@@ -9,7 +9,10 @@ ORANGE = \033[0;38;5;166m
 
 NAME = phonebook
 SRCS = \
-		main.cpp
+		main.cpp \
+		Contact.cpp \
+		PhoneBook.cpp
+
 OBJS = $(SRCS:.cpp=.o)
 
 # Build targets
@@ -20,13 +23,13 @@ bonus: all
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) && echo "$(GREEN)$(NAME) was created$(RESET)"
 
-%.o: $.cpp
+%.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $@ && echo "$(GREEN)object files were created$(RESET)"
 
 RM = rm -rf
 
 clean:
-	@$(RM) && echo "$(ORANGE)object files were deleted$(RESET)"
+	@$(RM) $(OBJS) && echo "$(ORANGE)object files were deleted$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME) && echo "$(ORANGE)$(NAME) was deleted$(RESET)"

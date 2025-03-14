@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:52:59 by sting             #+#    #+#             */
-/*   Updated: 2025/03/11 16:19:01 by sting            ###   ########.fr       */
+/*   Updated: 2025/03/12 13:48:59 by lewlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,23 @@
 
 class Contact {
 public:
-	std::string first_name;
-	std::string last_name;
+	void setFirstName(std::string firstName);
+	std::string getFirstName();
+	void setLastName(std::string lastName);
+	std::string getLastName();
+	void setNickname(std::string nickname);
+	std::string getNickname();
+	void setPhoneNum(std::string phoneNum);
+	std::string getPhoneNum();
+	void setDarkestSecret(std::string darkestSecret);
+	std::string getDarkestSecret();
+
+private:
+	std::string firstName;
+	std::string lastName;
 	std::string nickname;
-	std::string phone_num;
-	std::string darkest_secret;
+	std::string phoneNum;
+	std::string darkestSecret;
 };
 
 
