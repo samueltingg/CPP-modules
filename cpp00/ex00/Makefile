@@ -19,7 +19,7 @@ bonus: all
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) && echo "$(GREEN)$(NAME) was created$(RESET)"
 
-%.o: $.cpp
+%.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $@ && echo "$(GREEN)object files were created$(RESET)"
 
 RM = rm -rf
