@@ -18,8 +18,6 @@ OBJS = $(SRCS:.cpp=.o)
 # Build targets
 all:  $(NAME)
 
-bonus: all
-
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) && echo "$(GREEN)$(NAME) was created$(RESET)"
 
