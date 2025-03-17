@@ -14,8 +14,6 @@ OBJS = $(SRCS:.cpp=.o)
 # Build targets
 all:  $(NAME)
 
-bonus: all
-
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) && echo "$(GREEN)$(NAME) was created$(RESET)"
 
@@ -25,7 +23,7 @@ $(NAME): $(OBJS)
 RM = rm -rf
 
 clean:
-	@$(RM) && echo "$(ORANGE)object files were deleted$(RESET)"
+	@$(RM) $(OBJS) && echo "$(ORANGE)object files were deleted$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME) && echo "$(ORANGE)$(NAME) was deleted$(RESET)"
