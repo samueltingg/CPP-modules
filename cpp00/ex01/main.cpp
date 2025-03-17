@@ -47,7 +47,7 @@ bool isNumber(const std::string& str)
 	return (true);
 }
 
-std::string getPhoneNumber(const std::string& prompt) {
+std::string getNumber(const std::string& prompt) {
 	std::string input;
 
 	while (1) {
@@ -63,20 +63,32 @@ std::string getPhoneNumber(const std::string& prompt) {
 	return (input);
 }
 
+int stringToInt(const std::string& str) {
+    int result = 0;
+    for (size_t i = 0; i < str.length(); ++i) {
+        result = result * 10 + (str[i] - '0');
+    }
+    return result;
+}
+
 int getIndex(const std::string& prompt) {
 	std::string input;
 	int index;
 
 	while (true) {
-		input = getPhoneNumber(prompt);
-		index = std::stoi(input);
+		input = getNumber(prompt);
+		if (input.length() > 1) { // prevent overflow
+			std::cout << "Iindex must be within range of 0-7" << std::endl;
+			continue ;  
+		}
+		index = stringToInt(input);
 		if (index < 0 || index > 7) {
 			std::cout << "Index must be within range of 0-7" << std::endl;
 			continue ;  
 		}
 		break ;
 	}
-	return (std::stoi(input));	
+	return (index);	
 }
 
 int main() {
@@ -91,7 +103,7 @@ int main() {
 			contact.setFirstName(getInputString("First Name: "));	
 			contact.setLastName(getInputString("Last Name: "));	
 			contact.setNickname(getInputString("Nickname: "));	
-			contact.setPhoneNum(getPhoneNumber("Phone Num: "));	
+			contact.setPhoneNum(getNumber("Phone Num: "));	
 			contact.setDarkestSecret(getInputString("Darkest Secret: "));	
 			phoneBook.addContact(contact);
 		}
