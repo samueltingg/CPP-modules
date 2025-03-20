@@ -24,22 +24,6 @@ void PhoneBook::addContact(Contact contact) {
 	this->contacts[curContactCount] = contact;
 	curContactCount++;
 }
-void truncateNamesIfExceedTenChars(Contact &contact) { 
-	std::string name;
-
-	name = contact.getFirstName();
-	if (name.length() > 10)
-		name = name.substr(0,9) + '.';
-	contact.setFirstName(name);
-	name = contact.getLastName();
-	if (name.length() > 10)
-		name = name.substr(0,9) + '.';
-	contact.setLastName(name);
-	name = contact.getNickname();
-	if (name.length() > 10)
-		name = name.substr(0,9) + '.';
-	contact.setNickname(name);
-}
 
 std::string truncateName(std::string name) {
 	std::string truncatedName;
@@ -59,7 +43,6 @@ void PhoneBook::displaySavedContacts() {
  
 	for (int i = 0; i < initialisedCount; i++) {
 		std::string str;
-		// truncateNamesIfExceedTenChars(contacts[i]);
 	    std::cout << std::right << std::setw(10) << i 
 			  << "|" << std::setw(10) << truncateName(contacts[i].getFirstName())
 			  << "|" << std::setw(10) << truncateName(contacts[i].getLastName())

@@ -18,7 +18,7 @@ void Contact::setFirstName(std::string firstName) {
 	this->firstName = firstName; // using 'this' as param and class variable have same name
 }
 
-std::string Contact::getFirstName() {
+std::string Contact::getFirstName() const {
 	return (firstName);
 }
 
@@ -26,7 +26,7 @@ void Contact::setLastName(std::string lastName) {
 	this->lastName = lastName; 
 }
 
-std::string Contact::getLastName() {
+std::string Contact::getLastName() const {
 	return (lastName);
 }
 
@@ -34,7 +34,7 @@ void Contact::setNickname(std::string nickname) {
 	this->nickname = nickname; 
 }
 
-std::string Contact::getNickname() {
+std::string Contact::getNickname() const {
 	return (nickname);
 }
 
@@ -42,7 +42,7 @@ void Contact::setPhoneNum(std::string phoneNum) {
 	this->phoneNum = phoneNum; 
 }
 
-std::string Contact::getPhoneNum() {
+std::string Contact::getPhoneNum() const {
 	return (phoneNum);
 }
 
@@ -50,7 +50,7 @@ void Contact::setDarkestSecret(std::string darkestSecret) {
 	this->darkestSecret = darkestSecret; 
 }
 
-std::string Contact::getDarkestSecret() {
+std::string Contact::getDarkestSecret() const {
 	return (darkestSecret);
 }
 

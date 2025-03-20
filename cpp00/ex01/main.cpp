@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include <cctype>
-#include <limits>
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
@@ -28,7 +26,9 @@ std::string getInputString(const std::string& prompt) {
 	
 	while (1) {
 		std::cout << prompt;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			if (std::cin.eof()) // exit if user types 'ctrl + D'
+				std::exit(0);
 		if (!input.empty())
 			break ;
 		std::cout << "Input cannot be empty. Please try again." << std::endl;
