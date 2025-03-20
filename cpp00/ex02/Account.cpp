@@ -30,7 +30,7 @@ void	Account::_displayTimestamp( void ) {
 
     // Format the `tm` structure into desired format
     std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S]", now_tm);
-	std::cout << buffer;
+	std::cout << buffer << " ";
 }
 
 Account::Account( int initial_deposit ) {
@@ -38,6 +38,7 @@ Account::Account( int initial_deposit ) {
 	_accountIndex = _nbAccounts;
 	_nbAccounts++;
 	_amount = initial_deposit;
+	_totalAmount += _amount;
 	std::cout << "index:" << _accountIndex << ";amount:" 
 			  << _amount << ";created" << std::endl;
 }
@@ -74,6 +75,7 @@ void Account::displayAccountsInfos( void ) {
 void Account::makeDeposit( int deposit ) {
 	int prev_amount = _amount;
 	_amount += deposit;
+	_totalAmount += deposit;
 	_nbDeposits++;
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex 
@@ -94,6 +96,7 @@ bool Account::makeWithdrawal( int withdrawal ) {
 		return (false);
 	}
 	_amount -= withdrawal;
+	_totalAmount -= withdrawal;
 	_nbWithdrawals++;
 	std::cout << "index:" << _accountIndex 
 			  << ";p_amount:" << prev_amount 
