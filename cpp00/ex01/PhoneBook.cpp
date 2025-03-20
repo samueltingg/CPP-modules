@@ -41,6 +41,16 @@ void truncateNamesIfExceedTenChars(Contact &contact) {
 	contact.setNickname(name);
 }
 
+std::string truncateName(std::string name) {
+	std::string truncatedName;
+
+	if (name.length() > 10) {
+		truncatedName = name.substr(0,9) + '.';
+		return (truncatedName);
+	}
+	return (name);	
+}
+
 void PhoneBook::displaySavedContacts() {
     std::cout << std::right << std::setw(10) << "Index" 
 			  << "|" << std::setw(10) << "First Name" 
@@ -49,11 +59,11 @@ void PhoneBook::displaySavedContacts() {
  
 	for (int i = 0; i < initialisedCount; i++) {
 		std::string str;
-		truncateNamesIfExceedTenChars(contacts[i]);
+		// truncateNamesIfExceedTenChars(contacts[i]);
 	    std::cout << std::right << std::setw(10) << i 
-			  << "|" << std::setw(10) << contacts[i].getFirstName()
-			  << "|" << std::setw(10) << contacts[i].getLastName()
-			  << "|" << std::setw(10) << contacts[i].getNickname() << std::endl;
+			  << "|" << std::setw(10) << truncateName(contacts[i].getFirstName())
+			  << "|" << std::setw(10) << truncateName(contacts[i].getLastName())
+			  << "|" << std::setw(10) << truncateName(contacts[i].getNickname()) << std::endl;
 	}
 
 }
