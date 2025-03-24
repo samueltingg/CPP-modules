@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g 
 
 # COLORS
 GREEN = \033[0;32m
