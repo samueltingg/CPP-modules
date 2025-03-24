@@ -1,6 +1,6 @@
 
 
-#include "Harl.hpp""
+#include "Harl.hpp"
 
 int main(void) {
 
@@ -10,4 +10,6 @@ int main(void) {
 	harl.complain("INFO");
 	harl.complain("WARNING"); 
 	harl.complain("ERROR");
+
+	return (0);
 }
