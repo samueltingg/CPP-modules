@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:53:04 by sting             #+#    #+#             */
-/*   Updated: 2025/03/21 18:14:31 by sting            ###   ########.fr       */
+/*   Updated: 2025/03/24 15:55:27 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ int main(int argc, char **argv) {
 		return (1);
 	}
 
-	// std::ifstream	ifs(fileName.c_str()); // opens a input file stream to read from a specified file
-	// if (!ifs) {
-	// 	std::cerr << "Error opening file" << std::endl;
- //        return (1); 	
-	// }
-	//
-	// // extract string from file	
-	// std::string content;
-	// std::string	line;
-	// while (std::getline(ifs, line)) {
-	// 	content += line + "\n";	
-	// }
-	// ifs.close();
-	
 	std::string content;
 	content = readFile(fileName);
 
@@ -58,7 +44,5 @@ int main(int argc, char **argv) {
 	}
 	replaceAll(content, s1, s2);
 
-	// std::ofstream ofs((fileName + ".replace").c_str());
-	// ofs << content;
 	writeFile(fileName + ".replace", content); 
 }
