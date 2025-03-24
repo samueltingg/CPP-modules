@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
 	std::string s2 = argv[3];
 
 
-	std::ifstream	ifs(fileName); // opens a input file stream to read from a specified file
+	std::ifstream	ifs(fileName.c_str()); // opens a input file stream to read from a specified file
 	if (!ifs) {
 		std::cerr << "Error opening file" << std::endl;
         return (1); 	
@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
 	ifs.close();
 
 
-	std::ofstream ofs(fileName + ".replace");
+	std::ofstream ofs((fileName + ".replace").c_str());
 	ofs << content;
 
 
