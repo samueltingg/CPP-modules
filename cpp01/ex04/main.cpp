@@ -13,6 +13,11 @@
 #include <iostream>
 #include <fstream>
 
+/*
+start -> 1st index of str to be replaced
+end -> last index of str to be replaced
+str -> str to replace with
+*/
 std::string replace_str(const std::string& oriStr, size_t start, size_t end, const std::string& str) {
 	
     // Check if the indices are valid
@@ -21,16 +26,16 @@ std::string replace_str(const std::string& oriStr, size_t start, size_t end, con
     }
 	std::string	modifiedStr = oriStr.substr(0, start) + str + oriStr.substr(end + 1);
 	return (modifiedStr);
-}	
+}
 
 /*
 `npos` is constant that indicates `find()` not finding any matches
 */
-std::string	replaceAll(std::string& content, const std::string& s1, const std::string& s2) {
+void replaceAll(std::string& content, const std::string& s1, const std::string& s2) {
 	
 	size_t pos = 0;
 	while ((pos = content.find(s1, pos)) != std::string::npos) {
-		content =  
+		content = replace_str(content, pos, pos + s1.length() - 1, s2);
 	}	
 }
 
