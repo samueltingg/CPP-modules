@@ -10,6 +10,8 @@ ORANGE = \033[0;38;5;166m
 NAME = program
 SRCS = \
 		main.cpp \
+		replace.cpp \
+		fileio.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
