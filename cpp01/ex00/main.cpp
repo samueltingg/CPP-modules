@@ -13,10 +13,11 @@
 #include "Zombie.hpp"
 
 int main(void) {
-
-	randomChump("Bobby");
-
 	Zombie *zombie;
+
 	zombie = newZombie("John");
+	zombie->annouce();
+	randomChump("Bobby");
 	delete zombie;
+	return (0);
 }
