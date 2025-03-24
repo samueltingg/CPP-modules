@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 14:05:18 by sting             #+#    #+#             */
-/*   Updated: 2025/03/20 14:32:20 by sting            ###   ########.fr       */
+/*   Updated: 2025/03/24 16:18:15 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	void 	annouce (void);
 
 private:
-	std::string name;
+	std::string _name;
 };
 
 Zombie* newZombie(std::string name);
