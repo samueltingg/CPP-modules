@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+#include <iostream>
 
-int main(void) {
+int main(int argc, char **argv) {
 
-	Harl harl;
-
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING"); 
-	harl.complain("ERROR");
-
-	return (0);
+	if (argc != 2) {
+		std::cerr << "Error: Program only takes in 1 argument" << std::endl;
+		return (1);
+	}
+	Harl::complain(argv[1]);	
+	return (0);	
 }

@@ -15,6 +15,13 @@
 
 #include <string>
 
+enum {
+	DEBUG,
+	INFO,
+	WARNING,
+	ERROR,
+}; 
+
 typedef struct s_commentType {
 	std::string type;
 	void (*comment)( void );
@@ -23,7 +30,7 @@ typedef struct s_commentType {
 
 class Harl {
 public:
-void	complain( std::string level );
+	static void	complain( std::string level );
 
 private:
 	// set to static as they don't need to access instance data
