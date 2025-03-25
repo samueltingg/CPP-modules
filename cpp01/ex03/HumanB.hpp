@@ -18,7 +18,7 @@
 class HumanB {
 public: 
 	// constructor overloading
-	HumanB( const std::string& name ) : name(name), weapon(nullptr) {};
+	HumanB( const std::string& name ) : name(name), weapon(NULL) {};
 	HumanB( const std::string& name, Weapon& weapon ) : name(name), weapon(&weapon) {};
 
 	~HumanB() {};
