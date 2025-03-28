@@ -18,7 +18,7 @@ public:
 	int	getRawBits() const;
 	void setRawBits( int const raw );
 private:
-	int	_value;
+	int	_rawValue;
 	static const int	num_frac_bits = 8;
 };
 
