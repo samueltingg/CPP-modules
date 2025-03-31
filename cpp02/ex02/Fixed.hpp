@@ -4,6 +4,11 @@
 #include <fstream>
 #define FIXED_SCALE (1 << 8) // 2^8 = 256
 
+#define RESET   "\033[0m"
+#define BOLD    "\033[1m"
+#define CYAN    "\033[36m"
+#define GREY    "\033[90m"
+
 class Fixed {
 public:
 	//Default Constructor
@@ -27,23 +32,29 @@ public:
 	int		toInt( void ) const;
 
 	// Comparison Operators
-	bool operator>(const Fixed& fixedPointNum);
-	bool operator<(const Fixed& fixedPointNum);
-	bool operator>=(const Fixed& fixedPointNum);
-	bool operator<=(const Fixed& fixedPointNum);
-	bool operator==(const Fixed& fixedPointNum);
-	bool operator!=(const Fixed& fixedPointNum);
+	bool operator>(const Fixed& fixedPointNum) const;
+	bool operator<(const Fixed& fixedPointNum) const;
+	bool operator>=(const Fixed& fixedPointNum) const;
+	bool operator<=(const Fixed& fixedPointNum) const;
+	bool operator==(const Fixed& fixedPointNum) const;
+	bool operator!=(const Fixed& fixedPointNum) const;
 
 	// Arithmetic Operators
-	Fixed& operator+(const Fixed& fixedPointNum);
-	Fixed& operator-(const Fixed& fixedPointNum);
-	Fixed& operator*(const Fixed& fixedPointNum);
-	Fixed& operator/(const Fixed& fixedPointNum);
+	Fixed operator+(const Fixed& fixedPointNum) const;
+	Fixed operator-(const Fixed& fixedPointNum) const;
+	Fixed operator*(const Fixed& fixedPointNum) const;
+	Fixed operator/(const Fixed& fixedPointNum) const;
 
-	// Fixed& operator++(const Fixed& fixedPointNum);
-	// Fixed& operator-(const Fixed& fixedPointNum);
-	// Fixed& operator*(const Fixed& fixedPointNum);
-	// Fixed& operator/(const Fixed& fixedPointNum);
+	// Increment/Decrement Operators
+	Fixed& operator++();
+	Fixed  operator++(int); // the unnamed param "int" is just to indicate for "post-increment"
+	Fixed& operator--();
+	Fixed  operator--(int); // the unnamed param "int" is just to indicate for "post-decrement"
+
+	static Fixed& min(Fixed& num1, Fixed& num2);
+	static const Fixed& min(const Fixed& num1, const Fixed& num2);
+	static Fixed& max(Fixed& num1, Fixed& num2);
+	static const Fixed& max(const Fixed& num1, const Fixed& num2);
 
 
 private:
