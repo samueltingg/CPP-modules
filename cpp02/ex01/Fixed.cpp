@@ -10,7 +10,7 @@ Fixed::Fixed() : _rawValue(0)
 Fixed::Fixed(const int intNum)
 {
 	std::cout << "Int constructor called" << std::endl;
-	_rawValue = intNum << 8;
+	_rawValue = intNum << num_frac_bits;
 }
 
 Fixed::Fixed(const float floatNum)
@@ -19,7 +19,6 @@ Fixed::Fixed(const float floatNum)
 	_rawValue = static_cast<int>(roundf(floatNum * FIXED_SCALE)); 
 	// use roundf as casting to int directly will truncate decimal part
 }
-
 
 Fixed::Fixed(const Fixed& other) 
 {
@@ -56,11 +55,12 @@ void Fixed::setRawBits( int const raw )
 float	Fixed::toFloat( void ) const
 {
 	return (static_cast<float>((float)_rawValue / FIXED_SCALE));
+	// cannot bit shift as unlike 'int', 'float' aren't stored as raw binary numbers
 }
 
 int		Fixed::toInt( void ) const 
 {
-	return (_rawValue / FIXED_SCALE);
+	return (_rawValue >> num_frac_bits);
 }
 
 std::ostream & operator<<( std::ostream & os, const Fixed& fixedPointNum) 
