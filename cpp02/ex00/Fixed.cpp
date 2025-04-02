@@ -26,10 +26,12 @@ Fixed::Fixed(const Fixed& other)
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
+	if (this == &other) // Prevent self-assignment
+		return *this;
+
 	std::cout << "Copy Assignment Operator called" << std::endl;
-	if (this != &other) { // Prevent self-assignment
-		_rawValue = other._rawValue;
-	} 
+	_rawValue = other._rawValue;
+
 	return(*this);
 } 
 
