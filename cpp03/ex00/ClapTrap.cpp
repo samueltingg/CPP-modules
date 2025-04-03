@@ -14,14 +14,14 @@
 #include <iostream>
 
 ClapTrap::ClapTrap(std::string name) 
-	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0), _maxHitPoints(10)
+	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << "Constructor called" << std::endl;
 }
 
 // Copy Contructor
 ClapTrap::ClapTrap(const ClapTrap& other)
-	: _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage), _maxHitPoints(other._maxHitPoints)
+	: _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage)
 {
 	std::cout << "Copy Constructor called" << std::endl;
 }
@@ -105,12 +105,9 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return ;
 	}
 	
-	_energyPoints -= 1;
-	if (amount + _hitPoints > _maxHitPoints)
-		_hitPoints = _maxHitPoints;
-	else 
-		_hitPoints += amount;
 	std::cout << "ClapTrap " << _name << " repairs itself, regaining " << amount << " hit points. Updated Hit Point: " << _hitPoints << std::endl;
+	_energyPoints -= 1;
+	_hitPoints += amount;
 }
 
 

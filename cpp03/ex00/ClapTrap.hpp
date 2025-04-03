@@ -39,7 +39,6 @@ private:
 	unsigned int	_hitPoints;
 	unsigned int	_energyPoints;
 	unsigned int	_attackDamage;
-	const unsigned int _maxHitPoints;
 };
 
 #endif
