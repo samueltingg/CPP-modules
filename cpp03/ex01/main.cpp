@@ -13,50 +13,6 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-/*int main()*/
-/*{*/
-/*	// Constructors Test*/
-/*	ClapTrap clapTrap1("Bob");*/
-/*	ClapTrap clapTrap2(clapTrap1);*/
-/*	ClapTrap clapTrap3("Steve");*/
-/**/
-/*	clapTrap3 = clapTrap2;*/
-/**/
-/*	std::cout << "Name of clapTrap1: " << clapTrap1.getName() << std::endl;*/
-/*	std::cout << "Name of clapTrap2: " << clapTrap2.getName() << std::endl;*/
-/*	std::cout << "Name of clapTrap3: " << clapTrap3.getName() << std::endl;*/
-/*	std::cout << std::endl;*/
-/**/
-/**/
-/*	std::cout << "Values BEFORE attack->" */
-/*				<< " hitPoints: " << clapTrap1.getHitPoints()	*/
-/*				<< " energyPoints: " << clapTrap2.getHitPoints()*/
-/*				<< " attackDamage: " << clapTrap3.getAttackDamage() << std::endl;*/
-/*	clapTrap1.attack("another clapTrap");*/
-/*	std::cout << "Values AFTER attack->" */
-/*				<< " hitPoints: " << clapTrap1.getHitPoints()	*/
-/*				<< " energyPoints: " << clapTrap2.getHitPoints()*/
-/*				<< " attackDamage: " << clapTrap3.getAttackDamage() << std::endl;*/
-/*	std::cout << std::endl;*/
-/**/
-/*	std::cout << "Values BEFORE takeDamage>" */
-/*				<< " hitPoints: " << clapTrap1.getHitPoints()	*/
-/*				<< " energyPoints: " << clapTrap2.getHitPoints()*/
-/*				<< " attackDamage: " << clapTrap3.getAttackDamage() << std::endl;*/
-/*	clapTrap1.takeDamage(5);*/
-/*	std::cout << "Values AFTER attack->" */
-/*				<< " hitPoints: " << clapTrap1.getHitPoints()	*/
-/*				<< " energyPoints: " << clapTrap2.getHitPoints()*/
-/*				<< " attackDamage: " << clapTrap3.getAttackDamage() << std::endl;*/
-/*	std::cout << std::endl;*/
-/**/
-/*}*/
-
-
-
-#include "ClapTrap.hpp"
-#include <iostream>
-
 #define RESET   "\033[0m"
 #define BOLD    "\033[1m"
 #define CYAN    "\033[36m"

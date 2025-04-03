@@ -34,12 +34,11 @@ public:
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
-private:
-	std::string _name;
+protected: // acessible	by derived classes, within same class, but not outside class
+	std::string 	_name;
 	unsigned int	_hitPoints;
 	unsigned int	_energyPoints;
 	unsigned int	_attackDamage;
-	const unsigned int _maxHitPoints;
 };
 
 #endif

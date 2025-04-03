@@ -105,12 +105,9 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return ;
 	}
 	
-	_energyPoints -= 1;
-	if (amount + _hitPoints > _maxHitPoints)
-		_hitPoints = _maxHitPoints;
-	else 
-		_hitPoints += amount;
 	std::cout << "ClapTrap " << _name << " repairs itself, regaining " << amount << " hit points. Updated Hit Point: " << _hitPoints << std::endl;
+	_energyPoints -= 1;
+	_hitPoints += amount;
 }
 
 
