@@ -11,7 +11,7 @@ NAME = program
 SRCS = \
 		main.cpp \
 		ClapTrap.cpp \
-		ScavTrap.hpp
+		ScavTrap.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

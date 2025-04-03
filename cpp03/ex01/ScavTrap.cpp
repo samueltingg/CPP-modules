@@ -25,9 +25,14 @@ ScavTrap::ScavTrap(std::string name)
 
 // Copy Contructor
 ScavTrap::ScavTrap(const ScavTrap& other)
-	: ClapTrap(other._name), _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage), _maxHitPoints(other._maxHitPoints)
+	: ClapTrap(other._name)
 { // ^initialise base class by calling base class constructor
 	std::cout << "ScavTrap: Copy Constructor called" << std::endl;
+	_name = other._name;
+	_hitPoints = other._hitPoints;
+	_energyPoints = other._energyPoints;
+	_attackDamage = other._attackDamage;
+
 }
 
 // Copy Assignment Constructor

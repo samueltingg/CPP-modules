@@ -14,16 +14,16 @@
 #include <iostream>
 
 ClapTrap::ClapTrap(std::string name) 
-	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0), _maxHitPoints(10)
+	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "ClapTrap: Constructor called" << std::endl;
 }
 
 // Copy Contructor
 ClapTrap::ClapTrap(const ClapTrap& other)
-	: _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage), _maxHitPoints(other._maxHitPoints)
+	: _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage) 
 {
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "ClapTrap: Copy Constructor called" << std::endl;
 }
 
 // Copy Assignment Constructor
@@ -32,7 +32,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 	if (this == &other)
 		return *this;
 
-	std::cout << "Copy Assignment Operator called" << std::endl;
+	std::cout << "ClapTrap: Copy Assignment Operator called" << std::endl;
 	this->_name = other._name;
 	this->_hitPoints = other._hitPoints;
 	this->_energyPoints = other._energyPoints;
@@ -44,7 +44,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 // Destructor
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap: Destructor called" << std::endl;
 }
 
 std::string ClapTrap::getName() const

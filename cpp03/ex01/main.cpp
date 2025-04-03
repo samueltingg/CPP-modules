@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 
 #define RESET   "\033[0m"
@@ -24,17 +24,19 @@ void printSection(const std::string& title) {
 
 int main() {
     printSection("Testing Constructors");
-    ClapTrap bot1("ClapOne");
-    ClapTrap bot2(bot1); // Copy constructor
-    ClapTrap bot3("ClapThree");
+    ScavTrap bot1("ScavOne");
+    ScavTrap bot2(bot1); // Copy constructor
+    ScavTrap bot3("ScavThree");
     bot3 = bot1; // Copy assignment operator
     
     printSection("Testing Attack Function");
     bot1.attack("Enemy");
-    bot1.attack("Enemy"); // Should reduce energy points
-    
+
+    printSection("Testing guardGate Function");
+    bot1.guardGate();
+
     printSection("Testing Attack with 0 Attack Damage");
-    ClapTrap bot4("ClapZero");
+    ScavTrap bot4("ScavZero");
     bot4.attack("Enemy"); // Should display no damage
     
     printSection("Testing Taking Damage");
