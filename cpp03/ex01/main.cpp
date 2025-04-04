@@ -32,12 +32,8 @@ int main() {
     printSection("Testing Attack Function");
     bot1.attack("Enemy");
 
-    printSection("Testing guardGate Function");
-    bot1.guardGate();
-
-    printSection("Testing Attack with 0 Attack Damage");
-    ScavTrap bot4("ScavZero");
-    bot4.attack("Enemy"); // Should display no damage
+	printSection("Testing guardGate Function");
+	bot1.guardGate();
     
     printSection("Testing Taking Damage");
     bot2.takeDamage(5);

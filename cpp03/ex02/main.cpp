@@ -34,10 +34,6 @@ int main() {
 
     printSection("Testing 'highFiveGuys' Function");
     bot1.highFivesGuys();
-
-    printSection("Testing Attack with 0 Attack Damage");
-    FragTrap bot4("FragZero");
-    bot4.attack("Enemy"); // Should display no damage
     
     printSection("Testing Taking Damage");
     bot2.takeDamage(5);
