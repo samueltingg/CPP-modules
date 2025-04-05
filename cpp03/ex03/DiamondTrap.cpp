@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "DiamondTrap.hpp"
 #include <iostream>
+#include "DiamondTrap.hpp"
 #include "ClapTrap.hpp"
 
 DiamondTrap::DiamondTrap(std::string name) 
-	: ClapTrap(name), ScavTrap(name), FragTrap(name);
+	: ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
 	std::cout << "DiamondTrap: Constructor called" << std::endl;
 	_name = name;
@@ -26,7 +26,8 @@ DiamondTrap::DiamondTrap(std::string name)
 
 // Copy Contructor
 DiamondTrap::DiamondTrap(const DiamondTrap& other)
-	: ClapTrap(other._name)
+	: ClapTrap(other._name+ "_clap_name"), ScavTrap(other._name), FragTrap(other._name)
+
 { // ^initialise base class by calling base class constructor
 	std::cout << "DiamondTrap: Copy Constructor called" << std::endl;
 	_name = other._name;
@@ -58,14 +59,14 @@ DiamondTrap::~DiamondTrap()
 }
 
 
-void DiamondTrap::attack(const std::string& target)
-{
-	ScavTrap::attack(target);
-}
+/*void DiamondTrap::attack(const std::string& target)*/
+/*{*/
+/*	ScavTrap::attack(target);*/
+/*}*/
 
 void DiamondTrap::whoAmI()
 {
-	std::cout << "DiamondTrap name: " << << "ClapTrap name: " << << std::endl;
+	std::cout << "DiamondTrap name: " << this->getName() << "ClapTrap name: " << this->getName()<< std::endl;
 }
 
 

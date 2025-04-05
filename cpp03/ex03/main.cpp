@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
 #define RESET   "\033[0m"
@@ -24,13 +24,13 @@ void printSection(const std::string& title) {
 
 int main() {
     printSection("Testing Constructors");
-    FragTrap bot1("FragOne");
-    FragTrap bot2(bot1); // Copy constructor
-    FragTrap bot3("FragThree");
+    DiamondTrap bot1("DiamondOne");
+    DiamondTrap bot2(bot1); // Copy constructor
+    DiamondTrap bot3("DiamondThree");
     bot3 = bot1; // Copy assignment operator
     
     printSection("Testing Attack Function");
-    bot1.attack("Enemy");
+    /*bot1.attack("Enemy");*/
 
     printSection("Testing 'highFiveGuys' Function");
     bot1.highFivesGuys();
