@@ -38,6 +38,13 @@ int main() {
   printSection("Testing Attack Function");
   bot1.attack("Enemy");
 
+  printSection("Testing 'guardGate' Function");
+  bot1.guardGate();
+
+  printSection("Testing 'highFivesGuys' Function");
+  bot1.highFivesGuys();
+
+
   printSection("Testing 'whoAmI' Function");
   bot1.whoAmI();
 
