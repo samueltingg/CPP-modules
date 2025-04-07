@@ -27,6 +27,10 @@ public:
 	
 	void attack(const std::string& target);
 	void highFivesGuys();
+protected:
+	static	const unsigned int	defaultHitPoints = 100;
+	static	const unsigned int	defaultEnergyPoints = 100;
+	static	const unsigned int	defaultAttackDamage = 30;
 
 };
 

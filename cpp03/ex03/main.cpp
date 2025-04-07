@@ -30,15 +30,20 @@ int main() {
   DiamondTrap bot3("DiamondThree");
   bot3 = bot1; // Copy assignment operator
 
+  printSection("Testing attribute's inherited values");
+  std::cout << "_hitPoints: " << bot1.getHitPoints() << std::endl;
+  std::cout << "_energyPoints: " << bot1.getEnergyPoints() << std::endl;
+  std::cout << "_attackDamage: " << bot1.getAttackDamage() << std::endl;
+
   printSection("Testing Attack Function");
   bot1.attack("Enemy");
 
-  printSection("Testing 'highFiveGuys' Function");
-  bot1.highFivesGuys();
+  printSection("Testing 'whoAmI' Function");
+  bot1.whoAmI();
 
   printSection("Testing Taking Damage");
   bot2.takeDamage(5);
-  bot2.takeDamage(6); // Should drop to 0 hit points
+  bot2.takeDamage(100); // Should drop to 0 hit points
   bot2.takeDamage(2); // Should not take damage (already dead)
 
   printSection("Testing Repairing");

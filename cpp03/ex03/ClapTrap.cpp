@@ -69,14 +69,14 @@ unsigned int	ClapTrap::getAttackDamage() const
 void ClapTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
-		std::cout << "ClapTrap " << _name << " FAILED to attack, " << target << " bcuz it has 0 Hit Points (dead)." << std::endl;
+		std::cout << "ClapTrap: " << _name << " FAILED to attack, " << target << " bcuz it has 0 Hit Points (dead)." << std::endl;
 	else if (_energyPoints == 0)
-		std::cout << "ClapTrap " << _name << " FAILED to attack, " << target << " bcuz it has 0 Energy Points." << std::endl;
+		std::cout << "ClapTrap: " << _name << " FAILED to attack, " << target << " bcuz it has 0 Energy Points." << std::endl;
 	else if (_attackDamage == 0)
-        std::cout << "ClapTrap " << _name << " attacks " << target << ", but it does no damage!" << std::endl;
+        std::cout << "ClapTrap: " << _name << " attacks " << target << ", but it does no damage!" << std::endl;
 	else {
 		_energyPoints--;
-		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
+		std::cout << "ClapTrap: " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		// target loses <_attackDamage> hit points
 	}	
 }
@@ -84,28 +84,28 @@ void ClapTrap::attack(const std::string& target)
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (_hitPoints == 0) {
-		std::cout << "ClapTrap " << _name << " did not take any damage bcuz it has 0 Hit Points (dead)" << std::endl;
+		std::cout << "ClapTrap: " << _name << " did not take any damage bcuz it has 0 Hit Points (dead)" << std::endl;
 		return ;
 	}
 	if (amount > _hitPoints) 
 		_hitPoints = 0;
 	else 
 		_hitPoints -= amount;
-	std::cout << "ClapTrap " << _name << " takes " << amount << " amount of damage. Updated Hit Point: " << _hitPoints << std::endl;
+	std::cout << "ClapTrap: " << _name << " takes " << amount << " amount of damage. Updated Hit Point: " << _hitPoints << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints == 0) {
-		std::cout << "ClapTrap " << _name << " FAILED to repair, bcuz it has 0 Hit Points (dead)." << std::endl;
+		std::cout << "ClapTrap: " << _name << " FAILED to repair, bcuz it has 0 Hit Points (dead)." << std::endl;
 		return ;
 	}
 	else if (_energyPoints == 0) {
-		std::cout << "ClapTrap " << _name << " FAILED to repair, bcuz it has 0 Energy Points." << std::endl;
+		std::cout << "ClapTrap: " << _name << " FAILED to repair, bcuz it has 0 Energy Points." << std::endl;
 		return ;
 	}
 	
-	std::cout << "ClapTrap " << _name << " repairs itself, regaining " << amount << " hit points. Updated Hit Point: " << _hitPoints << std::endl;
+	std::cout << "ClapTrap: " << _name << " repairs itself, regaining " << amount << " hit points. Updated Hit Point: " << _hitPoints << std::endl;
 	_energyPoints -= 1;
 	_hitPoints += amount;
 }

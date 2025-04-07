@@ -60,14 +60,14 @@ ScavTrap::~ScavTrap()
 void ScavTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
-		std::cout << "ScavTrap " << _name << " FAILED to attack, " << target << " bcuz it has 0 Hit Points (dead)." << std::endl;
+		std::cout << "ScavTrap: " << _name << " FAILED to attack, " << target << " bcuz it has 0 Hit Points (dead)." << std::endl;
 	else if (_energyPoints == 0)
-		std::cout << "ScavTrap " << _name << " FAILED to attack, " << target << " bcuz it has 0 Energy Points." << std::endl;
+		std::cout << "ScavTrap: " << _name << " FAILED to attack, " << target << " bcuz it has 0 Energy Points." << std::endl;
 	else if (_attackDamage == 0)
-        std::cout << "ScavTrap " << _name << " attacks " << target << ", but it does no damage!" << std::endl;
+        std::cout << "ScavTrap: " << _name << " attacks " << target << ", but it does no damage!" << std::endl;
 	else {
 		_energyPoints--;
-		std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
+		std::cout << "ScavTrap: " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		// target loses <_attackDamage> hit points
 	}	
 }

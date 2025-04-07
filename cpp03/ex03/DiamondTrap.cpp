@@ -15,25 +15,25 @@
 #include "ClapTrap.hpp"
 
 DiamondTrap::DiamondTrap(std::string name) 
-	: ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
+	: ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name")
 {
 	std::cout << "DiamondTrap: Constructor called" << std::endl;
-	/*_name = name;*/
-	/*_hitPoints = 100;*/
-	/*_energyPoints = 100;*/
-	/*_attackDamage = 30;*/
+	_name = name;
+	_hitPoints = FragTrap::defaultHitPoints;
+	_energyPoints = ScavTrap::defaultEnergyPoints;
+	_attackDamage = FragTrap::defaultAttackDamage;
 }
 
 // Copy Contructor
 DiamondTrap::DiamondTrap(const DiamondTrap& other)
-	: ClapTrap(other._name+ "_clap_name"), ScavTrap(other._name), FragTrap(other._name)
+	: ClapTrap(other._name + "_clap_name"), ScavTrap(other._name), FragTrap(other._name)
 
 { // ^initialise base class by calling base class constructor
 	std::cout << "DiamondTrap: Copy Constructor called" << std::endl;
-	/*_name = other._name;*/
-	/*_hitPoints = other._hitPoints;*/
-	/*_energyPoints = other._energyPoints;*/
-	/*_attackDamage = other._attackDamage;*/
+	_name = other._name;
+	_hitPoints = other._hitPoints;
+	_energyPoints = other._energyPoints;
+	_attackDamage = other._attackDamage;
 
 }
 
@@ -44,10 +44,10 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 		return *this;
 
 	std::cout << "DiamondTrap: Copy Assignment Operator called" << std::endl;
-	/*this->_name = other._name;*/
-	/*this->_hitPoints = other._hitPoints;*/
-	/*this->_energyPoints = other._energyPoints;*/
-	/*this->_attackDamage = other._attackDamage;	*/
+	this->_name = other._name;
+	this->_hitPoints = other._hitPoints;
+	this->_energyPoints = other._energyPoints;
+	this->_attackDamage = other._attackDamage;	
 
 	return *this;
 }
@@ -61,12 +61,13 @@ DiamondTrap::~DiamondTrap()
 
 void DiamondTrap::attack(const std::string& target)
 {
-	ScavTrap::attack(target);
+	ScavTrap::attack(target); // same as `this->ScavTrap::attack(target)`;
+
 }
 
 void DiamondTrap::whoAmI()
 {
-	std::cout << "DiamondTrap name: " << this->getName() << "ClapTrap name: " << this->getName()<< std::endl;
+	std::cout << "DiamondTrap name: " << this->_name << ", ClapTrap name: " << ClapTrap::_name << std::endl;
 }
 
 
