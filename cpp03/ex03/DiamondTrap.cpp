@@ -18,10 +18,10 @@ DiamondTrap::DiamondTrap(std::string name)
 	: ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
 	std::cout << "DiamondTrap: Constructor called" << std::endl;
-	_name = name;
-	_hitPoints = 100;
-	_energyPoints = 100;
-	_attackDamage = 30;
+	/*_name = name;*/
+	/*_hitPoints = 100;*/
+	/*_energyPoints = 100;*/
+	/*_attackDamage = 30;*/
 }
 
 // Copy Contructor
@@ -30,10 +30,10 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other)
 
 { // ^initialise base class by calling base class constructor
 	std::cout << "DiamondTrap: Copy Constructor called" << std::endl;
-	_name = other._name;
-	_hitPoints = other._hitPoints;
-	_energyPoints = other._energyPoints;
-	_attackDamage = other._attackDamage;
+	/*_name = other._name;*/
+	/*_hitPoints = other._hitPoints;*/
+	/*_energyPoints = other._energyPoints;*/
+	/*_attackDamage = other._attackDamage;*/
 
 }
 
@@ -44,10 +44,10 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 		return *this;
 
 	std::cout << "DiamondTrap: Copy Assignment Operator called" << std::endl;
-	this->_name = other._name;
-	this->_hitPoints = other._hitPoints;
-	this->_energyPoints = other._energyPoints;
-	this->_attackDamage = other._attackDamage;	
+	/*this->_name = other._name;*/
+	/*this->_hitPoints = other._hitPoints;*/
+	/*this->_energyPoints = other._energyPoints;*/
+	/*this->_attackDamage = other._attackDamage;	*/
 
 	return *this;
 }
@@ -59,10 +59,10 @@ DiamondTrap::~DiamondTrap()
 }
 
 
-/*void DiamondTrap::attack(const std::string& target)*/
-/*{*/
-/*	ScavTrap::attack(target);*/
-/*}*/
+void DiamondTrap::attack(const std::string& target)
+{
+	ScavTrap::attack(target);
+}
 
 void DiamondTrap::whoAmI()
 {
