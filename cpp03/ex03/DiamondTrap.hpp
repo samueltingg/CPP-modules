@@ -16,8 +16,8 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap {
-public:
+class DiamondTrap : public ScavTrap, public FragTrap { // "Multiple Inheritance"
+public: 
 	DiamondTrap(std::string name);
 	// Copy Contructor
 	DiamondTrap(const DiamondTrap& other);
