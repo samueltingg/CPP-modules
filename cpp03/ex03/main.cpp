@@ -48,7 +48,7 @@ int main() {
 
   printSection("Testing Repairing");
   bot3.beRepaired(3);
-  bot3.beRepaired(10); // Should cap at max hit points
+  bot3.beRepaired(10); 
 
   /*printSection("Testing Repairing with 0 Energy Points");*/
   /*for (int i = 0; i < 10; i++) bot3.attack("Enemy"); // Deplete energy*/
