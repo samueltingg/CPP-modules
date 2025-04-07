@@ -41,22 +41,19 @@ int main() {
   printSection("Testing 'whoAmI' Function");
   bot1.whoAmI();
 
-  printSection("Testing Taking Damage");
-  bot2.takeDamage(5);
-  bot2.takeDamage(100); // Should drop to 0 hit points
-  bot2.takeDamage(2); // Should not take damage (already dead)
+	printSection("Testing Repairing");
+	bot1.beRepaired(3);
+	bot1.beRepaired(10); // Should cap at max hit points
 
-  printSection("Testing Repairing");
-  bot3.beRepaired(3);
-  bot3.beRepaired(10); 
+    printSection("Testing Taking Damage");
+    bot1.takeDamage(5);
+    bot1.takeDamage(150); // Should drop to 0 hit points
+    bot1.takeDamage(2); // Should not take damage (already dead)
+    
+    printSection("Testing Repairing when Dead");
+    bot1.beRepaired(5); // Should fail because bot2 is dead
+    
+    printSection("Testing Destructor");
+    return 0; // Destructors called automatically here
 
-  /*printSection("Testing Repairing with 0 Energy Points");*/
-  /*for (int i = 0; i < 10; i++) bot3.attack("Enemy"); // Deplete energy*/
-  /*bot3.beRepaired(3); // Should fail due to 0 energy*/
-
-  printSection("Testing Repairing when Dead");
-  bot2.beRepaired(5); // Should fail because bot2 is dead
-
-  printSection("Testing Destructor");
-  return 0; // Destructors called automatically here
 }
