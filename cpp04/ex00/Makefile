@@ -18,7 +18,7 @@ SRCS_FIL = \
 		Dog.cpp \
 		Cat.cpp \
 		WrongAnimal.cpp \
-		WrongCat.cpp
+		WrongCat.cpp \
 
 SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
