@@ -14,7 +14,7 @@
 #define CAT_HPP
 
 #include "Animal.hpp"
-#include <string>
+#include "Brain.hpp"
 
 class Cat : public Animal {
 public:
@@ -29,6 +29,8 @@ public:
 	~Cat();
 
 	void makeSound() const;
+private:
+	Brain	*_brain;
 };
 
 

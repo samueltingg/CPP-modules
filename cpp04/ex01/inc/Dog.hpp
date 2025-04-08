@@ -13,8 +13,8 @@
 #ifndef DOG_HPP
 #define DOG_HPP
 
-#include <string>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal {
 public:
@@ -28,7 +28,11 @@ public:
 	// Destructor
 	~Dog();
 
-	void makeSound() const; //need to add "virtual"??
+	void makeSound() const; 
+
+private:
+	Brain	*_brain;
+
 };
 
 

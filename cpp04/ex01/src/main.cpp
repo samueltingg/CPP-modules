@@ -30,27 +30,27 @@ void printSection(const std::string &title) {
 int	main()
 {
 	{
-	printSection("Testing 'Animal' Constructors");
-	Animal animal1;
-	Animal animal2(animal1); // Copy constructor
-	Animal animal3;
-	animal3 = animal1; // Copy assignment operator
+		printSection("Testing 'Animal' Constructors");
+		Animal animal1;
+		Animal animal2(animal1); // Copy constructor
+		Animal animal3;
+		animal3 = animal1; // Copy assignment operator
 	}
 
 	{
-	printSection("Testing 'Dog' Constructors");
-	Dog dog1;
-	Dog dog2(dog1); // Copy constructor
-	Dog dog3;
-	dog3 = dog1; // Copy assignment operator
+		printSection("Testing 'Dog' Constructors");
+		Dog dog1;
+		Dog dog2(dog1); // Copy constructor
+		Dog dog3;
+		dog3 = dog1; // Copy assignment operator
 	}
 
 	{
-	printSection("Testing 'Cat' Constructors");
-	Cat cat1;
-	Cat cat2(cat1); // Copy constructor
-	Cat cat3;
-	cat3 = cat1; // Copy assignment operator
+		printSection("Testing 'Cat' Constructors");
+		Cat cat1;
+		Cat cat2(cat1); // Copy constructor
+		Cat cat3;
+		cat3 = cat1; // Copy assignment operator
 	}
 	
 	{
@@ -70,16 +70,25 @@ int	main()
 	}
 
 	{
-	printSection("Testing WrongAnimal & WrongCat");
-	const WrongAnimal* meta = new WrongAnimal();
-	const WrongAnimal* i = new WrongCat();
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the animal sound instead of cat!
-	meta->makeSound();
+		printSection("Testing WrongAnimal & WrongCat");
+		const WrongAnimal* meta = new WrongAnimal();
+		const WrongAnimal* i = new WrongCat();
+		std::cout << i->getType() << " " << std::endl;
+		i->makeSound(); //will output the animal sound instead of cat!
+		meta->makeSound();
 
-	delete meta;
-	delete i;
+		delete meta;
+		delete i;
 	}
+
+	{
+		printSection("Dog: Test if copies are Deep copies");
+	}
+
+	{
+		printSection("Cat: Test if copies are Deep copies");
+	}
+
 
 	return (0);
 }
