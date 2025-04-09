@@ -73,12 +73,15 @@ int	main()
 	printSection("Testing WrongAnimal & WrongCat");
 	const WrongAnimal* meta = new WrongAnimal();
 	const WrongAnimal* i = new WrongCat();
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the animal sound instead of cat!
+	std::cout << "type of i: " << i->getType() << " " << std::endl;
+	
+	std::cout << "\nCalling makeSound() from WrongAnimal object" << std::endl;
 	meta->makeSound();
+	std::cout << "Calling makeSound() from WrongCat object" << std::endl << std::endl;
+	i->makeSound(); //will output the animal sound instead of cat!
 
-	delete meta;
 	delete i;
+	delete meta;
 	}
 
 	return (0);
