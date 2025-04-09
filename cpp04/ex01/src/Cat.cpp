@@ -53,3 +53,9 @@ void Cat::makeSound() const
 {
 	std::cout << "< Meow Meow Meow >" << std::endl;
 }
+
+const Brain *Cat::getBrainAddress() const
+{
+	return (_brain);
+}
+

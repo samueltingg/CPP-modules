@@ -29,6 +29,8 @@ public:
 	~Cat();
 
 	void makeSound() const;
+	const Brain *getBrainAddress() const;
+
 private:
 	Brain	*_brain;
 };

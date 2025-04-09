@@ -83,10 +83,48 @@ int	main()
 
 	{
 		printSection("Dog: Test if copies are Deep copies");
+		Dog dog1;
+		Dog dog2 = dog1;
+
+		std::cout << "dog1's brain address: " << dog1.getBrainAddress() << std::endl; 
+		std::cout << "dog2's brain address: " << dog2.getBrainAddress() << std::endl; 
+
 	}
 
 	{
 		printSection("Cat: Test if copies are Deep copies");
+		Cat cat1;
+		Cat cat2 = cat1;
+
+		std::cout << "cat1's brain address: " << cat1.getBrainAddress() << std::endl; 
+		std::cout << "cat2's brain address: " << cat2.getBrainAddress() << std::endl; 
+
+	}
+
+	{
+		printSection("Test: Array of 'Animal' objects");
+	   	int arrSize = 6;
+		Animal *arr[arrSize];
+
+		for (int i = 0; i < arrSize; ++i) {
+			if (i % 2 == 0) // if even
+				arr[i] = new Dog();
+			else 
+				arr[i] = new Cat();
+		}
+
+		// Check if arr is filled with cats & dogs evenly
+		std::cout << "Animal Array is filled evenly with Dogs & Cats: " << std::endl;
+		for (int i = 0; i < arrSize; ++i) {
+			std::cout << arr[i]->getType() << std::endl;
+		}
+
+
+		// free arr
+		for (int i = 0; i < arrSize; ++i) {
+			delete arr[i];		
+		}
+
 	}
 
 
