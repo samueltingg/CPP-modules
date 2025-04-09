@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 15:50:18 by sting             #+#    #+#             */
-/*   Updated: 2025/04/09 17:42:28 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/09 18:03:34 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ std::string const & AMateria::getType() const //Returns the materia type
 
 void AMateria::use(ICharacter& target)
 {
-	
+	std::cout << "AMateria's `use` function called on " << target.getName << std::endl;
+
 }
 
