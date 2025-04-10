@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Cure.hpp"
 #include <iostream>
+#include "../inc/Cure.hpp"
+#include "../inc/ICharacter.hpp"
 
 Cure::Cure()
 	: AMateria("ice") 
@@ -32,6 +33,8 @@ Cure& Cure::operator=(const Cure& other)
 
 	std::cout << "Cure: Copy Assignment Operator called" << std::endl;
 	this->type = other.type;
+	
+	return *this;
 }
 
 Cure::~Cure()
@@ -42,14 +45,12 @@ Cure::~Cure()
 
 Cure* Cure::clone() const
 {
-	Cure	*newCure = new Cure(*this); // call copy constructor
-
-	return newCure;
+	return new Cure(*this); // call copy constructor
 }
 
 
 void Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target.getName << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 

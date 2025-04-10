@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/AMateria.hpp"
 #include <iostream>
+#include "../inc/AMateria.hpp"
+#include "../inc/ICharacter.hpp"
 
 AMateria::AMateria(std::string const & type)
 	: type(type)
@@ -32,6 +33,8 @@ AMateria& AMateria::operator=(const AMateria& other)
 
 	std::cout << "AMateria: Copy Assignment Operator called" << std::endl;
 	this->type = other.type;
+
+	return *this;
 }
 
 AMateria::~AMateria()
@@ -46,7 +49,7 @@ std::string const & AMateria::getType() const //Returns the materia type
 
 void AMateria::use(ICharacter& target)
 {
-	std::cout << "AMateria's `use` function called on " << target.getName << std::endl;
+	std::cout << "AMateria's `use` function called on " << target.getName() << std::endl;
 
 }
 
