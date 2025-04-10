@@ -16,6 +16,8 @@
 #include <string>
 #include "AMateria.hpp"
 
+class AMateria; // Forward declaration to prevent 'Circular Dependency'
+
 class ICharacter {
 
 public:

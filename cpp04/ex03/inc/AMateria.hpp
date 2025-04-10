@@ -15,7 +15,7 @@
 
 #include <string>
 
-class ICharacter; // Forward declaration instead of including "ICharacter.hpp"
+class ICharacter; // Forward declaration to prevent 'Circular Dependency'
 
 class AMateria {
 public:
@@ -26,7 +26,7 @@ public:
 	// Copy Assignment Operator
 	AMateria& operator=(const AMateria& other);	
 	// Destructor
-	~AMateria();
+	virtual ~AMateria();
 
 	std::string const & getType() const; //Returns the materia type
 	
