@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98 -fsanitize=address -g 
+CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98 #-fsanitize=address -g  
 INCLUDES = -Iinc
 
 # COLORS
