@@ -17,7 +17,7 @@ SRCS_FIL = \
 		AMateria.cpp \
 		Ice.cpp \
 		Cure.cpp \
-		# Character.cpp \
+		Character.cpp \
 		# MaterialSource.cpp
 
 SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))

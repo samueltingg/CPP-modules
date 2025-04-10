@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 18:04:56 by sting             #+#    #+#             */
-/*   Updated: 2025/04/09 18:22:33 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:06:31 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define CHARACTER_HPP
 
 #include <string>
-#include "AMateria.hpp"
 #include "ICharacter.hpp"
 
 class Character : public ICharacter {
@@ -33,12 +32,12 @@ public:
 
 	void equip(AMateria* m);
 	void unequip(int idx);
-	void use(int idx, Character& target);
+	void use(int idx, ICharacter& target);
 
 private:
 	std::string _name;
-	static const int maxMateriaCount = 4;
-	AMateria	*_inventory[maxMateriaCount];
+	static const int _maxMateriaCount = 4;
+	AMateria	*_inventory[_maxMateriaCount];
 };
 
 #endif
