@@ -56,7 +56,14 @@ int	main()
 		cure3 = cure1; // Copy assignment operator
 	}
 
-	
+	{
+		printSection("Testing 'MateriaSource' Constructors");
+		MateriaSource materiaSourc31;
+		MateriaSource materiaSourc32(materiaSourc31); // Copy constructor
+		MateriaSource materiaSourc33;
+		materiaSourc33 = materiaSourc31; // Copy assignment operator
+	}
+
 	{
 		printSection("Subject PDF tests");
 		IMateriaSource* src = new MateriaSource();
@@ -89,6 +96,92 @@ int	main()
 		delete me;
 		delete src;
 	}
+
+	{
+		printSection("Testing Charater's member Functions ");
+		std::cout << "---equip()----" << std::endl;
+
+		Character me("me");
+		AMateria *ice1 = new Ice();
+		AMateria *ice2 = new Ice();
+		AMateria *ice3 = new Ice();
+		AMateria *ice4 = new Ice();
+		AMateria *ice5 = new Ice();
+		std::cout << std::endl;
+
+		std::cout << "calling equiping 5 times: " << std::endl;	
+		me.equip(ice1);
+		me.equip(ice2);
+		me.equip(ice3);
+		me.equip(ice4);
+		me.equip(ice5);
+		std::cout << std::endl;
+
+		std::cout << "---unequip()----" << std::endl;
+		std::cout << "Inventory Before:" << std::endl;
+		for (int i = 0; i < Character::maxMateriaCount; i++) {
+			std::cout << "index: " << i << "-> " << me.getMateriaFromInventory(i)->getType() << std::endl;
+		}
+
+		std::cout << std::endl;
+		me.unequip(2);
+
+		std::cout << "Inventory After:" << std::endl;
+		for (int i = 0; i < Character::maxMateriaCount; i++) {
+			if (me.getMateriaFromInventory(i))
+				std::cout << "index: " << i << "-> " << me.getMateriaFromInventory(i)->getType() << std::endl;
+			else
+				std::cout << "index: " << i << "-> " << std::endl;
+
+		}
+		std::cout << std::endl;
+
+		std::cout << "calling unequip() on non-existent Materia: " << std::endl;
+		me.unequip(2);
+		std::cout << std::endl;	
+
+
+		std::cout << "----use()----" << std::endl;
+		std::cout << "calling use() on non-existent Materia: " << std::endl;
+		me.use(2, me);
+		std::cout << std::endl;	
+
+		std::cout << "Destructors:" << std::endl;
+		delete ice3;
+		delete ice5;
+	}
+	{
+		printSection("Testing Materiasource's member Functions ");
+		std::cout << "---learnMateria()----" << std::endl;
+
+		MateriaSource source;
+		AMateria *ice1 = new Ice();
+		AMateria *ice2 = new Ice();
+		AMateria *ice3 = new Ice();
+		AMateria *ice4 = new Ice();
+		AMateria *ice5 = new Ice();
+		std::cout << std::endl;
+
+		std::cout << "calling learn Materia 5 times: " << std::endl;	
+		source.learnMateria(ice1);
+		source.learnMateria(ice2);
+		source.learnMateria(ice3);
+		source.learnMateria(ice4);
+		source.learnMateria(ice5);
+		std::cout << std::endl;
+
+
+		std::cout << "---createMateria()----" << std::endl;
+		std::cout << "createMateria with unknown type" << std::endl;	
+		AMateria *ret = source.createMateria("unknown type");
+		std::cout << "return value: " << ret << std::endl; 
+		std::cout << std::endl;
+
+		delete ice5;
+
+
+	}
+
 
 	
 	return (0);
