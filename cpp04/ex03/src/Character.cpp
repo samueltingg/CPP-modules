@@ -70,10 +70,12 @@ void Character::equip(AMateria* m)
 {
 	for (int i = 0; i < _maxMateriaCount; ++i) {
 		if (!_inventory[i]) {
+			std::cout << "equip: added \"" << m->getType() << "\" into inventory." << std::endl;
 			_inventory[i] = m;
 			break ;
 		}
 	}
+	std::cout << "learnMateria: Fail to learn Materia as inventory is full." << std::endl;
 }
 
 // doesn't not free (save ptr before calling unequip)
@@ -82,6 +84,8 @@ void Character::unequip(int idx)
 	if (idx < 0 || idx >= _maxMateriaCount) {
 		std::cout << "unequip: Invalid Index, not within range." << std::endl;
 	}
+
+	std::cout << "unequip: removed \"" << _inventory[idx]->getType() << "\" from inventory." << std::endl;
 	_inventory[idx] = NULL;
 }
 
