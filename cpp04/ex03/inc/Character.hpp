@@ -33,11 +33,12 @@ public:
 	void equip(AMateria* m);
 	void unequip(int idx);
 	void use(int idx, ICharacter& target);
+	const AMateria *getMateriaFromInventory(int idx);
+	static const int maxMateriaCount = 4;
 
 private:
 	std::string _name;
-	static const int _maxMateriaCount = 4;
-	AMateria	*_inventory[_maxMateriaCount];
+	AMateria	*_inventory[maxMateriaCount];
 };
 
 #endif

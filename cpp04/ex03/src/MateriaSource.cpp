@@ -63,6 +63,8 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria *m)
 {
+	if (!m)
+		return ;
 	for (int i = 0; i < _maxMateriaCount; ++i) {
 		if (!_inventory[i]) {
 			std::cout << "learnMateria: added \"" << m->getType() << "\" into inventory." << std::endl;
@@ -83,7 +85,7 @@ AMateria *MateriaSource::createMateria(std::string const &type)
 		}
 
 	}
-	std::cout << "createMateria: `type` not found" << std::endl;
+	std::cout << "createMateria: type(\"" << type << "\") not found" << std::endl;
 	return (0);
 
 }
