@@ -15,7 +15,7 @@
 #include "../inc/ICharacter.hpp"
 
 Cure::Cure()
-	: AMateria("ice") 
+	: AMateria("cure") 
 {
 	std::cout << "Cure: Constructor called" << std::endl;
 }

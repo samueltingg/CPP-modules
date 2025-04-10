@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98 -fsanitize=address -g 
 INCLUDES = -Iinc
 
 # COLORS
@@ -18,7 +18,7 @@ SRCS_FIL = \
 		Ice.cpp \
 		Cure.cpp \
 		Character.cpp \
-		# MaterialSource.cpp
+		MateriaSource.cpp
 
 SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 

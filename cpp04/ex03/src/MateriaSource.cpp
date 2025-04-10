@@ -63,18 +63,28 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria *m)
 {
-	AMateria *copy = m->clone();
-
 	for (int i = 0; i < _maxMateriaCount; ++i) {
 		if (!_inventory[i]) {
-			_inventory[i] = copy;
-			break ;
+			std::cout << "learnMateria: added \"" << m->getType() << "\" into inventory." << std::endl;
+			_inventory[i] = m;
+			return ;
 		}
 	}
+	std::cout << "learnMateria: Fail to learn Materia as inventory is full." << std::endl;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
+
+	for (int i = 0; i < _maxMateriaCount; ++i) {
+		if (_inventory[i] && _inventory[i]->getType() == type) {
+			std::cout << "createMateria: creating \"" << type << "\" materia" << std::endl;
+			return _inventory[i]->clone();
+		}
+
+	}
+	std::cout << "createMateria: `type` not found" << std::endl;
+	return (0);
 
 }
 

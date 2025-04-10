@@ -68,14 +68,16 @@ std::string const & Character::getName() const
 // add a Materia in the first empty spot in the arr
 void Character::equip(AMateria* m)
 {
+	if (!m)
+		return ;
 	for (int i = 0; i < _maxMateriaCount; ++i) {
 		if (!_inventory[i]) {
 			std::cout << "equip: added \"" << m->getType() << "\" into inventory." << std::endl;
 			_inventory[i] = m;
-			break ;
+			return ;
 		}
 	}
-	std::cout << "learnMateria: Fail to learn Materia as inventory is full." << std::endl;
+	std::cout << "equip: Fail to learn Materia as inventory is full." << std::endl;
 }
 
 // doesn't not free (save ptr before calling unequip)
@@ -91,6 +93,7 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-	_inventory[idx]->use(target);
+	if (_inventory[idx])
+		_inventory[idx]->use(target);
 }
 
