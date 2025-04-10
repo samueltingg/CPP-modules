@@ -41,6 +41,23 @@ int	main()
 	}
 
 	{
+		printSection("Character: Testing deep copy for copy contructor/copy assignment operator");
+		Character character1("bob");
+		Character character2("John");
+	
+		AMateria *ice = new Ice();
+		character1.equip(ice);
+
+		character2 = character1; // Copy assignment operator
+
+		std::cout << std::endl;
+		std::cout << "character1's _inventory[0] address: " << character1.getMateriaFromInventory(0) << std::endl;
+		std::cout << "character3's _inventory[0] address: " << character2.getMateriaFromInventory(0) << std::endl;
+		std::cout << std::endl;
+
+	}
+
+	{
 		printSection("Testing 'Ice' Constructors");
 		Ice ice1;
 		Ice ice2(ice1); // Copy constructor
