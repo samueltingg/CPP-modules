@@ -6,16 +6,16 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:06:20 by sting             #+#    #+#             */
-/*   Updated: 2025/04/10 10:08:00 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/10 11:26:05 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATERIASOURCE
 #define MATERIASOURCE
 
-#include "AMateria.hpp"
+#include "IMateriaSource.hpp"
 
-class MateriaSource {
+class MateriaSource : public IMateriaSource {
 public:
 
 	// Contructor
@@ -27,8 +27,11 @@ public:
 	// Destructor
 	~MateriaSource();
 
-	void learnMateria(AMateria *);
+	void learnMateria(AMateria *m);
 	AMateria *createMateria(std::string const &type);
+private:
+	static const int _maxMateriaCount = 4;
+	AMateria	*_inventory[_maxMateriaCount];
 };
 
 #endif
