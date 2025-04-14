@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:33:56 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 16:57:10 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:25:37 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,20 @@ int			Bureaucrat::getGrade() const
 
 void		Bureaucrat::increment()
 {
-
+	if (_grade - 1 < 1) {
+		throw Bureaucrat::GradeTooHighException();
+		return ;
+	}
+	_grade--;
 }
 
 void		Bureaucrat::decrement()
 {
-
+	if (_grade + 1 > 150) {
+		throw Bureaucrat::GradeTooLowException();
+		return ;
+	}
+	_grade++;
 }
 
 std::ostream & operator<<( std::ostream & o, Bureaucrat const & bureaucrat )
