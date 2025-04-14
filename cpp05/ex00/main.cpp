@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:15:18 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 17:38:59 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:45:49 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	main()
 	{
 		printSection("Test: Instantiating Bureaucrat with Invalid grade");
 		try {
-			Bureaucrat bureaucrat1("bob", 0);
+			Bureaucrat bureaucrat1("bob", 0); // too high
 		}
 		catch (const std::exception &e) {
-			std::cerr << "error: " << e.what() << std::endl;
+			std::cerr << "Error: " << e.what() << std::endl;
 		}
 
 		try {
-			Bureaucrat bureaucrat2("john", 151);
+			Bureaucrat bureaucrat2("john", 151); // too low
 		}
 		catch (const std::exception &e) {
-			std::cerr << "error: " << e.what() << std::endl;
+			std::cerr << "Error: " << e.what() << std::endl;
 		}
 
 		
@@ -70,8 +70,9 @@ int	main()
 			bureaucrat1.increment();
 			std::cout << "after increment: " << std::endl; 
 			std::cout << bureaucrat1 << std::endl;
+			std::cout << std::endl;
 
-			std::cout << "Attempt to increment to out of range grade " << std::endl; 
+			std::cout << "Attempt to increment to out of range grade: " << std::endl; 
 			bureaucrat1.increment();
 		}
 		catch (const std::exception& e) {
@@ -81,7 +82,7 @@ int	main()
 	}
 
 	{
-		printSection("test: increment() and decrement()");
+		printSection("test: decrement()");
 
 		try {
 			Bureaucrat bureaucrat1("bob", 149);
@@ -91,8 +92,9 @@ int	main()
 			bureaucrat1.decrement();
 			std::cout << "after decrement: " << std::endl; 
 			std::cout << bureaucrat1 << std::endl;
+			std::cout << std::endl;
 
-			std::cout << "Attempt to decrement to out of range grade " << std::endl; 
+			std::cout << "Attempt to decrement to out of range grade: " << std::endl; 
 			bureaucrat1.decrement();
 		}
 		catch (const std::exception& e) {

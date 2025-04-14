@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 16:33:56 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 17:25:37 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/14 17:43:24 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 Bureaucrat::Bureaucrat(std::string name, int grade)
 	: _name(name), _grade(grade)
 {
-	std::cout << "Bureaucrat:: Constructor Called" << std::endl;
+	std::cout << "Bureaucrat:: Constructor Called (name: " << _name << ")" << std::endl;
+
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	if (grade > 150)
@@ -46,7 +47,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat:: Destructor Called" << std::endl;
+	std::cout << "Bureaucrat:: Destructor Called (name: " << _name << ")" << std::endl;
 
 }
 	
