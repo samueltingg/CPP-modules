@@ -149,6 +149,7 @@ int	main()
 
 		std::cout << "\nUnsuccessful Attempt for " << bureaucrat2.getName() << " to sign " << form1.getName() << ": "<< std::endl;
 		bureaucrat2.signForm(form1);
+		std::cout << std::endl;
 
 
 	}
