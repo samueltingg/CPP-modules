@@ -106,18 +106,51 @@ int	main()
 
 	{
 		printSection("Testing 'Form' Constructors");
-		Form form1("form1");
+		Form form1("form1", 100, 50);
 		Form form2(form1); // Copy constructor
-		Form form3("form2");
+		Form form3("form2", 130, 150);
 		form3 = form1; // Copy assignment operator
 	}
 
 	{
+		printSection("Test: Instantiating Form with Invalid grade");
+		try {
+			Form form1("form1", 10, 0); // too high
+		}
+		catch (const std::exception &e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			Form form2("form2", 151, 151); // too low
+		}
+		catch (const std::exception &e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+
+		
+	}
+	{
 		printSection("Test: Form '<<' overload");
-		Form form1("form1");
+		Form form1("form1", 100, 50);
 
 		std::cout << "\nInitial attribute values of Form: " << std::endl; 
 		std::cout << form1 << std::endl; 
+	}
+
+	{
+		printSection("Test: Bureaucrat's signForm() + Form's beSigned()");
+		Bureaucrat bureaucrat1("bureaucrat1", 100);	
+		Bureaucrat bureaucrat2("bureaucrat2", 101);	
+		Form form1("form1", 100, 50);
+		
+		std::cout << "\nSuccessful Attempt for " << bureaucrat1.getName() << " to sign " << form1.getName() << ": "<< std::endl;
+		bureaucrat1.signForm(form1);
+
+		std::cout << "\nUnsuccessful Attempt for " << bureaucrat2.getName() << " to sign " << form1.getName() << ": "<< std::endl;
+		bureaucrat2.signForm(form1);
+
+
 	}
 
 	return (0);
