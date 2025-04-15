@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:06:11 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 18:20:32 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:24:23 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute)
 	std::cout << "AForm:: Constructor Called (name: " << _name << ")" << std::endl;
 	
 	if (gradeToSign < 1 || gradeToExecute < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 
 }
 
