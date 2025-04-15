@@ -14,7 +14,8 @@ NAME = program
 #SRCDIR = src/
 SRCS = \
 		main.cpp \
-		Bureaucrat.cpp
+		Bureaucrat.cpp \
+		Form.cpp
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 

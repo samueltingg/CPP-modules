@@ -11,12 +11,18 @@
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
-Form::Form(std::string name)
-	: _name(name), _isSigned(false), _gradeToSign(50), _gradeToExecute(100)
+Form::Form(std::string name, int gradeToSign, int gradeToExecute)
+	: _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	std::cout << "Form:: Constructor Called (name: " << _name << ")" << std::endl;
+	
+	if (gradeToSign < 1 || gradeToExecute < 1)
+		throw Bureaucrat::GradeTooHighException();
+	if (gradeToSign > 150 || gradeToExecute > 150)
+		throw Bureaucrat::GradeTooLowException();
 
 }
 
@@ -68,12 +74,10 @@ int		Form::getGradeToExecute() const
 
 void	Form::beSigned(Bureaucrat& bureaucrat)
 {
-	
-}
-
-void	Form::signForm()
-{
-
+	if (bureaucrat.getGrade() <= _gradeToSign)
+		_isSigned = true;
+	else
+		throw Form::GradeTooLowException();
 }
 
 std::ostream & operator<<( std::ostream & o, Form const & bureaucrat )

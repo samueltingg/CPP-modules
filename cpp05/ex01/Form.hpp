@@ -14,12 +14,14 @@
 #define FORM_HPP
 
 #include <string>
-#include "Bureaucrat.hpp"
+#include <exception>
+
+class Bureaucrat;
 
 class Form {
 public:
 	// Constructor
-	Form(std::string name);
+	Form(std::string name, int gradeToSign, int gradeToExecute);
 	// Copy Constructor
 	Form(const Form& other);
 	// Copy Assignment Operator
