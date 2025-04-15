@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:15:18 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 17:45:49 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/15 17:30:00 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,54 +104,45 @@ int	main()
 		}
 	}
 
+	// {
+	// 	printSection("Testing 'AForm' Constructors");
+	// 	AForm form1("form1", 100, 50);
+	// 	AForm form2(form1); // Copy constructor
+	// 	AForm form3("form2", 130, 150);
+	// 	form3 = form1; // Copy assignment operator
+	// }
+	
+	
 	{
-		printSection("Testing 'AForm' Constructors");
-		AForm form1("form1", 100, 50);
-		AForm form2(form1); // Copy constructor
-		AForm form3("form2", 130, 150);
+		printSection("Testing 'Shrubbery' Constructors");
+		ShrubberyCreationForm form1("bob", 1);
+		ShrubberyCreationForm form2(form1); // Copy constructor
+		ShrubberyCreationForm form3("john", 150);
 		form3 = form1; // Copy assignment operator
 	}
 
-	{
-		printSection("Test: Instantiating AForm with Invalid grade");
-		try {
-			AForm form1("form1", 10, 0); // too high
-		}
-		catch (const std::exception &e) {
-			std::cerr << "Error: " << e.what() << std::endl;
-		}
-
-		try {
-			AForm form2("form2", 151, 151); // too low
-		}
-		catch (const std::exception &e) {
-			std::cerr << "Error: " << e.what() << std::endl;
-		}
-
-		
-	}
-	{
-		printSection("Test: AForm '<<' overload");
-		AForm form1("form1", 100, 50);
-
-		std::cout << "\nInitial attribute values of AForm: " << std::endl; 
-		std::cout << form1 << std::endl; 
-	}
-
-	{
-		printSection("Test: Bureaucrat's signForm() + Form's beSigned()");
-		Bureaucrat bureaucrat1("bureaucrat1", 100);	
-		Bureaucrat bureaucrat2("bureaucrat2", 101);	
-		AForm form1("form1", 100, 50);
-		
-		std::cout << "\nSuccessful Attempt for " << bureaucrat1.getName() << " to sign " << form1.getName() << ": "<< std::endl;
-		bureaucrat1.signForm(form1);
-
-		std::cout << "\nUnsuccessful Attempt for " << bureaucrat2.getName() << " to sign " << form1.getName() << ": "<< std::endl;
-		bureaucrat2.signForm(form1);
-		std::cout << std::endl;
-
-	}
+	// {
+	// 	printSection("Test: AForm '<<' overload");
+	// 	AForm form1("form1", 100, 50);
+	//
+	// 	std::cout << "\nInitial attribute values of AForm: " << std::endl; 
+	// 	std::cout << form1 << std::endl; 
+	// }
+	//
+	// {
+	// 	printSection("Test: Bureaucrat's signForm() + Form's beSigned()");
+	// 	Bureaucrat bureaucrat1("bureaucrat1", 100);	
+	// 	Bureaucrat bureaucrat2("bureaucrat2", 101);	
+	// 	AForm form1("form1", 100, 50);
+	//
+	// 	std::cout << "\nSuccessful Attempt for " << bureaucrat1.getName() << " to sign " << form1.getName() << ": "<< std::endl;
+	// 	bureaucrat1.signForm(form1);
+	//
+	// 	std::cout << "\nUnsuccessful Attempt for " << bureaucrat2.getName() << " to sign " << form1.getName() << ": "<< std::endl;
+	// 	bureaucrat2.signForm(form1);
+	// 	std::cout << std::endl;
+	//
+	// }
 
 	return (0);
 }

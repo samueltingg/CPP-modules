@@ -15,7 +15,11 @@ NAME = program
 SRCS = \
 		main.cpp \
 		Bureaucrat.cpp \
-		AForm.cpp
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp \
+
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
