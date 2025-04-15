@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 18:06:11 by sting             #+#    #+#             */
-/*   Updated: 2025/04/14 18:20:32 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/15 16:26:17 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute)
 	std::cout << "Form:: Constructor Called (name: " << _name << ")" << std::endl;
 	
 	if (gradeToSign < 1 || gradeToExecute < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw Form::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw Form::GradeTooLowException();
 
 }
 
