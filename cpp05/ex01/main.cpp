@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -34,7 +36,7 @@ int	main()
 	}
 
 	{
-		printSection("Test: '<<' overload");
+		printSection("Test: Bureaucrat'<<' overload");
 		Bureaucrat bureaucrat1("bob", 1);
 		std::cout << bureaucrat1 << std::endl; 
 	}
@@ -102,7 +104,21 @@ int	main()
 		}
 	}
 
+	{
+		printSection("Testing 'Form' Constructors");
+		Form form1("form1");
+		Form form2(form1); // Copy constructor
+		Form form3("form2");
+		form3 = form1; // Copy assignment operator
+	}
 
+	{
+		printSection("Test: Form '<<' overload");
+		Form form1("form1");
+
+		std::cout << "\nInitial attribute values of Form: " << std::endl; 
+		std::cout << form1 << std::endl; 
+	}
 
 	return (0);
 }
