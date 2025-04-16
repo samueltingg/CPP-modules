@@ -14,6 +14,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -40,7 +42,6 @@ int	main()
 		Bureaucrat bureaucrat1("bob", 1);
 		std::cout << bureaucrat1 << std::endl; 
 	}
-
 
 	{
 		printSection("Test: Instantiating Bureaucrat with Invalid grade");
@@ -128,7 +129,7 @@ int	main()
 		try {
 
 			ShrubberyCreationForm form("home");
-			Bureaucrat bureaucrat("bob", 100);
+			Bureaucrat bureaucrat("bob", 137);
 			bureaucrat.signForm(form);
 			form.execute(bureaucrat);
 		}
@@ -139,28 +140,63 @@ int	main()
 		try {
 			std::cout << "\nTest Case: Form Not Signed" << std::endl;
 			ShrubberyCreationForm form("home");
-			Bureaucrat bureaucrat("bob", 100);
+			Bureaucrat bureaucrat("bob", 137);
 			// bureaucrat.signForm(form);
 			form.execute(bureaucrat);
 		}
 		catch (const std::exception& e) {
-			std::cout << "\nError: " << e.what() << std::endl;
+			std::cout << "Error: " << e.what() << std::endl;
 		}
 
 		try {
 			std::cout << "\nTest Case: Bureaucrat grade too low" << std::endl;
 			ShrubberyCreationForm form("home");
-			Bureaucrat bureaucrat("bob", 151);
+			Bureaucrat bureaucrat("bob", 138);
 			bureaucrat.signForm(form);
 			form.execute(bureaucrat);
 		}
 		catch (const std::exception& e) {
-			std::cout << "\nError: " << e.what() << std::endl;
+			std::cout << "Error: " << e.what() << std::endl;
 		}
-
-
 	}
 
+	{
+		printSection("Testing Robotomy's execute");
+
+		std::cout << "Test Case: Normal" << std::endl;
+		try {
+
+			RobotomyRequestForm form("home");
+			Bureaucrat bureaucrat("bob", 45);
+			bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Form Not Signed" << std::endl;
+			RobotomyRequestForm form("home");
+			Bureaucrat bureaucrat("bob", 45);
+			// bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Bureaucrat grade too low" << std::endl;
+			RobotomyRequestForm form("home");
+			Bureaucrat bureaucrat("bob", 46);
+			bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+	}
 	// {
 	// 	printSection("Test: AForm '<<' overload");
 	// 	AForm form1("form1", 100, 50);
