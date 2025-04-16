@@ -10,3 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PRESIDENTIALPARDON_FORM_HPP
+#define PRESIDENTIALPARDON_FORM_HPP
+
+#include "AForm.hpp" 
+
+class PresidentialPardonForm : public AForm {
+public:
+	// Constructor
+	PresidentialPardonForm(std::string target);
+	// Copy Constructor
+	PresidentialPardonForm(const PresidentialPardonForm& other);
+	// Copy Assignment Operator
+	PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
+	// Destructor
+	~PresidentialPardonForm();
+
+	void	execute(Bureaucrat const & executor) const;
+
+private:
+	std::string	_target;
+};
+
+#endif

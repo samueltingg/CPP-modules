@@ -68,7 +68,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	
 	srand(static_cast<unsigned int>(clock()));
 	if (rand() % 2 == 0)
-		std::cout << _target << " has be robotomized." << std::endl;
+		std::cout << "Target:" << _target << ", has be robotomized." << std::endl;
 	else 
 		std::cout << "Robotomy has failed" << std::endl;
 }
