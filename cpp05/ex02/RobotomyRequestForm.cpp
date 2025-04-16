@@ -13,6 +13,8 @@
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 #define RESET "\033[0m"
 #define GREY "\033[90m"
@@ -49,6 +51,12 @@ RobotomyRequestForm::~RobotomyRequestForm()
 	std::cout << GREY << "RobotomyRequestForm:: Destructor Called (target: " << _target << ")" << RESET << std::endl;
 }
 
+/*
+`srand` sets a seed(starting point) for the random number generator used by `rand()` function
+
+using clock() as seed creates more randomness
+
+*/
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	if (!getIsSigned() )
@@ -56,5 +64,12 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	if (executor.getGrade() > getGradeToExecute())
 		throw RobotomyRequestForm::GradeTooLowException();
 	
+	std::cout << "< **DRILLING NOISES** >" << std::endl;
+	
+	srand(static_cast<unsigned int>(clock()));
+	if (rand() % 2 == 0)
+		std::cout << _target << " has be robotomized." << std::endl;
+	else 
+		std::cout << "Robotomy has failed" << std::endl;
 }
 
