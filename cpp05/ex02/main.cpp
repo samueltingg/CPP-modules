@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:15:18 by sting             #+#    #+#             */
-/*   Updated: 2025/04/15 17:30:00 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/16 15:57:42 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,22 @@ int	main()
 		ShrubberyCreationForm form1("home");
 		ShrubberyCreationForm form2(form1); // Copy constructor
 		ShrubberyCreationForm form3("school");
+		form3 = form1; // Copy assignment operator
+	}
+
+	{
+		printSection("Testing 'Robotomy' Constructors");
+		RobotomyRequestForm form1("home");
+		RobotomyRequestForm form2(form1); // Copy constructor
+		RobotomyRequestForm form3("school");
+		form3 = form1; // Copy assignment operator
+	}
+
+	{
+		printSection("Testing 'Presidential' Constructors");
+		PresidentialPardonForm form1("home");
+		PresidentialPardonForm form2(form1); // Copy constructor
+		PresidentialPardonForm form3("school");
 		form3 = form1; // Copy assignment operator
 	}
 
