@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 10:15:18 by sting             #+#    #+#             */
-/*   Updated: 2025/04/15 17:30:00 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/16 15:52:58 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-
+#include "Intern.hpp"
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -300,6 +300,32 @@ int	main()
 		catch (const std::exception& e) {
 			std::cout << "Error: " << e.what() << std::endl;
 		}
+	}
+
+	{
+		printSection("Testing 'Intern' Constructors");
+		Intern intern1;
+		Intern intern2(intern1); // Copy constructor
+		Intern intern3;
+		intern3 = intern1; // Copy assignment operator
+	}
+
+	{
+		printSection("Testing Intern's makeForm");
+		Bureaucrat bureaucrat("bob", 1);
+		Intern someRandomIntern;
+		AForm* rrf;
+		
+		std::cout << BOLD << "\nTest: non-existent form" << RESET << std::endl;
+		rrf = someRandomIntern.makeForm("invalid form", "Bender");
+
+		std::cout << BOLD << "\nTest: Existing form" << RESET << std::endl;
+		rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
+	
+		bureaucrat.signForm(*rrf);
+		std::cout << "\nExecute created Form: \n" << std::endl;
+		bureaucrat.executeForm(*rrf); 
+		delete rrf;
 	}
 	return (0);
 }

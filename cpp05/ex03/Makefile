@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror $(INCLUDES) -std=c++98 
 INCLUDES = 
 
 # COLORS
@@ -19,7 +19,7 @@ SRCS = \
 		ShrubberyCreationForm.cpp \
 		RobotomyRequestForm.cpp \
 		PresidentialPardonForm.cpp \
-
+		Intern.cpp 
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
