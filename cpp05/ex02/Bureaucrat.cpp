@@ -14,10 +14,13 @@
 #include "AForm.hpp"
 #include <iostream>
 
+#define RESET "\033[0m"
+#define GREY "\033[90m"
+
 Bureaucrat::Bureaucrat(std::string name, int grade)
 	: _name(name), _grade(grade)
 {
-	std::cout << "Bureaucrat:: Constructor Called (name: " << _name << ")" << std::endl;
+	std::cout << GREY << "Bureaucrat:: Constructor Called (name: " << _name << ")" << RESET << std::endl;
 
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
@@ -29,12 +32,12 @@ Bureaucrat::Bureaucrat(std::string name, int grade)
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
 	: _name(other._name), _grade(other._grade)
 {
-	std::cout << "Bureaucrat:: Copy Constructor Called" << std::endl;
+	std::cout << GREY << "Bureaucrat:: Copy Constructor Called" << RESET << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
-	std::cout << "Bureaucrat:: Copy Assignment Operator Called" << std::endl;
+	std::cout << GREY << "Bureaucrat:: Copy Assignment Operator Called" << RESET << std::endl;
 	
 	if (this == &other)
 		return *this;
@@ -48,7 +51,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat:: Destructor Called (name: " << _name << ")" << std::endl;
+	std::cout << GREY << "Bureaucrat:: Destructor Called (name: " << _name << ")" << RESET << std::endl;
 
 }
 	

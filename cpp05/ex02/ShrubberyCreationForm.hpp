@@ -33,7 +33,7 @@ public:
         const char* what() const throw() {
             return "Grade is too low";
         }
-	}
+	};
 
 private:
 	std::string	_target;

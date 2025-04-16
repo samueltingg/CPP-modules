@@ -13,7 +13,7 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-
+#include "ShrubberyCreationForm.hpp"
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
@@ -115,10 +115,50 @@ int	main()
 	
 	{
 		printSection("Testing 'Shrubbery' Constructors");
-		ShrubberyCreationForm form1("bob", 1);
+		ShrubberyCreationForm form1("home");
 		ShrubberyCreationForm form2(form1); // Copy constructor
-		ShrubberyCreationForm form3("john", 150);
+		ShrubberyCreationForm form3("school");
 		form3 = form1; // Copy assignment operator
+	}
+
+	{
+		printSection("Testing Shrubbery's execute");
+
+		std::cout << "Test Case: Normal" << std::endl;
+		try {
+
+			ShrubberyCreationForm form("home");
+			Bureaucrat bureaucrat("bob", 100);
+			bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Form Not Signed" << std::endl;
+			ShrubberyCreationForm form("home");
+			Bureaucrat bureaucrat("bob", 100);
+			// bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "\nError: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Bureaucrat grade too low" << std::endl;
+			ShrubberyCreationForm form("home");
+			Bureaucrat bureaucrat("bob", 151);
+			bureaucrat.signForm(form);
+			form.execute(bureaucrat);
+		}
+		catch (const std::exception& e) {
+			std::cout << "\nError: " << e.what() << std::endl;
+		}
+
+
 	}
 
 	// {

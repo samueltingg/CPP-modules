@@ -14,10 +14,13 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
+#define RESET "\033[0m"
+#define GREY "\033[90m"
+
 AForm::AForm(std::string name, int gradeToSign, int gradeToExecute)
 	: _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
-	std::cout << "AForm:: Constructor Called (name: " << _name << ")" << std::endl;
+	std::cout << GREY << "AForm:: Constructor Called (name: " << _name << ")" << RESET << std::endl;
 	
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw AForm::GradeTooHighException();
@@ -29,12 +32,12 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute)
 AForm::AForm(const AForm& other)
 	: _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 {
-	std::cout << "AForm:: Copy Constructor Called" << std::endl;
+	std::cout << GREY << "AForm:: Copy Constructor Called" << RESET << std::endl;
 }
 
 AForm& AForm::operator=(const AForm& other)
 {
-	std::cout << "AForm:: Copy Assignment Operator Called" << std::endl;
+	std::cout << GREY << "AForm:: Copy Assignment Operator Called" << RESET << std::endl;
 	
 	if (this == &other)
 		return *this;
@@ -48,7 +51,7 @@ AForm& AForm::operator=(const AForm& other)
 
 AForm::~AForm()
 {
-	std::cout << "AForm:: Destructor Called (name: " << _name << ")" << std::endl;
+	std::cout << GREY << "AForm:: Destructor Called (name: " << _name << ")" << RESET << std::endl;
 }
 	
 

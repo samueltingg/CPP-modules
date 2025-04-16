@@ -53,11 +53,18 @@ public:
 	public:
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw() {
-            return "Grade is too low";
+            return "Grade is too low.";
         }
 
 	};
+	class FormNotSignedException : public std::exception {
+	public:
+		// 'throw()' specifies that func won't throw any exceptions 
+        const char* what() const throw() {
+            return "Form not signed.";
+        }
 
+	};
 private:
 	const std::string	_name;
 	bool				_isSigned;

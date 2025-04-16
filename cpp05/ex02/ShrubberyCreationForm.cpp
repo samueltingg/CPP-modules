@@ -11,24 +11,29 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <fstream>
+
+#define RESET "\033[0m"
+#define GREY "\033[90m"
+
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
 	: AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
-	std::cout << "ShrubberyCreationForm:: Constructor Called (target: " << _target << ")" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm:: Constructor Called (target: " << _target << ")" << RESET << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
 	: AForm("ShrubberyCreationForm", 145, 137), _target(other._target)
 {
-	std::cout << "ShrubberyCreationForm:: Copy Constructor Called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm:: Copy Constructor Called" << RESET << std::endl;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
 {
-	std::cout << "ShrubberyCreationForm:: Copy Assignment Operator Called" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm:: Copy Assignment Operator Called" << RESET << std::endl;
 	
 	if (this == &other)
 		return *this;
@@ -42,7 +47,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	std::cout << "ShrubberyCreationForm:: Destructor Called (target: " << _target << ")" << std::endl;
+	std::cout << GREY << "ShrubberyCreationForm:: Destructor Called (target: " << _target << ")" << RESET << std::endl;
 }
 
 void writeFile(const std::string& fileName, const std::string& content) {
@@ -54,6 +59,13 @@ void writeFile(const std::string& fileName, const std::string& content) {
 
 void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
+	if (!getIsSigned() )
+		throw ShrubberyCreationForm::FormNotSignedException();
+	if (executor.getGrade() > getGradeToExecute())
+		throw ShrubberyCreationForm::GradeTooLowException();
+	
+	std::string fileName = _target + "_shrubbery";
+	std::cout << "File: \"" << fileName << "\" with AsciiTree created." << std::endl;
     std::string asciiTree = 
         "        /\\\n"
         "       /**\\\n"
@@ -63,7 +75,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
         "   /**********\\\n"
         "       ||\n"
         "       ||\n";
-
-	writeFile(_target + "_shrubbery", asciiTree);
+	writeFile(fileName, asciiTree);
 }
 
