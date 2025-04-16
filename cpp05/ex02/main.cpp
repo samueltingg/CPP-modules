@@ -237,6 +237,50 @@ int	main()
 		}
 	}
 
+	{
+		printSection("Testing Bureaucrat's executeForm");
+
+		std::cout << "Test Case: Normal" << std::endl;
+		try {
+
+			PresidentialPardonForm form("home");
+			Bureaucrat bureaucrat("bob", 5);
+			bureaucrat.signForm(form);
+			// form.execute(bureaucrat);
+			bureaucrat.executeForm(form);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Form Not Signed" << std::endl;
+			PresidentialPardonForm form("home");
+			Bureaucrat bureaucrat("bob", 5);
+			// bureaucrat.signForm(form);
+			bureaucrat.executeForm(form);
+
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
+		try {
+			std::cout << "\nTest Case: Bureaucrat grade too low" << std::endl;
+			PresidentialPardonForm form("home");
+			Bureaucrat bureaucrat("bob", 6);
+			bureaucrat.signForm(form);
+			bureaucrat.executeForm(form);
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+	}
+
+
+
+
+
 	// {
 	// 	printSection("Test: AForm '<<' overload");
 	// 	AForm form1("form1", 100, 50);
