@@ -240,6 +240,31 @@ int	main()
 	{
 		printSection("Testing Bureaucrat's executeForm");
 
+		std::cout << "Test: Bureaucrat can execute all Forms" << std::endl;
+		try {
+
+			ShrubberyCreationForm shrubForm("home");
+			RobotomyRequestForm robotForm("home");
+			PresidentialPardonForm preForm("home");
+			Bureaucrat bureaucrat("bob", 5);
+			bureaucrat.signForm(shrubForm);
+			bureaucrat.signForm(robotForm);
+			bureaucrat.signForm(preForm);
+
+			std::cout << std::endl;
+			bureaucrat.executeForm(shrubForm);
+
+			std::cout << std::endl;
+			bureaucrat.executeForm(robotForm);
+
+			std::cout << std::endl;
+			bureaucrat.executeForm(preForm);
+
+		}
+		catch (const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+		}
+
 		std::cout << "Test Case: Normal" << std::endl;
 		try {
 
@@ -276,33 +301,5 @@ int	main()
 			std::cout << "Error: " << e.what() << std::endl;
 		}
 	}
-
-
-
-
-
-	// {
-	// 	printSection("Test: AForm '<<' overload");
-	// 	AForm form1("form1", 100, 50);
-	//
-	// 	std::cout << "\nInitial attribute values of AForm: " << std::endl; 
-	// 	std::cout << form1 << std::endl; 
-	// }
-	//
-	// {
-	// 	printSection("Test: Bureaucrat's signForm() + Form's beSigned()");
-	// 	Bureaucrat bureaucrat1("bureaucrat1", 100);	
-	// 	Bureaucrat bureaucrat2("bureaucrat2", 101);	
-	// 	AForm form1("form1", 100, 50);
-	//
-	// 	std::cout << "\nSuccessful Attempt for " << bureaucrat1.getName() << " to sign " << form1.getName() << ": "<< std::endl;
-	// 	bureaucrat1.signForm(form1);
-	//
-	// 	std::cout << "\nUnsuccessful Attempt for " << bureaucrat2.getName() << " to sign " << form1.getName() << ": "<< std::endl;
-	// 	bureaucrat2.signForm(form1);
-	// 	std::cout << std::endl;
-	//
-	// }
-
 	return (0);
 }
