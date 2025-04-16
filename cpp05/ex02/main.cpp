@@ -240,7 +240,7 @@ int	main()
 	{
 		printSection("Testing Bureaucrat's executeForm");
 
-		std::cout << "Test: Bureaucrat can execute all Forms" << std::endl;
+		std::cout << "\nTest: Bureaucrat can execute all Forms" << std::endl;
 		try {
 
 			ShrubberyCreationForm shrubForm("home");
@@ -265,7 +265,7 @@ int	main()
 			std::cout << "Error: " << e.what() << std::endl;
 		}
 
-		std::cout << "Test Case: Normal" << std::endl;
+		std::cout << "\nTest Case: Normal" << std::endl;
 		try {
 
 			PresidentialPardonForm form("home");
