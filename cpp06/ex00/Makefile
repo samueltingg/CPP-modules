@@ -8,7 +8,7 @@ RED = \033[0;31m
 RESET = \033[0m
 ORANGE = \033[0;38;5;166m
 
-NAME = program
+NAME = convert
 
 # Source Files
 #SRCDIR = src/
