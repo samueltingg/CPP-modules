@@ -21,11 +21,23 @@ enum e_LiteralType {
 	INT,
 	FLOAT,
 	DOUBLE,
-	PSEUDO,
+	PSEUDO_FLOAT,
+	PSEUDO_DOUBLE,
 	INVALID,
 };
 
 void colorPrint(const std::string &title);
+
+bool isAscii(char c);
+bool isDisplayable(char c);
+bool hasDecimalPoint(char *literal);
+bool isPseudoFloatLiteral(char *literal);
+bool isPseudoDoubleLiteral(char *literal);
+bool isSinglePrintableChar(char *literal);
+bool isDigit(char c);
+bool isIntegerLiteral(char	*literal);
+bool isFloatLiteral(char *literal);
+bool isDoubleLiteral(char *literal);
 
 
 class ScalarConverter {
