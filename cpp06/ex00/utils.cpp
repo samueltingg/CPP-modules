@@ -35,9 +35,9 @@ bool isDisplayable(char c)
 	return false;
 }
 
-bool	hasDecimalPoint(char *literal)
+bool	hasDecimalPoint(std::string literal)
 {
-	if (!literal)
+	if (literal.empty())
 		return false;
 	for (int i = 0; literal[i]; ++i) {
 		if (literal[i] == '.')
@@ -46,50 +46,37 @@ bool	hasDecimalPoint(char *literal)
 	return false;
 }
 
-
-// bool isPseudoLiteral(char *literal)
-// {
-// 	const char *arr[] = {"inff", "-inff", "+inff","inf", "-inf", "+inf", "nan", "nanf"};
-//
-//
-// 	for (int i = 0; i < 6; i++) {
-// 		if (!strcmp(literal, arr[i]))
-// 			return true;
-// 	}
-// 	return false;
-// }
-
-bool isPseudoFloatLiteral(char *literal)
+bool isPseudoFloatLiteral(std::string literal)
 {
 	const char *arr[4] = {"inff", "-inff", "+inff", "nanf"};
 	
 	
 	for (int i = 0; i < 4; i++) {
-		if (!strcmp(literal, arr[i]))
+		if (literal == arr[i])
 			return true;
 	}
 	return false;
 }
 
-bool isPseudoDoubleLiteral(char *literal)
+bool isPseudoDoubleLiteral(std::string literal)
 {
 	const char *arr[4] = {"inf", "-inf", "+inf", "nan"};
 	
 	
 	for (int i = 0; i < 4; i++) {
-		if (!strcmp(literal, arr[i]))
+		if (literal == arr[i])
 			return true;
 	}
 	return false;
 }
 
-bool	isSinglePrintableChar(char *literal)
+bool	isSinglePrintableChar(std::string literal)
 {
-	if (!literal)
+	if (literal.empty())
 		return false;
-	char c = *literal;
+	char c = literal[0];
 
-	if (strlen(literal) == 1)	
+	if (literal.length() == 1)	
 		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 			return true;
 	return false;
@@ -102,7 +89,7 @@ bool isDigit(char c)
 	return false;
 }
 
-bool isIntegerLiteral(char	*literal) 
+bool isIntegerLiteral(std::string literal) 
 {
 	int i = 0;
 
@@ -115,26 +102,26 @@ bool isIntegerLiteral(char	*literal)
 	return true;
 }
 
-bool isFloatLiteral(char *literal)
+bool isFloatLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
 
 	char	*endPtr = NULL;	
-	strtof(literal, &endPtr);
+	strtof(literal.c_str(), &endPtr);
 
 	if (endPtr[0] == 'f' && endPtr[1] == '\0')
 		return true;
 	return false;
 }
 
-bool isDoubleLiteral(char *literal)
+bool isDoubleLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
 
 	char	*endPtr = NULL;	
-	strtof(literal, &endPtr);
+	strtod(literal.c_str(), &endPtr);
 
 	if (endPtr[0] == '\0')
 		return true;

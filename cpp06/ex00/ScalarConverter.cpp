@@ -43,7 +43,7 @@ ScalarConverter::~ScalarConverter()
 }
 
 
-e_LiteralType	checkType(char *literal)
+e_LiteralType	checkType(std::string literal)
 {
 	if (isPseudoFloatLiteral(literal)) {
 		colorPrint("Type: PSEUDO_FLOAT\n");
@@ -76,16 +76,25 @@ e_LiteralType	checkType(char *literal)
 }
 
 
-void	convertAndPrint(char *literal, e_LiteralType type)
+void	convertAndPrint(std::string literal, e_LiteralType type)
 {
 	char c;
 	int i;
 	float f;
 	double d;
 
-	// if (type == PSEUDO) {
-	//
-	// }
+	if (type == PSEUDO_FLOAT) {
+		std::cout << "char: impossible\n";
+		std::cout << "int: impossible\n";
+		std::cout << "float: " << literal << "\n";
+		std::cout << "double: " << literal.erase(literal.length() - 1) << "\n";
+	}
+	else if (type == PSEUDO_DOUBLE) {
+		std::cout << "char: impossible\n";
+		std::cout << "int: impossible\n";
+		std::cout << "float: " << literal << "f" << "\n";
+		std::cout << "double: " << literal << "\n";
+	}
 	if (type == CHAR) {
 		c = literal[0];
 
@@ -94,21 +103,21 @@ void	convertAndPrint(char *literal, e_LiteralType type)
 		d = static_cast<double>(c);
 	}
 	else if (type == INT) {
-		i = atoi(literal);
+		i = atoi(literal.c_str());
 
 		c = static_cast<char>(i);
 		f = static_cast<float>(i);
 		d = static_cast<double>(i);
 	}
 	else if (type == FLOAT) {
-		f = atof(literal);
+		f = atof(literal.c_str());
 
 		i = static_cast<int>(f);
 		c = static_cast<char>(f);
 		d = static_cast<double>(f);
 	}
 	else if (type == DOUBLE) {
-		d = atof(literal);
+		d = strtod(literal.c_str(), NULL);
 
 		i = static_cast<int>(d);
 		c = static_cast<char>(d);
@@ -119,9 +128,9 @@ void	convertAndPrint(char *literal, e_LiteralType type)
 	}
 	
 	if (type == PSEUDO_FLOAT || type == PSEUDO_DOUBLE || !isAscii(c))	
-		std::cout << "char: " << "impossible\n";
+		std::cout << "char: impossible\n";
 	else if (!isDisplayable(c))
-		std::cout << "char: " << "Non displayable\n";
+		std::cout << "char: Non displayable\n";
 	else 
 		std::cout << "char: '" << c << "\'\n";
 		
@@ -131,11 +140,8 @@ void	convertAndPrint(char *literal, e_LiteralType type)
 	std::cout << std::fixed << std::setprecision(1) << "double: " << d << "\n";
 }
 
-void ScalarConverter::convert(char *literal)
+void ScalarConverter::convert(std::string literal)
 {
-	// char charValue;
-	// int intValue;
-	// float floatValue;
 	e_LiteralType type = checkType(literal);
 	if (type == INVALID) 
 		std::cerr << "Input is not a valid literal\n";

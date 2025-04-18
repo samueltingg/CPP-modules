@@ -30,19 +30,19 @@ void colorPrint(const std::string &title);
 
 bool isAscii(char c);
 bool isDisplayable(char c);
-bool hasDecimalPoint(char *literal);
-bool isPseudoFloatLiteral(char *literal);
-bool isPseudoDoubleLiteral(char *literal);
-bool isSinglePrintableChar(char *literal);
+bool hasDecimalPoint(std::string literal);
+bool isPseudoFloatLiteral(std::string literal);
+bool isPseudoDoubleLiteral(std::string literal);
+bool isSinglePrintableChar(std::string literal);
 bool isDigit(char c);
-bool isIntegerLiteral(char	*literal);
-bool isFloatLiteral(char *literal);
-bool isDoubleLiteral(char *literal);
+bool isIntegerLiteral(std::string literal);
+bool isFloatLiteral(std::string literal);
+bool isDoubleLiteral(std::string literal);
 
 
 class ScalarConverter {
 public:
-	static	void convert(char *literal);
+	static	void convert(std::string literal);
 
 private:
 	// Set as private to prevent class to be instanciated: 
