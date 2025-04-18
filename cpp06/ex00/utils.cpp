@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
+#include <cctype>
 
 
 void colorPrint(const std::string &title) {
@@ -21,29 +22,15 @@ void colorPrint(const std::string &title) {
 		<< std::endl;
 }
 
-bool isAscii(char c)
-{
-	if (c >= 0 && c <= 127)
-		return (true);
-	return (false);
-}
-
-bool isDisplayable(char c)
-{
-	if (c >= 32 && c <= 126)
-		return true;
-	return false;
-}
-
 bool	hasDecimalPoint(std::string literal)
 {
 	if (literal.empty())
 		return false;
-	for (int i = 0; literal[i]; ++i) {
-		if (literal[i] == '.')
-			return true;
-	}
-	return false;
+
+	size_t decimalPos = literal.find('.');
+	if (decimalPos == std::string::npos)
+		return false;
+	return true;
 }
 
 bool isPseudoFloatLiteral(std::string literal)
@@ -76,15 +63,7 @@ bool	isSinglePrintableChar(std::string literal)
 		return false;
 	char c = literal[0];
 
-	if (literal.length() == 1)	
-		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-			return true;
-	return false;
-}
-
-bool isDigit(char c)
-{
-	if (c >= '0' && c <= '9')
+	if (literal.length() == 1 && isalpha(c))
 		return true;
 	return false;
 }
@@ -96,15 +75,20 @@ bool isIntegerLiteral(std::string literal)
 	if (literal[0] == '-')
 		i++;
 	for (; literal[i]; i++) {
-		if (!isDigit(literal[i]))
+		if (!isdigit(literal[i]))
 			return false;
 	} 
 	return true;
 }
 
+
+
+
 bool isFloatLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
+		return false;
+	if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
 		return false;
 
 	char	*endPtr = NULL;	
@@ -119,8 +103,10 @@ bool isDoubleLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
+	if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
+		return false;
 
-	char	*endPtr = NULL;	
+	char	*endPtr = NULL;
 	strtod(literal.c_str(), &endPtr);
 
 	if (endPtr[0] == '\0')
@@ -129,3 +115,10 @@ bool isDoubleLiteral(std::string literal)
 }
 
 
+int	countDecimalPlaces(std::string num)
+{
+	size_t decimalPos = num.find('.');
+	if (decimalPos == std::string::npos)
+		return 0;
+	return (num.length() - decimalPos - 1);
+}

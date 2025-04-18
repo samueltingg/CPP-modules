@@ -28,17 +28,15 @@ enum e_LiteralType {
 
 void colorPrint(const std::string &title);
 
-bool isAscii(char c);
-bool isDisplayable(char c);
 bool hasDecimalPoint(std::string literal);
 bool isPseudoFloatLiteral(std::string literal);
 bool isPseudoDoubleLiteral(std::string literal);
 bool isSinglePrintableChar(std::string literal);
-bool isDigit(char c);
 bool isIntegerLiteral(std::string literal);
 bool isFloatLiteral(std::string literal);
 bool isDoubleLiteral(std::string literal);
 
+int	countDecimalPlaces(std::string num);
 
 class ScalarConverter {
 public:

@@ -127,9 +127,9 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 		return ;
 	}
 	
-	if (type == PSEUDO_FLOAT || type == PSEUDO_DOUBLE || !isAscii(c))	
+	if (type == PSEUDO_FLOAT || type == PSEUDO_DOUBLE || !isascii(c))	
 		std::cout << "char: impossible\n";
-	else if (!isDisplayable(c))
+	else if (!isprint(c))
 		std::cout << "char: Non displayable\n";
 	else 
 		std::cout << "char: '" << c << "\'\n";
@@ -137,7 +137,7 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 
 	std::cout << "int: " << i << std::endl;
 	std::cout << std::fixed << std::setprecision(1) << "float: " << f << "f\n";
-	std::cout << std::fixed << std::setprecision(1) << "double: " << d << "\n";
+	std::cout << std::fixed << std::setprecision(countDecimalPlaces(literal)) << "double: " << d << "\n";
 }
 
 void ScalarConverter::convert(std::string literal)
