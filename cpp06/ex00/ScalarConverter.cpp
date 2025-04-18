@@ -134,10 +134,12 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 	else 
 		std::cout << "char: '" << c << "\'\n";
 		
-
+	int decimalPlacesCount = countDecimalPlaces(literal);
+	if (decimalPlacesCount == 0)
+		decimalPlacesCount = 1;
 	std::cout << "int: " << i << std::endl;
-	std::cout << std::fixed << std::setprecision(1) << "float: " << f << "f\n";
-	std::cout << std::fixed << std::setprecision(countDecimalPlaces(literal)) << "double: " << d << "\n";
+	std::cout << std::setprecision(decimalPlacesCount) << "float: " << f << "f\n";
+	std::cout << std::setprecision(decimalPlacesCount) << "double: " << d << "\n";
 }
 
 void ScalarConverter::convert(std::string literal)

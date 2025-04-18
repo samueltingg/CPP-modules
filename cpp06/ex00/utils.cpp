@@ -81,14 +81,11 @@ bool isIntegerLiteral(std::string literal)
 	return true;
 }
 
-
-
-
 bool isFloatLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
-	if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
+	if (literal.find_first_of("eE") != std::string::npos)
 		return false;
 
 	char	*endPtr = NULL;	
@@ -103,7 +100,7 @@ bool isDoubleLiteral(std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
-	if (literal.find('e') != std::string::npos || literal.find('E') != std::string::npos)
+	if (literal.find_first_of("eE") != std::string::npos)
 		return false;
 
 	char	*endPtr = NULL;
@@ -120,5 +117,7 @@ int	countDecimalPlaces(std::string num)
 	size_t decimalPos = num.find('.');
 	if (decimalPos == std::string::npos)
 		return 0;
+	if (num[num.length() - 1] == 'f')
+		return (num.length() - decimalPos);
 	return (num.length() - decimalPos - 1);
 }
