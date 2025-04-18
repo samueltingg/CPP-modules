@@ -110,7 +110,7 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 		d = static_cast<double>(i);
 	}
 	else if (type == FLOAT) {
-		f = atof(literal.c_str());
+		f = strtof(literal.c_str(), NULL);
 
 		i = static_cast<int>(f);
 		c = static_cast<char>(f);
