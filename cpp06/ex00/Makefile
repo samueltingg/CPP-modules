@@ -15,6 +15,7 @@ NAME = program
 SRCS = \
 		main.cpp \
 		ScalarConverter.cpp \
+		utils.cpp
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
