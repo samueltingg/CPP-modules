@@ -6,16 +6,11 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:20:51 by sting             #+#    #+#             */
-/*   Updated: 2025/04/18 11:25:05 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/21 13:23:02 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
-#include <string.h>
-#include <stdlib.h>
-#include <cctype>
-
+#include "ScalarConverter.hpp"
 
 void colorPrint(const std::string &title) {
 	std::cout << "\033[36m"<< "\033[1m" << title << "\033[0m"
@@ -121,3 +116,24 @@ int	countDecimalPlaces(const std::string num)
 		return (num.length() - 1 - decimalPos -1);
 	return (num.length() - decimalPos - 1);
 }
+
+bool	isIntExeceedingLimits(const double num) 
+{
+	if (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max())
+		return true;
+	return false;
+}
+
+bool	isFloatExeceedingLimits(const double num) 
+{
+	if (num < std::numeric_limits<float>::min() || num > std::numeric_limits<float>::max())
+		return true;
+	return false;
+}
+
+// bool	isDoubleExeceedingLimits(const double num) 
+// {
+// 	if (num < std::numeric_limits<double>::min() || num > std::numeric_limits<double>::max())
+// 		return true;
+// 	return false;
+// }

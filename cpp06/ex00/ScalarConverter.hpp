@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:19:16 by sting             #+#    #+#             */
-/*   Updated: 2025/04/18 11:24:50 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/21 14:10:18 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 #define SCALAR_CONVERTER_HPP
 
 #include <string>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <stdlib.h>
+#include <string.h>
+#include <limits>
+#include <cmath>
 
+#define IMPOSSIBLE "impossible\n"
+#define NON_DISPLAYABLE "Non displayable\n"
 
 enum e_LiteralType {
 	CHAR,
@@ -26,8 +35,16 @@ enum e_LiteralType {
 	INVALID,
 };
 
+enum e_OverflowType {
+	NO_OVERFLOW,
+	I_OVERFLOW,
+	F_OVERFLOW,
+	D_OVERFLOW
+};
+
 void colorPrint(const std::string &title);
 
+// Check Functions
 bool hasDecimalPoint(const std::string literal);
 bool isPseudoFloatLiteral(const std::string literal);
 bool isPseudoDoubleLiteral(const std::string literal);
@@ -35,8 +52,13 @@ bool isSinglePrintableChar(const std::string literal);
 bool isIntegerLiteral(const std::string literal);
 bool isFloatLiteral(const std::string literal);
 bool isDoubleLiteral(const std::string literal);
-
 int	countDecimalPlaces(const std::string num);
+bool	isIntExeceedingLimits(const double num) ;
+bool	isFloatExeceedingLimits(const double num) ;
+// bool	isDoubleExeceedingLimits(const double num) ;
+e_OverflowType checkNumericLimits(const std::string literal, e_LiteralType type);
+
+void	convertAndPrint(const std::string literal, e_LiteralType type);
 
 class ScalarConverter {
 public:

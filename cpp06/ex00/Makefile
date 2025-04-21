@@ -15,7 +15,8 @@ NAME = convert
 SRCS = \
 		main.cpp \
 		ScalarConverter.cpp \
-		utils.cpp
+		utils.cpp \
+		convertAndPrint.cpp
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 

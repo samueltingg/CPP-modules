@@ -10,11 +10,6 @@
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-#include <stdlib.h>
-#include <string.h>
 
 
 ScalarConverter::ScalarConverter()
@@ -73,75 +68,6 @@ e_LiteralType	checkType(std::string literal)
 		colorPrint("Type: INVALID\n");
 		return INVALID;
 	}
-}
-
-
-void	convertAndPrint(const std::string literal, e_LiteralType type)
-{
-	char c;
-	int i;
-	float f;
-	double d;
-
-	if (type == PSEUDO_FLOAT) {
-		std::cout << "char  : impossible\n";
-		std::cout << "int   : impossible\n";
-		std::cout << "float : " << literal << "\n";
-		std::cout << "double: " << literal.substr(0, literal.length() - 1) << "\n";
-		return ;
-	}
-	else if (type == PSEUDO_DOUBLE) {
-		std::cout << "char  : impossible\n";
-		std::cout << "int   : impossible\n";
-		std::cout << "float : " << literal << "f" << "\n";
-		std::cout << "double: " << literal << "\n";
-		return ;
-	}
-	else if (type == CHAR) {
-		c = literal[0];
-
-		i = static_cast<int>(c);
-		f = static_cast<float>(c);
-		d = static_cast<double>(c);
-	}
-	else if (type == INT) {
-		i = atoi(literal.c_str());
-
-		c = static_cast<char>(i);
-		f = static_cast<float>(i);
-		d = static_cast<double>(i);
-	}
-	else if (type == FLOAT) {
-		f = strtof(literal.c_str(), NULL);
-
-		i = static_cast<int>(f);
-		c = static_cast<char>(f);
-		d = static_cast<double>(f);
-	}
-	else if (type == DOUBLE) {
-		d = strtod(literal.c_str(), NULL);
-
-		i = static_cast<int>(d);
-		c = static_cast<char>(d);
-		f = static_cast<float>(d);
-	}
-	else { // NECESSARY?? std::cerr << "Invalid literal\n";
-		return ;
-	}
-	
-	if (!isascii(c))	
-		std::cout << "char  : impossible\n";
-	else if (!isprint(c))
-		std::cout << "char  : Non displayable\n";
-	else 
-		std::cout << "char  : '" << c << "\'\n";
-		
-	int decimalPlacesCount = countDecimalPlaces(literal);
-	if (decimalPlacesCount == 0)
-		decimalPlacesCount = 1;
-	std::cout << "int   : " << i << std::endl;
-	std::cout << std::fixed << std::setprecision(decimalPlacesCount) << "float : " << f << "f\n";
-	std::cout << std::fixed << std::setprecision(decimalPlacesCount) << "double: " << d << "\n";
 }
 
 void ScalarConverter::convert(const std::string literal)
