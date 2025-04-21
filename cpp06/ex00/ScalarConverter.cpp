@@ -76,7 +76,7 @@ e_LiteralType	checkType(std::string literal)
 }
 
 
-void	convertAndPrint(std::string literal, e_LiteralType type)
+void	convertAndPrint(const std::string literal, e_LiteralType type)
 {
 	char c;
 	int i;
@@ -84,18 +84,20 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 	double d;
 
 	if (type == PSEUDO_FLOAT) {
-		std::cout << "char: impossible\n";
-		std::cout << "int: impossible\n";
-		std::cout << "float: " << literal << "\n";
-		std::cout << "double: " << literal.erase(literal.length() - 1) << "\n";
+		std::cout << "char  : impossible\n";
+		std::cout << "int   : impossible\n";
+		std::cout << "float : " << literal << "\n";
+		std::cout << "double: " << literal.substr(0, literal.length() - 1) << "\n";
+		return ;
 	}
 	else if (type == PSEUDO_DOUBLE) {
-		std::cout << "char: impossible\n";
-		std::cout << "int: impossible\n";
-		std::cout << "float: " << literal << "f" << "\n";
+		std::cout << "char  : impossible\n";
+		std::cout << "int   : impossible\n";
+		std::cout << "float : " << literal << "f" << "\n";
 		std::cout << "double: " << literal << "\n";
+		return ;
 	}
-	if (type == CHAR) {
+	else if (type == CHAR) {
 		c = literal[0];
 
 		i = static_cast<int>(c);
@@ -127,22 +129,22 @@ void	convertAndPrint(std::string literal, e_LiteralType type)
 		return ;
 	}
 	
-	if (type == PSEUDO_FLOAT || type == PSEUDO_DOUBLE || !isascii(c))	
-		std::cout << "char: impossible\n";
+	if (!isascii(c))	
+		std::cout << "char  : impossible\n";
 	else if (!isprint(c))
-		std::cout << "char: Non displayable\n";
+		std::cout << "char  : Non displayable\n";
 	else 
-		std::cout << "char: '" << c << "\'\n";
+		std::cout << "char  : '" << c << "\'\n";
 		
 	int decimalPlacesCount = countDecimalPlaces(literal);
 	if (decimalPlacesCount == 0)
 		decimalPlacesCount = 1;
-	std::cout << "int: " << i << std::endl;
-	std::cout << std::setprecision(decimalPlacesCount) << "float: " << f << "f\n";
-	std::cout << std::setprecision(decimalPlacesCount) << "double: " << d << "\n";
+	std::cout << "int   : " << i << std::endl;
+	std::cout << std::fixed << std::setprecision(decimalPlacesCount) << "float : " << f << "f\n";
+	std::cout << std::fixed << std::setprecision(decimalPlacesCount) << "double: " << d << "\n";
 }
 
-void ScalarConverter::convert(std::string literal)
+void ScalarConverter::convert(const std::string literal)
 {
 	e_LiteralType type = checkType(literal);
 	if (type == INVALID) 

@@ -28,19 +28,19 @@ enum e_LiteralType {
 
 void colorPrint(const std::string &title);
 
-bool hasDecimalPoint(std::string literal);
-bool isPseudoFloatLiteral(std::string literal);
-bool isPseudoDoubleLiteral(std::string literal);
-bool isSinglePrintableChar(std::string literal);
-bool isIntegerLiteral(std::string literal);
-bool isFloatLiteral(std::string literal);
-bool isDoubleLiteral(std::string literal);
+bool hasDecimalPoint(const std::string literal);
+bool isPseudoFloatLiteral(const std::string literal);
+bool isPseudoDoubleLiteral(const std::string literal);
+bool isSinglePrintableChar(const std::string literal);
+bool isIntegerLiteral(const std::string literal);
+bool isFloatLiteral(const std::string literal);
+bool isDoubleLiteral(const std::string literal);
 
-int	countDecimalPlaces(std::string num);
+int	countDecimalPlaces(const std::string num);
 
 class ScalarConverter {
 public:
-	static	void convert(std::string literal);
+	static	void convert(const std::string literal);
 
 private:
 	// Set as private to prevent class to be instanciated: 

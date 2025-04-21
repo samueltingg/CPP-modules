@@ -22,7 +22,7 @@ void colorPrint(const std::string &title) {
 		<< std::endl;
 }
 
-bool	hasDecimalPoint(std::string literal)
+bool	hasDecimalPoint(const std::string literal)
 {
 	if (literal.empty())
 		return false;
@@ -33,7 +33,7 @@ bool	hasDecimalPoint(std::string literal)
 	return true;
 }
 
-bool isPseudoFloatLiteral(std::string literal)
+bool isPseudoFloatLiteral(const std::string literal)
 {
 	const char *arr[4] = {"inff", "-inff", "+inff", "nanf"};
 	
@@ -45,7 +45,7 @@ bool isPseudoFloatLiteral(std::string literal)
 	return false;
 }
 
-bool isPseudoDoubleLiteral(std::string literal)
+bool isPseudoDoubleLiteral(const std::string literal)
 {
 	const char *arr[4] = {"inf", "-inf", "+inf", "nan"};
 	
@@ -57,7 +57,7 @@ bool isPseudoDoubleLiteral(std::string literal)
 	return false;
 }
 
-bool	isSinglePrintableChar(std::string literal)
+bool	isSinglePrintableChar(const std::string literal)
 {
 	if (literal.empty())
 		return false;
@@ -68,7 +68,7 @@ bool	isSinglePrintableChar(std::string literal)
 	return false;
 }
 
-bool isIntegerLiteral(std::string literal) 
+bool isIntegerLiteral(const std::string literal) 
 {
 	int i = 0;
 
@@ -81,7 +81,7 @@ bool isIntegerLiteral(std::string literal)
 	return true;
 }
 
-bool isFloatLiteral(std::string literal)
+bool isFloatLiteral(const std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
@@ -96,7 +96,7 @@ bool isFloatLiteral(std::string literal)
 	return false;
 }
 
-bool isDoubleLiteral(std::string literal)
+bool isDoubleLiteral(const std::string literal)
 {
 	if (!hasDecimalPoint(literal))
 		return false;
@@ -112,12 +112,12 @@ bool isDoubleLiteral(std::string literal)
 }
 
 
-int	countDecimalPlaces(std::string num)
+int	countDecimalPlaces(const std::string num)
 {
 	size_t decimalPos = num.find('.');
 	if (decimalPos == std::string::npos)
 		return 0;
 	if (num[num.length() - 1] == 'f')
-		return (num.length() - decimalPos);
+		return (num.length() - 1 - decimalPos -1);
 	return (num.length() - decimalPos - 1);
 }
