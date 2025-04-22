@@ -51,7 +51,7 @@ void	printCommonTypes(char c, int i, float f, double d, e_OverflowType overflowT
 	if (overflowType >= F_OVERFLOW)
 		std::cout << "float : " << IMPOSSIBLE;
 	else
-		std::cout << std::fixed << std::setprecision(decPlacesCount) << "float : " << f << "\n";
+		std::cout << std::fixed << std::setprecision(decPlacesCount) << "float : " << f << "f\n";
 
 	// Double
 	if (overflowType >= D_OVERFLOW)
@@ -84,6 +84,7 @@ void	printFromFloat(const std::string literal, e_OverflowType overflowType, int 
 {
 
 	float f = strtof(literal.c_str(), NULL);
+	std::cout << "f: " << f << "\n";
 	int i = static_cast<int>(f);
 	char c = static_cast<char>(f);
 	double d = static_cast<double>(f);
@@ -104,13 +105,6 @@ void	printFromDouble(const std::string literal, e_OverflowType overflowType, int
 
 void	convertAndPrint(const std::string literal, e_LiteralType type)
 {
-	// char c;
-	// long int i;
-	// float f;
-	// double d;
-	// std::string int_buf;
-	// std::string float_buf;
-	// std::string double_buf;
 	int decPlacesCount = countDecimalPlaces(literal);
 	if (decPlacesCount == 0)
 		decPlacesCount = 1;
@@ -130,74 +124,14 @@ void	convertAndPrint(const std::string literal, e_LiteralType type)
 		std::cout << "double: " << literal << "\n";
 		return ;
 	}
-	else if (type == CHAR) {
-		// c = literal[0];
-		//
-		// i = static_cast<int>(c);
-		// f = static_cast<float>(c);
-		// d = static_cast<double>(c);
-
+	else if (type == CHAR)
 		printFromChar(literal, decPlacesCount);
-		return ;
-	}
-	else if (type == INT) {
-		// i = strtol(literal.c_str(), NULL, 10);
-		// if (isIntExeceedingLimits(i))
-		// 	int_buf = "impossible\n";	
-		//
-		// c = static_cast<char>(i);
-		// f = static_cast<float>(i);
-		// d = static_cast<double>(i);
+	else if (type == INT)
 		printFromInt(literal, overflowType, decPlacesCount);
-
-	}
-	else if (type == FLOAT) {
-		// f = strtof(literal.c_str(), NULL);
-		// if (f == -HUGE_VALF || f == HUGE_VALF) {
-		// 	std::cout << "double: out of range\n";
-		// 	int_buf = "impossible\n";
-		// 	float_buf = "impossible\n";
-		// }
-		//
-		// i = static_cast<int>(f);
-		// c = static_cast<char>(f);
-		// d = static_cast<double>(f);
+	else if (type == FLOAT)
 		printFromFloat(literal, overflowType, decPlacesCount);
-	}
-	else if (type == DOUBLE) {
-		// d = strtod(literal.c_str(), NULL);
-		// std::cout << "d: " << d << "\n";
-		// if (d == -HUGE_VAL || d == HUGE_VAL) {
-		// 	std::cout << "double: out of range\n";
-		// 	int_buf = "impossible\n";
-		// 	float_buf = "impossible\n";
-		// 	double_buf = "impossible\n";
-		// }
-		// i = static_cast<int>(d);
-		// c = static_cast<char>(d);
-		// f = static_cast<float>(d);
+	else if (type == DOUBLE)
 		printFromDouble(literal, overflowType, decPlacesCount);
-	}
 	else // NECESSARY?? std::cerr << "Invalid literal\n";
 		return ;
-	//
-	// if (!isascii(c))	
-	// 	std::cout << "char  : impossible\n";
-	// else if (!isprint(c))
-	// 	std::cout << "char  : Non displayable\n";
-	// else 
-	// 	std::cout << "char  : '" << c << "\'\n";
-		
-	// if (int_buf.empty())
-	// 	std::cout << "int   : " << i << std::endl;
-	// else 
-	// 	std::cout << "int   : " << int_buf << std::endl;
-	// if (float_buf.empty())
-	// 	std::cout << std::fixed << std::setprecision(decPlacesCount) << "float : " << f << "f\n";
-	// else
-	// 	std::cout << "float : " << float_buf << std::endl;
-	// if (double_buf.empty())
-	// 	std::cout << std::fixed << std::setprecision(decPlacesCount) << "double: " << d << "\n";
-	// else
-	// 	std::cout << "double : " << double_buf << std::endl;
 }

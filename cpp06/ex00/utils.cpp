@@ -66,7 +66,8 @@ bool	isSinglePrintableChar(const std::string literal)
 bool isIntegerLiteral(const std::string literal) 
 {
 	int i = 0;
-
+	if (checkOverflow(literal, INT) >= I_OVERFLOW)
+		return false;
 	if (literal[0] == '-')
 		i++;
 	for (; literal[i]; i++) {
@@ -94,6 +95,8 @@ bool isFloatLiteral(const std::string literal)
 bool isDoubleLiteral(const std::string literal)
 {
 	if (!hasDecimalPoint(literal))
+		return false;
+	if (checkOverflow(literal, DOUBLE) == D_OVERFLOW)
 		return false;
 	if (literal.find_first_of("eE") != std::string::npos)
 		return false;
@@ -126,14 +129,9 @@ bool	isIntExeceedingLimits(const double num)
 
 bool	isFloatExeceedingLimits(const double num) 
 {
-	if (num < std::numeric_limits<float>::min() || num > std::numeric_limits<float>::max())
+	// use 'lowest' instead of 'min'
+	if (num < std::numeric_limits<float>::lowest() || num > std::numeric_limits<float>::max())
 		return true;
 	return false;
 }
 
-// bool	isDoubleExeceedingLimits(const double num) 
-// {
-// 	if (num < std::numeric_limits<double>::min() || num > std::numeric_limits<double>::max())
-// 		return true;
-// 	return false;
-// }

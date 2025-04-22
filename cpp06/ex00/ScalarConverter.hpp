@@ -55,8 +55,7 @@ bool isDoubleLiteral(const std::string literal);
 int	countDecimalPlaces(const std::string num);
 bool	isIntExeceedingLimits(const double num) ;
 bool	isFloatExeceedingLimits(const double num) ;
-// bool	isDoubleExeceedingLimits(const double num) ;
-e_OverflowType checkNumericLimits(const std::string literal, e_LiteralType type);
+e_OverflowType checkOverflow(const std::string literal, e_LiteralType type);
 
 void	convertAndPrint(const std::string literal, e_LiteralType type);
 
