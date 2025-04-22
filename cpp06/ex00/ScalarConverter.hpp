@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:19:16 by sting             #+#    #+#             */
-/*   Updated: 2025/04/21 14:10:18 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:09:48 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ bool	isIntExeceedingLimits(const double num) ;
 bool	isFloatExeceedingLimits(const double num) ;
 e_OverflowType checkOverflow(const std::string literal, e_LiteralType type);
 
+// checkType
+e_LiteralType	checkType(std::string literal);
+
+// checkOverflow
+e_OverflowType checkOverflow(const std::string literal, e_LiteralType type);
+
+// printTypes
+void	printPseudoFloat(std::string literal);
+void	printDoubleFloat(std::string literal);
+void	printCommonTypes(char c, int i, float f, double d, e_OverflowType overflowType, int decPlacesCount);
+void	printFromChar(const std::string literal, int decPlacesCount);
+void	printFromInt(const std::string literal, e_OverflowType overflowType, int decPlacesCount);
+void	printFromFloat(const std::string literal, e_OverflowType overflowType, int decPlacesCount);
+void	printFromDouble(const std::string literal, e_OverflowType overflowType, int decPlacesCount);
+
+// convertAndPrint
 void	convertAndPrint(const std::string literal, e_LiteralType type);
 
 class ScalarConverter {

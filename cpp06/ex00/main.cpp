@@ -19,8 +19,6 @@ int	main(int argc, char **argv)
 		std::cout << "Error: Program only takes in 1 argument." << std::endl;
 		return 1;
 	}
-
 	ScalarConverter::convert(argv[1]);
-	// try catch if got exception?
 
 }

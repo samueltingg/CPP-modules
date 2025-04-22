@@ -16,7 +16,10 @@ SRCS = \
 		main.cpp \
 		ScalarConverter.cpp \
 		utils.cpp \
-		convertAndPrint.cpp
+		convertAndPrint.cpp \
+		checkType.cpp \
+		printTypes.cpp \
+		checkOverflow.cpp \
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 

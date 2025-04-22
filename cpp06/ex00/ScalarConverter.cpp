@@ -37,39 +37,6 @@ ScalarConverter::~ScalarConverter()
 	std::cout << "Bureaucrat:: Destructor Called" << std::endl;
 }
 
-
-e_LiteralType	checkType(std::string literal)
-{
-	if (isPseudoFloatLiteral(literal)) {
-		colorPrint("Type: PSEUDO_FLOAT\n");
-		return PSEUDO_FLOAT;
-	}
-	else if (isPseudoDoubleLiteral(literal)) {
-		colorPrint("Type: PSEUDO_DOUBLE\n");
-		return PSEUDO_DOUBLE;
-	}
-	else if (isSinglePrintableChar(literal)) {
-		colorPrint("Type: CHAR\n");
-		return CHAR;
-	}
-	else if (isIntegerLiteral(literal)) {
-		colorPrint("Type: INT\n");
-		return INT;
-	}
-	else if (isFloatLiteral(literal)) {
-		colorPrint("Type: FLOAT\n");
-		return FLOAT;
-	}
-	else if (isDoubleLiteral(literal)) {
-		colorPrint("Type: DOUBLE\n");
-		return DOUBLE;
-	}
-	else {
-		colorPrint("Type: INVALID\n");
-		return INVALID;
-	}
-}
-
 void ScalarConverter::convert(const std::string literal)
 {
 	e_LiteralType type = checkType(literal);
