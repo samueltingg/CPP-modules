@@ -37,6 +37,7 @@ enum e_LiteralType {
 
 enum e_OverflowType {
 	NO_OVERFLOW,
+	C_OVERFLOW,
 	I_OVERFLOW,
 	F_OVERFLOW,
 	D_OVERFLOW
@@ -53,6 +54,7 @@ bool isIntegerLiteral(const std::string literal);
 bool isFloatLiteral(const std::string literal);
 bool isDoubleLiteral(const std::string literal);
 int	countDecimalPlaces(const std::string num);
+bool	isCharExeceedingLimits(const double num);
 bool	isIntExeceedingLimits(const double num) ;
 bool	isFloatExeceedingLimits(const double num) ;
 e_OverflowType checkOverflow(const std::string literal, e_LiteralType type);

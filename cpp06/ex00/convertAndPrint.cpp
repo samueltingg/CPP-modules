@@ -27,6 +27,8 @@ e_OverflowType checkOverflow(const std::string literal, e_LiteralType type)
 		return F_OVERFLOW;
 	else if (isIntExeceedingLimits(num))
 		return I_OVERFLOW;
+	else if (isCharExeceedingLimits(num))
+		return C_OVERFLOW;
 	else 
 		return NO_OVERFLOW;
 }
@@ -34,7 +36,7 @@ e_OverflowType checkOverflow(const std::string literal, e_LiteralType type)
 void	printCommonTypes(char c, int i, float f, double d, e_OverflowType overflowType, int decPlacesCount)
 {
 	// char
-	if (!isascii(c))	
+	if (overflowType >= C_OVERFLOW || !isascii(c))
 		std::cout << "char  : " << IMPOSSIBLE; 
 	else if (!isprint(c))
 		std::cout << "char  : " << NON_DISPLAYABLE;

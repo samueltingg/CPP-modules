@@ -120,6 +120,13 @@ int	countDecimalPlaces(const std::string num)
 	return (num.length() - decimalPos - 1);
 }
 
+bool	isCharExeceedingLimits(const double num) 
+{
+	if (num < std::numeric_limits<signed char>::min() || num > std::numeric_limits<signed char>::max())
+		return true;
+	return false;
+}
+
 bool	isIntExeceedingLimits(const double num) 
 {
 	if (num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max())
