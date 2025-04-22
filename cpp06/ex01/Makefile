@@ -8,19 +8,13 @@ RED = \033[0;31m
 RESET = \033[0m
 ORANGE = \033[0;38;5;166m
 
-NAME = convert
+NAME = program
 
 # Source Files
 #SRCDIR = src/
 SRCS = \
 		main.cpp \
-		ScalarConverter.cpp \
-		utils.cpp \
-		convertAndPrint.cpp \
-		checkType.cpp \
-		printTypes.cpp \
-		checkOverflow.cpp \
-
+		Serializer.cpp
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
 # Object files

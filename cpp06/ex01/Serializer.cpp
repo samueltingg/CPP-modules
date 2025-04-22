@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:27:54 by sting             #+#    #+#             */
-/*   Updated: 2025/04/22 18:34:31 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/22 18:39:11 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ Serializer::~Serializer()
 // It takes a pointer and converts it to the unsigned integer type uintptr_t.
 uintptr_t Serializer::serialize(Data* ptr)
 {
-
+	return reinterpret_cast<uintptr_t>(ptr);
 }
 
 // It takes an unsigned integer parameter and converts it to a pointer to Data.
 Data* Serializer::deserialize(uintptr_t raw)
 {
-
+	return reinterpret_cast<Data *>(raw);
 }
 
