@@ -82,9 +82,7 @@ void	printFromInt(const std::string literal, e_OverflowType overflowType, int de
 
 void	printFromFloat(const std::string literal, e_OverflowType overflowType, int decPlacesCount)
 {
-
 	float f = strtof(literal.c_str(), NULL);
-	std::cout << "f: " << f << "\n";
 	int i = static_cast<int>(f);
 	char c = static_cast<char>(f);
 	double d = static_cast<double>(f);
@@ -135,3 +133,4 @@ void	convertAndPrint(const std::string literal, e_LiteralType type)
 	else // NECESSARY?? std::cerr << "Invalid literal\n";
 		return ;
 }
+
