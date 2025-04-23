@@ -137,7 +137,7 @@ bool	isIntExeceedingLimits(const double num)
 bool	isFloatExeceedingLimits(const double num) 
 {
 	// use 'lowest' instead of 'min'
-	if (num < std::numeric_limits<float>::lowest() || num > std::numeric_limits<float>::max())
+	if (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max())
 		return true;
 	return false;
 }
