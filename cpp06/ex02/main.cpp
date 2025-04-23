@@ -42,15 +42,45 @@ Base * generate(void)
 //  prints the actual type of the object pointed to by p: "A", "B" or "C".
 void identify(Base* p)
 {
-	const std::type_info& ti = typeid(*p);
-	std::cout << "identify: type = \"" <<  ti.name() << "\"\n";
+	// const std::type_info& ti = typeid(*p);
+	// std::cout << "identify: type = \"" <<  ti.name() << "\"\n";
+	if (dynamic_cast<A*>(p))
+		std::cout << "type: A\n";
+	else if (dynamic_cast<B*>(p))
+		std::cout << "type: B\n";
+	else if (dynamic_cast<C*>(p))
+		std::cout << "type: C\n"; 
+
 }
 
 // prints the actual type of the object pointed to by p: "A", "B" or "C". Using a pointer inside this function is forbidden.
 void identify(Base& p)
 {
-	const std::type_info& ti = typeid(p);
-	std::cout << "identify: type = \"" <<  ti.name() << "\"\n";
+	// if cast is invalid, 'std::bad_cast' exception is thrown
+	
+	
+	try {
+		A& aRef = dynamic_cast<A&>(p);
+		(void)aRef;
+		std::cout << "type: A\n";
+	}
+	catch (const std::bad_cast& e) {
+	}
+
+	try {
+		B& bRef = dynamic_cast<B&>(p);
+		(void)bRef;
+		std::cout << "type: B\n";
+	}
+	catch (const std::bad_cast& e) {
+	}
+	try {
+		C& cRef = dynamic_cast<C&>(p);
+		(void)cRef;
+		std::cout << "type: C\n";
+	}
+	catch (const std::bad_cast& e) {
+	}
 
 }
 
