@@ -14,10 +14,13 @@
 #define A_HPP
 
 #include "Base.hpp"
+#include <iostream>
 
 class A : public Base {
 public:
-	virtual ~A(){};
+	virtual ~A(){
+		std::cout << "A: Destructor called\n";
+	};
 };
 
 #endif
