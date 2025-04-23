@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:54:35 by sting             #+#    #+#             */
-/*   Updated: 2025/04/23 18:00:57 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/23 18:06:02 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ private:
 
 std::ostream & operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; }
 
-void printSection(const std::string &title) {
-	std::cout << CYAN << BOLD << "\n=== " << title << " ===" << RESET
-		<< std::endl;
-}
+
 
 int main(void)
 {

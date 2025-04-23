@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:37:29 by sting             #+#    #+#             */
-/*   Updated: 2025/04/23 18:01:41 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/23 18:08:32 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 template < typename T >
-void print( T const & x ) 
+void print( const T& x ) 
 { 
 	std::cout << x << std::endl; 
 	return; 
