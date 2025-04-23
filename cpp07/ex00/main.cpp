@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:54:35 by sting             #+#    #+#             */
-/*   Updated: 2025/04/23 17:29:59 by sting            ###   ########.fr       */
+/*   Updated: 2025/04/23 17:35:22 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ void printSection(const std::string &title) {
 	std::cout << CYAN << BOLD << "\n=== " << title << " ===" << RESET
 		<< std::endl;
 }
+
+class Awesome
+{
+public:
+	Awesome(void) : _n(0) {}
+	Awesome( int n ) : _n( n ) {}
+	Awesome & operator= (Awesome & a) { _n = a._n; return *this; }
+	bool operator==( Awesome const & rhs ) const { return (this->_n == rhs._n); }
+	bool operator!=( Awesome const & rhs ) const{ return (this->_n != rhs._n); }
+	bool operator>( Awesome const & rhs ) const { return (this->_n > rhs._n); }
+	bool operator<( Awesome const & rhs ) const { return (this->_n < rhs._n); }
+	bool operator>=( Awesome const & rhs ) const { return (this->_n >= rhs._n); }
+	bool operator<=( Awesome const & rhs ) const { return (this->_n <= rhs._n); }
+	int get_n() const { return _n; }
+private:
+	int _n;
+};
+std::ostream & operator<<(std::ostream & o, const Awesome &a) { o << a.get_n(); return o; }
+
 
 int main(void)
 {
@@ -59,5 +78,16 @@ int main(void)
 	std::cout << "max( x, y ) = " << ::max( x, y ) << std::endl;
 	std::cout << "address of max's return value: " << &(::max( x, y )) << "\n";
 
+
+	{
+		printSection("Testing with 'Awesome' class ");
+		Awesome a(2), b(4);
+
+		swap(a, b);
+		std::cout << "a = " << a << ", b = " << b << std::endl;
+		std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+		std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+
+	}
 	return 0;
 }
