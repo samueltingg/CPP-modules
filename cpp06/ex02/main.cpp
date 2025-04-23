@@ -16,12 +16,28 @@
 #include "C.hpp"
 #include <typeinfo>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 // It randomly instanciates A, B or C and returns the instance as a Base pointer.
-/*Base * generate(void)*/
-/*{*/
-/**/
-/*}*/
+Base * generate(void)
+{
+	Base *ptr;
+
+	std::srand(std::time(0));
+
+	int choice = std::rand() % 3;
+	// choice will only be 0, 1 or 2
+	
+	if (choice == 0)
+		ptr = new A();
+	else if (choice == 1)
+		ptr = new B();
+	else // choice == 2
+		ptr = new C();
+	
+	return ptr;
+}
 
 //  prints the actual type of the object pointed to by p: "A", "B" or "C".
 void identify(Base* p)
@@ -41,14 +57,14 @@ void identify(Base& p)
 int main(void)
 {
 	{
-		Base *p = new A();
+		Base *p = generate();
 
 		identify(p);
 		delete p;
 	}
 	{
-		A a;
-		const Base& r = a;
+		B a;
+		Base& r = a;
 
 		identify(r);
 	}
