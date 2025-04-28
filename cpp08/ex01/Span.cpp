@@ -54,11 +54,16 @@ void Span::addNumber(const int num)
 // {
 //
 // }
-//
-// int Span::longestSpan() const
-// {
-//
-// }
+
+int Span::longestSpan() const
+{
+	if (_vector.size() < 2)
+		throw InsufficientElementsException();
+	std::vector<int>::const_iterator maxIt = std::max_element(_vector.begin(), _vector.end());
+	std::vector<int>::const_iterator minIt = std::min_element(_vector.begin(), _vector.end());
+
+	return (*maxIt - *minIt);
+}
 
 unsigned int Span::getMaxSize() const
 {

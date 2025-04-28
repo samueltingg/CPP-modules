@@ -22,38 +22,71 @@ int main(void)
 {
 	{
 		printSection("Testing Span Constructors");
-		Span integers(4);
-		integers.addNumber(1);	
-		integers.addNumber(2);	
-		integers.addNumber(3);	
-		integers.addNumber(4);	
+		Span sp(4);
+		sp.addNumber(1);	
+		sp.addNumber(2);	
+		sp.addNumber(3);	
+		sp.addNumber(4);	
 
 
-		std::cout << integers << '\n';
+		std::cout << sp << '\n';
 
-		Span integers2(integers);
-		Span integers3;
-		integers3 = integers;
+		Span sp2(sp);
+		Span sp3;
+		sp3 = sp;
 
-		std::cout << integers2 << '\n';
-		std::cout << integers3 << '\n';
+		std::cout << sp2 << '\n';
+		std::cout << sp3 << '\n';
 	}
 
 	{
 		printSection("Test: calling 'addNumber' when vector is full");
-		Span integers(4);
-		integers.addNumber(1);	
-		integers.addNumber(2);	
-		integers.addNumber(3);	
-		integers.addNumber(4);	
+		Span sp(4);
+		sp.addNumber(1);	
+		sp.addNumber(2);	
+		sp.addNumber(3);	
+		sp.addNumber(4);	
 
 		try {
-			integers.addNumber(4);	
+			sp.addNumber(4);	
 		}
 		catch(std::exception &e) {
 			std::cout << "Error: " << e.what() << '\n';
 		}
 
+
+	}
+
+	{
+		printSection("Test: 'longestSpan()'");
+		Span sp = Span(5);
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		// std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
+	}
+	
+	{
+		printSection("Test: 'longestSpan()'");
+		Span sp(1);
+		sp.addNumber(6);
+		try {
+			std::cout << sp.longestSpan() << std::endl;
+		}
+		catch (std::exception& e) {
+			std::cout << "Error: " << e.what() << '\n';
+		}
+
+		Span sp2;
+		try {
+			std::cout << sp2.longestSpan() << std::endl;
+		}
+		catch (std::exception& e) {
+			std::cout << "Error: " << e.what() << '\n';
+		}
 
 	}
 

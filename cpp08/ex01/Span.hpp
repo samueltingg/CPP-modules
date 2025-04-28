@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 class Span {
 public:
@@ -52,15 +53,15 @@ public:
 
 	};
 	
-	class NoSpanFoundException : public std::exception {
+	class InsufficientElementsException : public std::exception {
 	public:
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw() { 
-            return "No span found. No numbers stored.";
+            return "Vector is empty or contain only one element.";
         }
 
 	};
-
+	
 private:
 	std::vector<int> _vector;
 	unsigned int _maxSize;
