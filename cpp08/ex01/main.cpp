@@ -92,4 +92,41 @@ int main(void)
 
 	}
 
+	{
+		printSection("Test: 'shortestSpan()'");
+		Span sp(1);
+		sp.addNumber(6);
+		try {
+			std::cout << sp.shortestSpan() << std::endl;
+		}
+		catch (std::exception& e) {
+			std::cout << "Error: " << e.what() << '\n';
+		}
+
+		Span sp2;
+		try {
+			std::cout << sp2.shortestSpan() << std::endl;
+		}
+		catch (std::exception& e) {
+			std::cout << "Error: " << e.what() << '\n';
+		}
+
+	}
+
+	{
+		printSection("Test: 10,000 elements");
+		Span sp(10000);
+		
+		for (int i = 0; i < 10000; i++) {
+			sp.addNumber(i);
+		}
+
+		std::cout << sp << '\n';
+	}
+
+	{
+		printSection("Test: 'addMultipleNumbers'");
+
+
+	}
 }

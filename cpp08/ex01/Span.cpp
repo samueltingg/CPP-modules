@@ -49,12 +49,23 @@ void Span::addNumber(const int num)
 		throw Span::SpanIsFullException();
 	_vector.push_back(num);
 }
+	
+// void Span::addMultipleNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
+// {
+// 	std::vector<int>::iterator it = begin;
+//
+// 	for (it = begin; it < end; it++) {
+//
+// 	}
+// }
 
 //methods used: sort, adjacent_difference
 int Span::shortestSpan() const // return 'unsigned int'?
 {
-	std::vector<int> copy = _vector;
+	if (_vector.size() < 2)
+		throw InsufficientElementsException();
 
+	std::vector<int> copy = _vector;
 	std::sort(copy.begin(), copy.end());
 	std::adjacent_difference(copy.begin(), copy.end(), copy.begin());
 	std::vector<int>::const_iterator minIt = std::min_element(copy.begin(), copy.end());
@@ -90,3 +101,4 @@ std::ostream& operator<<(std::ostream& os, const Span& vector)
 	}
 	return os;
 }
+
