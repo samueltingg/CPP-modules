@@ -59,7 +59,7 @@ int Span::shortestSpan() const // return 'unsigned int'?
 	std::adjacent_difference(copy.begin(), copy.end(), copy.begin());
 	std::vector<int>::const_iterator minIt = std::min_element(copy.begin(), copy.end());
 	
-	return *minIt;
+	return abs(*minIt);
 }
 
 int Span::longestSpan() const

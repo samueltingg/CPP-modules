@@ -24,6 +24,7 @@
 #include <iterator>
 #include <exception>
 #include <numeric>
+#include <cstdlib>
 
 class Span {
 public:
