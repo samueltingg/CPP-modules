@@ -44,4 +44,22 @@ int main(void)
 		std::cout << integers3 << '\n';
 	}
 
+	{
+		printSection("Test: calling 'addNumber' when vector is full");
+		Span integers(4);
+		integers.addNumber(1);	
+		integers.addNumber(2);	
+		integers.addNumber(3);	
+		integers.addNumber(4);	
+
+		try {
+			integers.addNumber(4);	
+		}
+		catch(std::exception &e) {
+			std::cout << "Error: " << e.what() << '\n';
+		}
+
+
+	}
+
 }
