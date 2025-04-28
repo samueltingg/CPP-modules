@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 09:08:17 by sting             #+#    #+#             */
+/*   Updated: 2025/04/28 10:13:38 by sting            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Span.hpp"
+
+Span::Span() : _vector(), _maxSize(0) 
+{
+	std::cout << "Span:: Constructor Called" << std::endl;
+}
+
+Span::Span(unsigned int N) : _vector(), _maxSize(N)
+{
+	std::cout << "Span:: Unsigned Int Constructor Called" << std::endl;
+}
+
+Span::Span(const Span& other) : _vector(other._vector), _maxSize(other._maxSize)
+{
+	std::cout << "Span:: Copy Constructor Called" << std::endl;
+}
+
+Span& Span::operator=(const Span& other)
+{
+	std::cout << "Span:: Copy Assignment Operator Called" << std::endl;
+	
+	if (this == &other)
+		return *this;
+	_vector = other._vector;
+	_maxSize = other._maxSize;
+	return *this;
+}
+
+Span::~Span()
+{
+	std::cout << "Span:: Destructor Called" << std::endl;
+}
+
+void Span::addNumber(const int num)
+{
+	if (_vector.size() >= _maxSize)
+		throw Span::SpanIsFullException();
+	_vector.push_back(num);
+}
+	
+// int Span::shortestSpan() const // return 'unsigned int'?
+// {
+//
+// }
+//
+// int Span::longestSpan() const
+// {
+//
+// }
+
+unsigned int Span::getMaxSize() const
+{
+	return _maxSize;
+}
+
+
+int	Span::operator[](int index) const
+{
+	return _vector[index];
+}
+
+std::ostream& operator<<(std::ostream& os, const Span& vector)
+{
+	for (size_t i = 0; i < vector.getMaxSize(); i++) {
+		os << i << ": " << vector[i] << '\n';
+	}
+	return os;
+}
