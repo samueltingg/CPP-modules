@@ -12,19 +12,13 @@
 
 #ifndef EASYFIND_HPP
 #define EASYFIND_HPP
+#include <algorithm>
 
 // `typename` keyword is used to indicate that T::const_iterator is a type.
 template <typename T>
 typename T::const_iterator easyfind(const T& container, int num)
 {
-	typename T::const_iterator it; 
-	// 'const_iterator' -> element pointed by it can't be modified
-
-	for (it = container.begin(); it != container.end(); ++it) {
-		if (*it == num)
-			return it;
-	}
-	return container.end();
+	return std::find(container.begin(), container.end(), num);
 }
 
 #endif
