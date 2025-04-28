@@ -49,11 +49,18 @@ void Span::addNumber(const int num)
 		throw Span::SpanIsFullException();
 	_vector.push_back(num);
 }
+
+//methods used: sort, adjacent_difference
+int Span::shortestSpan() const // return 'unsigned int'?
+{
+	std::vector<int> copy = _vector;
+
+	std::sort(copy.begin(), copy.end());
+	std::adjacent_difference(copy.begin(), copy.end(), copy.begin());
+	std::vector<int>::const_iterator minIt = std::min_element(copy.begin(), copy.end());
 	
-// int Span::shortestSpan() const // return 'unsigned int'?
-// {
-//
-// }
+	return *minIt;
+}
 
 int Span::longestSpan() const
 {

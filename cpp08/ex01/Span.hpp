@@ -21,6 +21,9 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
+#include <exception>
+#include <numeric>
 
 class Span {
 public:
