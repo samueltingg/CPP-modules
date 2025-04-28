@@ -14,22 +14,22 @@
 
 Span::Span() : _vector(), _maxSize(0) 
 {
-	std::cout << "Span:: Constructor Called" << std::endl;
+	std::cout << GREY << "Span:: Constructor Called" << RESET << std::endl;
 }
 
 Span::Span(unsigned int N) : _vector(), _maxSize(N)
 {
-	std::cout << "Span:: Unsigned Int Constructor Called" << std::endl;
+	std::cout << GREY << "Span:: Unsigned Int Constructor Called" << RESET << std::endl;
 }
 
 Span::Span(const Span& other) : _vector(other._vector), _maxSize(other._maxSize)
 {
-	std::cout << "Span:: Copy Constructor Called" << std::endl;
+	std::cout << GREY << "Span:: Copy Constructor Called" << RESET << std::endl;
 }
 
 Span& Span::operator=(const Span& other)
 {
-	std::cout << "Span:: Copy Assignment Operator Called" << std::endl;
+	std::cout << GREY << "Span:: Copy Assignment Operator Called" << RESET << std::endl;
 	
 	if (this == &other)
 		return *this;
@@ -40,7 +40,7 @@ Span& Span::operator=(const Span& other)
 
 Span::~Span()
 {
-	std::cout << "Span:: Destructor Called" << std::endl;
+	std::cout << GREY << "Span:: Destructor Called" << RESET << std::endl;
 }
 
 void Span::addNumber(const int num)

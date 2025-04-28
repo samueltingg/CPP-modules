@@ -13,11 +13,6 @@
 #include <iostream>
 #include "Span.hpp"
 
-#define RESET "\033[0m"
-#define BOLD "\033[1m"
-#define CYAN "\033[36m"
-#define GREY "\033[90m"
-
 void printSection(const std::string &title) {
 	std::cout << CYAN << BOLD << "\n=== " << title << " ===" << RESET
 		<< std::endl;

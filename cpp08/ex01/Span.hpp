@@ -13,6 +13,11 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+#define CYAN "\033[36m"
+#define GREY "\033[90m"
+
 #include <vector>
 #include <iostream>
 
