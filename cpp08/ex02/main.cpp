@@ -93,12 +93,20 @@ void constructorTests()
 	}
 
 	std::cout << "Printing stack from the Top: \n";
-
-	MutantStack<int> temp = mstack;
+	MutantStack<int> temp;
+	temp = mstack;
 	while (!temp.empty()) {
 		std::cout << temp.top() << '\n';
 		temp.pop();
 	}
+
+	std::cout << "\nPrinting stack from the Top: \n";
+	MutantStack<int> temp2(mstack);
+	while (!temp2.empty()) {
+		std::cout << temp2.top() << '\n';
+		temp2.pop();
+	}
+
 }
 
 
