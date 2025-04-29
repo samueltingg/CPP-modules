@@ -19,6 +19,7 @@
 #define GREY "\033[90m"
 
 #include <stack>
+#include <deque>
 #include <iostream>
 #include <algorithm>
 #include <iterator>
@@ -31,26 +32,38 @@ class MutantStack : public std::stack<T> {
 public:
 	// Default Constructor
 	MutantStack();
-	// Constructor with Parameter
-	MutantStack(unsigned int N);
 	// Copy Constructor
 	MutantStack(const MutantStack& other);
 	// Copy Assignment Operator
 	MutantStack& operator=(const MutantStack& other);
 	// Destructor
 	~MutantStack();
+	
+	// deque, list, vector has all these iterators
+	// 'container_type': type defined within the std::stack class that represents the underlying container used by the stack.
+	typedef	 typename std::stack<T>::container_type::iterator iterator;
+	typedef	 typename std::stack<T>::container_type::const_iterator const_iterator;
+	typedef	 typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+	typedef	 typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
+	
+	// begin
+
+	// end
+	// rbegin
+	// rend
+
 };
 
 template <typename T>
 MutantStack<T>::MutantStack() 
-	: std::stack<T>()
+	: std::stack<T, std::deque<T>>()
 {
 	std::cout << GREY << "MutantStack:: Default Constructor Called" << RESET << std::endl;
 }
 
 template <typename T>
 MutantStack<T>::MutantStack(const MutantStack& other)
-	: std::stack<T>()  
+	: std::stack<T, std::deque<T>>()  
 {
 	std::cout << GREY << "MutantStack:: Copy Constructor Called" << RESET << std::endl;
 
@@ -89,6 +102,7 @@ MutantStack<T>::~MutantStack()
 	std::cout << GREY << "MutantStack:: Destructor Called" << RESET << std::endl;
 }
 
-#include "MutantStack.tpp"
+
+// #include "MutantStack.tpp"
 
 #endif

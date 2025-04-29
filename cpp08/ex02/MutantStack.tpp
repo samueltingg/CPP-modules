@@ -13,4 +13,53 @@
 #ifndef MUTANT_STACK_TPP
 #define MUTANT_STACK_TPP
 
+template <typename T>
+MutantStack<T>::MutantStack() 
+	: std::stack<T>()
+{
+	std::cout << GREY << "MutantStack:: Default Constructor Called" << RESET << std::endl;
+}
+
+template <typename T>
+MutantStack<T>::MutantStack(const MutantStack& other)
+	: std::stack<T>()  
+{
+	std::cout << GREY << "MutantStack:: Copy Constructor Called" << RESET << std::endl;
+
+	std::stack<T> temp = other;
+
+	while (!temp.empty()) {
+		this->push(temp.top());
+		temp.pop();
+	}
+}
+
+template <typename T>
+MutantStack<T>& MutantStack<T>::operator=(const MutantStack& other)
+{
+	std::cout << GREY << "MutantStack:: Copy Assignment Operator Called" << RESET << std::endl;
+	
+	if (this == &other)
+		return *this;
+
+	// Clear current stack	
+	while (!this->empty())
+		this->pop();
+
+	std::stack<T> temp = other;
+	while (!temp.empty()) {
+		this->push(temp.top());
+		temp.pop();
+	}
+
+	return *this;
+}
+
+template <typename T>
+MutantStack<T>::~MutantStack()
+{
+	std::cout << GREY << "MutantStack:: Destructor Called" << RESET << std::endl;
+}
+
+
 #endif
