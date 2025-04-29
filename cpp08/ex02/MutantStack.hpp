@@ -40,30 +40,28 @@ public:
 	~MutantStack();
 	
 	// deque, list, vector has all these iterators
-	// 'container_type': type defined within the std::stack class that represents the underlying container used by the stack.
+	// 'container_type': underlying container type	
 	typedef	 typename std::stack<T>::container_type::iterator iterator;
 	typedef	 typename std::stack<T>::container_type::const_iterator const_iterator;
 	typedef	 typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
 	typedef	 typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 	
-	// begin
-
-	// end
-	// rbegin
-	// rend
-
+	iterator begin() { return this->c.begin(); };
+	iterator end() { return this->c.end(); };
+	iterator rbegin() { return this->c.rbegin(); };
+	iterator rend() { return this->c.rend(); };
 };
 
 template <typename T>
 MutantStack<T>::MutantStack() 
-	: std::stack<T, std::deque<T>>()
+	: std::stack<T>()
 {
 	std::cout << GREY << "MutantStack:: Default Constructor Called" << RESET << std::endl;
 }
 
 template <typename T>
 MutantStack<T>::MutantStack(const MutantStack& other)
-	: std::stack<T, std::deque<T>>()  
+	: std::stack<T>()  
 {
 	std::cout << GREY << "MutantStack:: Copy Constructor Called" << RESET << std::endl;
 
@@ -102,7 +100,5 @@ MutantStack<T>::~MutantStack()
 	std::cout << GREY << "MutantStack:: Destructor Called" << RESET << std::endl;
 }
 
-
-// #include "MutantStack.tpp"
 
 #endif
