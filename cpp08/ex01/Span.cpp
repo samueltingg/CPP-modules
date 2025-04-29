@@ -49,15 +49,12 @@ void Span::addNumber(const int num)
 		throw Span::SpanIsFullException();
 	_vector.push_back(num);
 }
-	
-// void Span::addMultipleNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
-// {
-// 	std::vector<int>::iterator it = begin;
-//
-// 	for (it = begin; it < end; it++) {
-//
-// 	}
-// }
+void Span::addMultipleNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
+{
+	for (std::vector<int>::const_iterator it = begin; it < end; it++) {
+		_vector.push_back(*it);
+	}
+}
 
 //methods used: sort, adjacent_difference
 int Span::shortestSpan() const // return 'unsigned int'?

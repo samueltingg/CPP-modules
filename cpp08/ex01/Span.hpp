@@ -40,9 +40,9 @@ public:
 	~Span();
 
 	void addNumber(const int num);
+	void addMultipleNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end);
 	int shortestSpan() const; // return 'unsigned int'?
 	int longestSpan() const;
-	void addMultipleNumbers(std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end);
 
 	unsigned int getMaxSize() const;
 

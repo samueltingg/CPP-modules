@@ -72,7 +72,7 @@ int main(void)
 	}
 	
 	{
-		printSection("Test: 'longestSpan()'");
+		printSection("Test: 'longestSpan()' error handling");
 		Span sp(1);
 		sp.addNumber(6);
 		try {
@@ -93,7 +93,7 @@ int main(void)
 	}
 
 	{
-		printSection("Test: 'shortestSpan()'");
+		printSection("Test: 'shortestSpan()' error handling");
 		Span sp(1);
 		sp.addNumber(6);
 		try {
@@ -113,20 +113,28 @@ int main(void)
 
 	}
 
-	{
-		printSection("Test: 10,000 elements");
-		Span sp(10000);
-		
-		for (int i = 0; i < 10000; i++) {
-			sp.addNumber(i);
-		}
-
-		std::cout << sp << '\n';
-	}
+	// {
+	// 	printSection("Test: 10,000 elements");
+	// 	Span sp(10000);
+	//
+	// 	for (int i = 0; i < 10000; i++) {
+	// 		sp.addNumber(i);
+	// 	}
+	//
+	// 	std::cout << sp << '\n';
+	// }
 
 	{
 		printSection("Test: 'addMultipleNumbers'");
+		std::vector<int> v;
+		
+		for (int i = 0; i < 5; i++) {
+			v.push_back(i);
+		}
 
+		Span sp(5);
+		sp.addMultipleNumbers(v.begin(), v.end());
 
+		std::cout << sp << '\n';
 	}
 }
