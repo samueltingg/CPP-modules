@@ -28,9 +28,36 @@ void constructorTests()
 	std::cout << "bcExchange2: \n"<< bcExchange2 << '\n';
 }
 
+void testGetConvertedValue()
+{
+	printSection("Test: getConvertedValue()");
+
+	std::string date;
+	double value = 1;
+	double convertedValue;
+
+	BitcoinExchange bcExchange("short.csv");
+
+	std::cout << "\n==== Test Case: No Exact match ====\n";
+	date = "2010-09-17"; value = 1;
+	std::cout << "Date: " << date << ", Value: " << value << '\n';
+	convertedValue = bcExchange.getConvertedValue(date, value);
+	std::cout << "Converted Value: " << convertedValue << '\n';
+
+
+	std::cout << "\n==== Test Case: Exact Match ====\n";
+	date = "2010-09-19"; value = 1;
+	std::cout << "Date: " << date << ", Value: " << value << '\n';
+	convertedValue = bcExchange.getConvertedValue(date, value);
+	std::cout << "Converted Value: " << convertedValue << '\n';
+
+}
+
 int main(void)
 {
 	constructorTests();
+	testGetConvertedValue();
+
 	/*{*/
 	/*	try {*/
 	/*		BitcoinExchange bc("data.csv");*/

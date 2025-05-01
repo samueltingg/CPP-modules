@@ -18,7 +18,6 @@
 #define CYAN "\033[36m"
 #define GREY "\033[90m"
 
-
 #include <map>
 #include <string>
 #include <iostream>
@@ -36,18 +35,17 @@ public:
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 	// Destructor
 	~BitcoinExchange();
-	
+
+	// Member Functions:
+	double getConvertedValue(const std::string& date, double value);
+
+	// Iterators:
 	typedef std::map<std::string, double>::iterator iterator;
 	typedef std::map<std::string, double>::const_iterator const_iterator;
-	typedef std::map<std::string, double>::reverse_iterator reverse_iterator;
-	typedef std::map<std::string, double>::const_reverse_iterator const_reverse_iterator;
-	
 	iterator begin();
 	iterator end();
-	reverse_iterator rbegin();
-	reverse_iterator rend();
-
 	
+	// Exceptions:
 	class ErrorOpeningFileException : std::exception {
 	public: 
 		// 'throw()' specifies that func won't throw any exceptions 

@@ -70,6 +70,26 @@ BitcoinExchange::~BitcoinExchange()
 	std::cout << "Bureaucrat:: Destructor Called" << std::endl;
 }
 
+
+double BitcoinExchange::getConvertedValue(const std::string& date, double value)
+{
+	BitcoinExchange::const_iterator it = _database.begin();
+	double exchangeRate;
+
+	for (; it != _database.end(); it++) {
+		if (it->first == date)
+			break;
+		// find 1st element greater than 'date'
+		if (it->first > date) {
+			--it; // get lower closet date
+			break;
+		}
+	}
+	exchangeRate = it->second;
+	// std::cout << "exchangeRate found: " << exchangeRate << '\n';
+	return value * exchangeRate;
+}
+
 BitcoinExchange::iterator BitcoinExchange::begin() 
 { 
 	return _database.begin(); 
@@ -80,25 +100,13 @@ BitcoinExchange::iterator BitcoinExchange::end()
 	return _database.end(); 
 }
 
-BitcoinExchange::reverse_iterator BitcoinExchange::rbegin() 
-{ 
-	return _database.rbegin(); 
-}
-
-BitcoinExchange::reverse_iterator BitcoinExchange::rend() 
-{ 
-	return _database.rend(); 
-}
-
-
 const char* BitcoinExchange::ErrorOpeningFileException::what() const throw() { 
 	return "Error opening file.";
 }
 
-
 std::ostream& operator<<(std::ostream& os, BitcoinExchange& bitcoinExchange)
 {
-	std::map<std::string, double>::const_iterator it = bitcoinExchange.begin();
+	BitcoinExchange::const_iterator it = bitcoinExchange.begin();
 
 	for (; it != bitcoinExchange.end(); it++) {
 		os << it->first << " : " << it->second << '\n';
