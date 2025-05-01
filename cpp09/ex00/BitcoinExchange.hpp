@@ -25,6 +25,8 @@
 #include <exception>
 #include <cstdlib>
 
+std::ifstream openInputFile(const std::string& fileName);
+
 class BitcoinExchange {
 public:
 	// Overloaded Constructor

@@ -17,7 +17,7 @@ void printSection(const std::string &title) {
 		<< std::endl;
 }
 
-void constructorTests()
+void ocfTest()
 {
 	printSection("Testing MutantStack Constructors");
 
@@ -26,6 +26,19 @@ void constructorTests()
 
 	BitcoinExchange bcExchange2(bcExchange1);
 	std::cout << "bcExchange2: \n"<< bcExchange2 << '\n';
+}
+
+void constructorErrorTest()
+{
+	printSection("constructorErrorTest");
+	try {
+		BitcoinExchange bc("nonExistentFile");
+		std::cout << "printing database: \n";
+		std::cout << bc << '\n' << "testt\n";
+	}
+	catch (BitcoinExchange::ErrorOpeningFileException& e) {
+		std::cout << e.what() << '\n';
+	}
 }
 
 void testGetConvertedValue()
@@ -55,21 +68,9 @@ void testGetConvertedValue()
 
 int main(void)
 {
-	constructorTests();
+	ocfTest();
+	constructorErrorTest();
 	testGetConvertedValue();
 
-	/*{*/
-	/*	try {*/
-	/*		BitcoinExchange bc("data.csv");*/
-	/*		std::cout << "printing database: \n";*/
-	/*		std::cout << bc << '\n' << "testt\n";*/
-	/*	}*/
-	/*	catch (BitcoinExchange::ErrorOpeningFileException& e) {*/
-	/*		std::cout << e.what() << '\n';*/
-	/*	}*/
-	/**/
-	/**/
-	/**/
-	/*}		*/
 
 }

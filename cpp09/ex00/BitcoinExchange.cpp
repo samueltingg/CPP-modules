@@ -13,18 +13,17 @@
 #include "BitcoinExchange.hpp"
 
 
+std::ifstream openInputFile(const std::string& fileName) {
+
+	std::ifstream ifs(fileName.c_str());
+	if (!ifs)
+		throw BitcoinExchange::ErrorOpeningFileException();
+	return ifs;
+}
 
 BitcoinExchange::BitcoinExchange()
 {
 	std::cout << "BitcoinExchange:: Constructor Called" << std::endl;
-}
-
-std::ifstream openInputFile(const std::string& fileName) {
-
-    std::ifstream ifs(fileName.c_str());
-    if (!ifs)
-		throw BitcoinExchange::ErrorOpeningFileException();
-	return ifs;
 }
 
 void loadDatabaseFromFile(std::string fileName, std::map<std::string, double>& database)
