@@ -16,7 +16,9 @@ int main(void)
 {
 	{
 		try {
-			BitcoinExchange("test");
+			BitcoinExchange bc("data.csv");
+			std::cout << "printing database: \n";
+			std::cout << bc << '\n' << "testt\n";
 		}
 		catch (BitcoinExchange::ErrorOpeningFileException& e) {
 			std::cout << e.what() << '\n';

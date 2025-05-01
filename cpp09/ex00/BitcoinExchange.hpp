@@ -18,6 +18,7 @@
 #include <iostream>
 #include <fstream>
 #include <exception>
+#include <cstdlib>
 
 class BitcoinExchange {
 public:
@@ -31,6 +32,16 @@ public:
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 	// Destructor
 	~BitcoinExchange();
+	
+	typedef std::map<std::string, double>::iterator iterator;
+	typedef std::map<std::string, double>::const_iterator const_iterator;
+	typedef std::map<std::string, double>::reverse_iterator reverse_iterator;
+	typedef std::map<std::string, double>::const_reverse_iterator const_reverse_iterator;
+	
+	iterator begin();
+	iterator end();
+	reverse_iterator rbegin();
+	reverse_iterator rend();
 
 	
 	class ErrorOpeningFileException : std::exception {
@@ -40,8 +51,10 @@ public:
 	};
 
 private:
-	std::map<std::string, int> _database;
+	std::map<std::string, double> _database;
 };
+
+std::ostream& operator<<(std::ostream& os, BitcoinExchange& bitcoinExchange);
 
 #endif
 
