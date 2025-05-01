@@ -10,61 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vector>
-#include <list>
-#include "easyfind.hpp"
-#include <iostream>
-#include <deque>
-#include <stack>
+#include "BitcoinExchange.hpp"
 
 int main(void)
 {
 	{
-		std::vector<int> vector;
-		vector.push_back(1);	
-		vector.push_back(2);	
-		vector.push_back(3);	
-		vector.push_back(4);	
+		try {
+			BitcoinExchange("test");
+		}
+		catch (BitcoinExchange::ErrorOpeningFileException& e) {
+			std::cout << e.what() << '\n';
+		}
 
-		std::vector<int>::const_iterator it;
 
-		it = easyfind(vector, 2);
-		std::cout << *it << '\n';
 
-		std::cout << "Test: finding num that doesn't exist in container\n";
-		it = easyfind(vector, 5);
-		if (it == vector.end())
-			std::cout << "Num doesn't exist\n";
-		else
-			std::cout << "Num does exist\n";
-
-	}
-
-	{
-		std::list<int> list;
-		list.push_back(1);	
-		list.push_back(2);	
-		list.push_back(3);	
-		list.push_back(4);	
-
-		std::list<int>::const_iterator it;
-
-		it = easyfind(list, 2);
-
-		std::cout << *it << '\n';
-	}
-	{
-		std::deque<int> deque;
-		deque.push_back(1);	
-		deque.push_back(2);	
-		deque.push_back(3);	
-		deque.push_back(4);	
-
-		std::deque<int>::const_iterator it;
-
-		it = easyfind(deque, 2);
-
-		std::cout << *it << '\n';
-	}
+	}		
 
 }

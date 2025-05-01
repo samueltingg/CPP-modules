@@ -40,7 +40,7 @@ public:
 	};
 
 private:
-	std::map<std::string, int> database;
+	std::map<std::string, int> _database;
 };
 
 #endif

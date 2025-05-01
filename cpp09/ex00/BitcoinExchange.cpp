@@ -20,25 +20,24 @@ BitcoinExchange::BitcoinExchange()
 }
 
 std::ifstream openInputFile(const std::string& fileName) {
+
     std::ifstream ifs(fileName.c_str());
     if (!ifs)
 		throw BitcoinExchange::ErrorOpeningFileException();
+	std::cout << fileName << '\n';
 	return ifs;
 }
 
 // loop through each line in file, 
 // transfer insert key values to map
-void parseCsvFileToMap(std::string fileName)
+void loadDatabaseFromFile(std::string fileName, std::map<std::string, int>& database)
 {
 	std::ifstream ifs;
 	std::string	line;
 
-	try {
-		 ifs = openInputFile(fileName);
-	}
-	catch (BitcoinExchange::ErrorOpeningFileException& e) {
-		std::cout << e.what() << '\n';
-	} // STOPPED HERE
+	ifs = openInputFile(fileName);
+
+	(void)database;
 
 	// while (std::getline(ifs, line)) 
 }
@@ -47,9 +46,7 @@ BitcoinExchange::BitcoinExchange(std::string fileName)
 {
 	std::cout << "BitcoinExchange:: String Constructor Called" << std::endl;
 	
-	
-	
-	
+	loadDatabaseFromFile(fileName, _database);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
