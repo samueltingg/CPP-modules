@@ -13,6 +13,12 @@
 #ifndef BITCOIN_EXCHANGE_HPP
 #define BITCOIN_EXCHANGE_HPP
 
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+#define CYAN "\033[36m"
+#define GREY "\033[90m"
+
+
 #include <map>
 #include <string>
 #include <iostream>
@@ -22,8 +28,6 @@
 
 class BitcoinExchange {
 public:
-	// Default Constructor
-	BitcoinExchange();
 	// Overloaded Constructor
 	BitcoinExchange(std::string fileName);
 	// Copy Constructor
@@ -52,6 +56,9 @@ public:
 
 private:
 	std::map<std::string, double> _database;
+
+	// Default Constructor
+	BitcoinExchange();
 };
 
 std::ostream& operator<<(std::ostream& os, BitcoinExchange& bitcoinExchange);

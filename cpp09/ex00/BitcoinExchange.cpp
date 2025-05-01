@@ -27,8 +27,6 @@ std::ifstream openInputFile(const std::string& fileName) {
 	return ifs;
 }
 
-// loop through each line in file, 
-// transfer insert key values to map
 void loadDatabaseFromFile(std::string fileName, std::map<std::string, double>& database)
 {
 	std::ifstream ifs;
@@ -46,17 +44,15 @@ void loadDatabaseFromFile(std::string fileName, std::map<std::string, double>& d
 	}
 }
 
-BitcoinExchange::BitcoinExchange(std::string fileName)
+BitcoinExchange::BitcoinExchange(std::string fileName) 
 {
 	std::cout << "BitcoinExchange:: String Constructor Called" << std::endl;
-	
 	loadDatabaseFromFile(fileName, _database);
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : _database(other._database)
 {
 	std::cout << "BitcoinExchange:: Copy Constructor Called" << std::endl;
-	(void)other;
 }
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
@@ -65,6 +61,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 	
 	if (this == &other)
 		return *this;
+	_database = other._database;
 	return *this;
 }
 
