@@ -41,7 +41,7 @@ void constructorErrorTest()
 	}
 }
 
-void testGetConvertedValue()
+void getConvertedValueTest()
 {
 	printSection("Test: getConvertedValue()");
 
@@ -63,14 +63,53 @@ void testGetConvertedValue()
 	std::cout << "Date: " << date << ", Value: " << value << '\n';
 	convertedValue = bcExchange.getConvertedValue(date, value);
 	std::cout << "Converted Value: " << convertedValue << '\n';
-
 }
 
-int main(void)
+void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, double>& database)
 {
-	ocfTest();
-	constructorErrorTest();
-	testGetConvertedValue();
+	std::string	line;
+	int pipeIndex;
+	double value;
+
+	std::ifstream ifs(fileName.c_str());
+	if (!ifs)
+		throw BitcoinExchange::ErrorOpeningFileException();
+
+	std::getline(ifs, line); // skip first line: "data,value"
+	while (std::getline(ifs, line)) {
+		pipeIndex = line.find("|");
+		value = strtod(line.substr(pipeIndex + 1).c_str(), NULL);
+		database.insert(std::make_pair(line.substr(0, pipeIndex), value)); 
+		// multimap::insert() expects a value_type, which is a std::pair.
+	}
+}
+
+int main(int argc, char **argv)
+{
+	if (argc != 2) {
+		std::cerr << "Error: expected one input file.\n";
+		return (1);
+	}
+
+	std::multimap<std::string, double> database; 
+	try {
+		loadDatabseFromInputFile(argv[1], database);
+		std::map<std::string, double>::const_iterator it = database.begin();
+
+		for (; it != database.end(); it++) {
+			std::cout << it->first << " : " << it->second << '\n';
+		}
+
+	}
+	catch (BitcoinExchange::ErrorOpeningFileException& e){
+		std::cout << e.what() << '\n';
+		return (1);
+	}
 
 
+
+	// test
+	// ocfTest();
+	// constructorErrorTest();
+	// getConvertedValueTest();
 }

@@ -17,10 +17,10 @@ BitcoinExchange::BitcoinExchange()
 	std::cout << "BitcoinExchange:: Constructor Called" << std::endl;
 }
 
-void loadDatabaseFromFile(std::string fileName, std::map<std::string, double>& database)
+void loadDatabaseFromCsv(std::string fileName, std::map<std::string, double>& database)
 {
 	std::string	line;
-	int comma_index;
+	int commaIndex;
 	double value;
 
 	std::ifstream ifs(fileName.c_str());
@@ -29,16 +29,16 @@ void loadDatabaseFromFile(std::string fileName, std::map<std::string, double>& d
 
 	std::getline(ifs, line); // skip first line: "data,value"
 	while (std::getline(ifs, line)) {
-		comma_index = line.find(",");
-		value = strtod(line.substr(comma_index + 1).c_str(), NULL);
-		database[line.substr(0, comma_index)] = value; 
+		commaIndex = line.find(",");
+		value = strtod(line.substr(commaIndex + 1).c_str(), NULL);
+		database[line.substr(0, commaIndex)] = value; 
 	}
 }
 
 BitcoinExchange::BitcoinExchange(std::string fileName) 
 {
 	std::cout << "BitcoinExchange:: String Constructor Called" << std::endl;
-	loadDatabaseFromFile(fileName, _database);
+	loadDatabaseFromCsv(fileName, _database);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : _database(other._database)
