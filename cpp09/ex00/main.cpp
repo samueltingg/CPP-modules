@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <climits>
+#include <cstdio>
+#include <cctype>
 
 void printSection(const std::string &title) {
 	std::cout << CYAN << BOLD << "\n=== " << title << " ===" << RESET
@@ -65,11 +68,25 @@ void getConvertedValueTest()
 	std::cout << "Converted Value: " << convertedValue << '\n';
 }
 
+void trimSpacesBothEnds(std::string& str)
+{
+	size_t start = 0;
+	size_t end = str.length() - 1;
+	
+	while (start < str.length() && std::isspace(str[start]))
+		++start;
+	while (end > start && std::isspace(str[end]))
+		--end;
+	
+	str = str.substr(start, end - start + 1);
+}
+
 void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, double>& database)
 {
+	size_t pipeIndex;
 	std::string	line;
-	int pipeIndex;
 	double value;
+	std::string date;
 
 	std::ifstream ifs(fileName.c_str());
 	if (!ifs)
@@ -78,10 +95,32 @@ void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, d
 	std::getline(ifs, line); // skip first line: "data,value"
 	while (std::getline(ifs, line)) {
 		pipeIndex = line.find("|");
-		value = strtod(line.substr(pipeIndex + 1).c_str(), NULL);
-		database.insert(std::make_pair(line.substr(0, pipeIndex), value)); 
+		if (pipeIndex == std::string::npos)
+			value = 0;
+		else
+			value = strtod(line.substr(pipeIndex + 1).c_str(), NULL);
+		
+		date = line.substr(0, pipeIndex);
+		trimSpacesBothEnds(date);
+		database.insert(std::make_pair(date, value)); 
 		// multimap::insert() expects a value_type, which is a std::pair.
 	}
+}
+
+bool isValidDate(const std::string& date) {
+	
+	if (date.length() != 10)
+		return false;
+
+    int y, m, d;
+    char c1, c2;
+
+	// check format 'YYYY-MM-DD'
+    if (std::sscanf(date.c_str(), "%4d%c%2d%c%2d", &y, &c1, &m, &c2, &d) != 5 || c1 != '-' || c2 != '-')
+		return false;
+	if (m < 1 || m > 12 || d < 0 || d > 31)
+		return false;
+	return true;
 }
 
 int main(int argc, char **argv)
@@ -93,9 +132,10 @@ int main(int argc, char **argv)
 
 	std::multimap<std::string, double> database; 
 	try {
+		printSection("Input File:");
 		loadDatabseFromInputFile(argv[1], database);
 		std::map<std::string, double>::const_iterator it = database.begin();
-
+		
 		for (; it != database.end(); it++) {
 			std::cout << it->first << " : " << it->second << '\n';
 		}
@@ -105,6 +145,28 @@ int main(int argc, char **argv)
 		std::cout << e.what() << '\n';
 		return (1);
 	}
+
+	printSection("After Conversion: ");
+	BitcoinExchange bcX("data.csv");
+	std::map<std::string, double>::const_iterator it = database.begin();
+	for (; it != database.end(); it++) {
+	
+		if (!isValidDate(it->first)) {
+			std::cout << "Error: bad input.\n";
+			continue;
+		}
+		else if (it->second < 0) {
+			std::cout << "Error: not a positive number.\n";
+			continue;
+		}
+		else if (it->second > INT_MAX) {
+			std::cout << "Error: too large a number.\n";
+			continue;
+		}
+
+		std::cout << it->first << " => " << it->second << " = " << bcX.getConvertedValue(it->first, it->second) << '\n';
+	}
+
 
 
 

@@ -72,7 +72,8 @@ double BitcoinExchange::getConvertedValue(const std::string& date, double value)
 			break;
 		// find 1st element greater than 'date'
 		if (it->first > date) {
-			--it; // get lower closet date
+			if (it != _database.begin())
+				--it; // get lower closet date
 			break;
 		}
 	}
