@@ -81,11 +81,11 @@ void trimSpacesBothEnds(std::string& str)
 	str = str.substr(start, end - start + 1);
 }
 
-void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, double>& database)
+void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, std::string>& database)
 {
 	size_t pipeIndex;
 	std::string	line;
-	double value;
+	std::string value;
 	std::string date;
 
 	std::ifstream ifs(fileName.c_str());
@@ -95,20 +95,24 @@ void loadDatabseFromInputFile(std::string fileName, std::multimap<std::string, d
 	std::getline(ifs, line); // skip first line: "data,value"
 	while (std::getline(ifs, line)) {
 		pipeIndex = line.find("|");
-		if (pipeIndex == std::string::npos)
-			value = 0;
-		else
-			value = strtod(line.substr(pipeIndex + 1).c_str(), NULL);
-		
+		// parse 'date'
 		date = line.substr(0, pipeIndex);
 		trimSpacesBothEnds(date);
+
+		// parse 'value'
+		if (pipeIndex == std::string::npos)
+			value = "";
+		else {
+			value = line.substr(pipeIndex + 1);
+			trimSpacesBothEnds(value);
+		}
+		
 		database.insert(std::make_pair(date, value)); 
 		// multimap::insert() expects a value_type, which is a std::pair.
 	}
 }
 
 bool isValidDate(const std::string& date) {
-	
 	if (date.length() != 10)
 		return false;
 
@@ -123,6 +127,30 @@ bool isValidDate(const std::string& date) {
 	return true;
 }
 
+bool isValidValue(const std::string literal) 
+{
+	double num = strtod(literal.c_str(), NULL);
+	if (num == -HUGE_VAL || num == HUGE_VAL)
+		return false;
+	else if (num < 0) {
+		std::cout << "Error: not a positive number.\n";
+		return false;
+	}
+	else if (num > std::numeric_limits<int>::max()) {
+		std::cout << "Error: too large a number.\n";
+		return false;
+	}
+
+	char	*endPtr = NULL;
+	strtod(literal.c_str(), &endPtr);
+
+	if (endPtr[0] != '\0') {
+		std::cout << "Error: not a number.\n";
+		return false;
+	}
+	return true;
+}
+
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
@@ -130,11 +158,11 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	std::multimap<std::string, double> database; 
+	std::multimap<std::string, std::string> database; 
 	try {
 		printSection("Input File:");
 		loadDatabseFromInputFile(argv[1], database);
-		std::map<std::string, double>::const_iterator it = database.begin();
+		std::map<std::string, std::string>::const_iterator it = database.begin();
 		
 		for (; it != database.end(); it++) {
 			std::cout << it->first << " : " << it->second << '\n';
@@ -147,30 +175,29 @@ int main(int argc, char **argv)
 	}
 
 	printSection("After Conversion: ");
-	BitcoinExchange bcX("data.csv");
-	std::map<std::string, double>::const_iterator it = database.begin();
-	for (; it != database.end(); it++) {
-	
-		if (!isValidDate(it->first)) {
-			std::cout << "Error: bad input.\n";
-			continue;
-		}
-		else if (it->second < 0) {
-			std::cout << "Error: not a positive number.\n";
-			continue;
-		}
-		else if (it->second > INT_MAX) {
-			std::cout << "Error: too large a number.\n";
-			continue;
-		}
+	try {
+		BitcoinExchange bcX("data.csv");
+		std::map<std::string, std::string>::const_iterator it = database.begin();
+		for (; it != database.end(); it++) {
 
-		std::cout << it->first << " => " << it->second << " = " << bcX.getConvertedValue(it->first, it->second) << '\n';
+			if (!isValidDate(it->first)) {
+				std::cout << "Error: bad input. => " << it->first << '\n';
+				continue;
+			}
+			if (!isValidValue(it->second)) 
+				continue;
+			
+			double value = strtod(it->second.c_str(), NULL);
+			std::cout << it->first << " => " << it->second << " = " << bcX.getConvertedValue(it->first, value) << '\n';
+		}
+	}
+	catch (BitcoinExchange::ErrorOpeningFileException& e){
+		std::cout << e.what() << '\n';
 	}
 
 
 
 
-	// test
 	// ocfTest();
 	// constructorErrorTest();
 	// getConvertedValueTest();

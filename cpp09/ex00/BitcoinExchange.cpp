@@ -14,7 +14,7 @@
 
 BitcoinExchange::BitcoinExchange()
 {
-	std::cout << "BitcoinExchange:: Constructor Called" << std::endl;
+	std::cout << GREY << "BitcoinExchange:: Constructor Called" << RESET << std::endl;
 }
 
 void loadDatabaseFromCsv(std::string fileName, std::map<std::string, double>& database)
@@ -37,18 +37,18 @@ void loadDatabaseFromCsv(std::string fileName, std::map<std::string, double>& da
 
 BitcoinExchange::BitcoinExchange(std::string fileName) 
 {
-	std::cout << "BitcoinExchange:: String Constructor Called" << std::endl;
+	std::cout << GREY << "BitcoinExchange:: String Constructor Called" << RESET << std::endl;
 	loadDatabaseFromCsv(fileName, _database);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : _database(other._database)
 {
-	std::cout << "BitcoinExchange:: Copy Constructor Called" << std::endl;
+	std::cout << GREY << "BitcoinExchange:: Copy Constructor Called" << RESET << std::endl;
 }
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
-	std::cout << "BitcoinExchange:: Copy Assignment Operator Called" << std::endl;
+	std::cout << GREY << "BitcoinExchange:: Copy Assignment Operator Called" << RESET << std::endl;
 	
 	if (this == &other)
 		return *this;
@@ -58,7 +58,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 
 BitcoinExchange::~BitcoinExchange()
 {
-	std::cout << "Bureaucrat:: Destructor Called" << std::endl;
+	std::cout << GREY << "Bureaucrat:: Destructor Called" << RESET << std::endl;
 }
 
 
