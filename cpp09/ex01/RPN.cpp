@@ -17,11 +17,37 @@ RPN::RPN() : _tokens(), _stack()
 	std::cout << GREY << "RPN:: Constructor Called" << RESET << std::endl;
 }
 
+void splitBySpaces(std::string str, std::deque<std::string>& tokens)
+{
+	std::string::size_type end;
+	std::string::size_type start = 0;
+	std::string substr;
 
-RPN::RPN(std::string fileName) : _tokens(), _stack()
+	while ((end = str.find(" ", start)) != std::string::npos) {
+		if (end > start)
+			tokens.push_back(str.substr(start, end - start));
+		start = end + 1; // set start to character after found ' '
+	}
 
+	// if no spaces at all / end with no space
+	if (start < str.length())	
+	tokens.push_back(str.substr(start));
+}
+
+void printDeque(std::deque<std::string>& deque)
+{
+	std::deque<std::string>::size_type i;
+	for (i = 0; i < deque.size(); ++i) {
+		std::cout << "[" << deque[i] << "]" << '\n';
+	}
+}
+
+RPN::RPN(std::string expression) : _tokens(), _stack()
 {
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
+	
+	splitBySpaces(expression, _tokens);
+	printDeque(_tokens);	
 }
 
 RPN::RPN(const RPN& other) : _tokens(other._tokens), _stack(other._stack)
@@ -50,8 +76,8 @@ const char* RPN::ErrorOpeningFileException::what() const throw() {
 	return "Error opening file.";
 }
 
-std::ostream& operator<<(std::ostream& os, RPN& rpn)
-{
-
-	return os;
-}
+// std::ostream& operator<<(std::ostream& os, RPN& rpn)
+// {
+//
+// 	return os;
+// }

@@ -14,6 +14,7 @@ NAME = btc
 #SRCDIR = src/
 SRCS = \
 		main.cpp \
+		RPN.cpp \
 
 #SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 

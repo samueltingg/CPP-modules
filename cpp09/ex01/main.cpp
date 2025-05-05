@@ -24,11 +24,11 @@ void ocfTest()
 {
 	printSection("Testing RPN Constructors");
 
-	RPN bcExchange1("short.csv");
-	std::cout << "bcExchange1: \n"<< bcExchange1 << '\n';
+	RPN rpn1(" 1 1  + ");
+	// std::cout << "rpn1: \n"<< rpn1 << '\n';
 
-	RPN bcExchange2(bcExchange1);
-	std::cout << "bcExchange2: \n"<< bcExchange2 << '\n';
+	RPN rpn2(rpn1);
+	// std::cout << "rpn2: \n"<< rpn2 << '\n';
 }
 
 int main(int argc, char **argv)
@@ -37,6 +37,9 @@ int main(int argc, char **argv)
 		std::cerr << "Error: expected 1 argument only.\n";
 		return (1);
 	}
+
+	RPN rpn1(argv[1]);
+
 
 	
 
