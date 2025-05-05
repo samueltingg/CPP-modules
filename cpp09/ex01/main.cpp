@@ -23,12 +23,18 @@ void printSection(const std::string &title) {
 void ocfTest(const std::string& arg)
 {
 	printSection("Testing RPN Constructors");
-
-	RPN rpn1(arg);
-	rpn1.printTokens(std::cout);
 	
-	RPN rpn2(rpn1);
-	rpn2.printTokens(std::cout);
+	try {
+		RPN rpn1(arg);
+		rpn1.printTokens(std::cout);
+
+		RPN rpn2(rpn1);
+		rpn2.printTokens(std::cout);
+	} 
+	catch (RPN::InvalidTokenException& e) {
+		std::cout << "Error: " << e.what() << '\n';
+	}
+	
 }
 
 int main(int argc, char **argv)

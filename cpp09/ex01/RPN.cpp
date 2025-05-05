@@ -43,10 +43,20 @@ void RPN::printTokens(std::ostream& os)
 	}
 }
 
+bool isExpressionValid(const std::string& expression)
+{
+	if (expression.find_first_not_of("1234567890+-*/ ") != std::string::npos)
+		return false;
+	return true;	
+}
+
 RPN::RPN(std::string expression) : _tokens(), _stack()
 {
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
 	
+	if (!isExpressionValid(expression))
+		throw RPN::InvalidTokenException();
+
 	splitBySpaces(expression, _tokens);
 }
 
@@ -72,8 +82,8 @@ RPN::~RPN()
 	std::cout << GREY << "RPN:: Destructor Called" << RESET << std::endl;
 }
 
-const char* RPN::ErrorOpeningFileException::what() const throw() { 
-	return "Error opening file.";
+const char* RPN::InvalidTokenException::what() const throw() { 
+	return "Invalid Token.";
 }
 
 

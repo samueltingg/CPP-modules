@@ -42,7 +42,7 @@ public:
 	void printTokens(std::ostream& os);
 
 	// Exceptions:
-	class ErrorOpeningFileException : std::exception {
+	class InvalidTokenException : std::exception {
 	public: 
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw();
