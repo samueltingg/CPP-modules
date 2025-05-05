@@ -130,8 +130,10 @@ bool isValidDate(const std::string& date) {
 bool isValidValue(const std::string literal) 
 {
 	double num = strtod(literal.c_str(), NULL);
-	if (num == -HUGE_VAL || num == HUGE_VAL)
+	if (num == -HUGE_VAL || num == HUGE_VAL) {
+		std::cout << "Error: too large a number.\n";
 		return false;
+	}
 	else if (num < 0) {
 		std::cout << "Error: not a positive number.\n";
 		return false;
