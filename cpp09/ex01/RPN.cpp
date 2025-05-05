@@ -12,7 +12,7 @@
 
 #include "RPN.hpp"
 
-RPN::RPN() : _tokens(), _stack()
+RPN::RPN() : _tokens()
 {
 	std::cout << GREY << "RPN:: Constructor Called" << RESET << std::endl;
 }
@@ -37,20 +37,21 @@ void splitBySpaces(std::string str, std::deque<std::string>& tokens)
 void RPN::printTokens(std::ostream& os)
 {
 	os << "\n==== Tokens ====\n";
-	std::deque<std::string>::size_type i;
-	for (i = 0; i < _tokens.size(); ++i) {
-		os << "[" << _tokens[i] << "]" << '\n';
+	std::deque<std::string>::const_iterator it = _tokens.begin();
+
+	for (; it != _tokens.end(); ++it) {
+		os << "[" << *it << "]" << '\n';
 	}
 }
 
-bool isExpressionValid(const std::string& expression)
+bool isExpressionValid(const std::string& expression, std::deque<std::string>& tokens)
 {
 	if (expression.find_first_not_of("1234567890+-*/ ") != std::string::npos)
 		return false;
 	return true;	
 }
 
-RPN::RPN(std::string expression) : _tokens(), _stack()
+RPN::RPN(std::string expression) : _tokens()
 {
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
 	
@@ -60,8 +61,7 @@ RPN::RPN(std::string expression) : _tokens(), _stack()
 	splitBySpaces(expression, _tokens);
 }
 
-RPN::RPN(const RPN& other) : _tokens(other._tokens), _stack(other._stack)
-
+RPN::RPN(const RPN& other) : _tokens(other._tokens)
 {
 	std::cout << GREY << "RPN:: Copy Constructor Called" << RESET << std::endl;
 }
@@ -73,7 +73,6 @@ RPN& RPN::operator=(const RPN& other)
 	if (this == &other)
 		return *this;
 	_tokens = other._tokens;
-	_stack = other._stack;
 	return *this;
 }
 
@@ -81,6 +80,49 @@ RPN::~RPN()
 {
 	std::cout << GREY << "RPN:: Destructor Called" << RESET << std::endl;
 }
+
+
+
+operatorType getOperatorType(const std::string& str) 
+{
+	if (str == "+") 
+		return PLUS;
+	else if (str == "-") 
+		return MINUS;
+	else if (str == "*") 
+		return TIMES;
+	else if (str == "/") 
+		return DIVIDE;
+	else
+		return NOT_OP;
+}
+
+int stringToInt(const std::string& str)
+{
+	int num;
+	
+	// use atoi as confirm 1 digit
+
+}
+
+int RPN::calcExpression()
+{
+	std::stack<int> stack;
+	std::deque<std::string>::const_iterator it = _tokens.begin();
+	operatorType opType;
+
+	for (; it != _tokens.end(); ++it) {
+		if (opType != NOT_OP) {
+			
+		}
+		else {
+			
+		}		
+
+	}
+
+}
+
 
 const char* RPN::InvalidTokenException::what() const throw() { 
 	return "Invalid Token.";

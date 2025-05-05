@@ -26,6 +26,13 @@
 #include <cstdlib>
 #include <cmath>
 
+enum operatorType {
+	PLUS,
+	MINUS,
+	TIMES,
+	DIVIDE,
+	NOT_OP
+};
 
 class RPN {
 public:
@@ -40,6 +47,7 @@ public:
 
 	// Member Functions:
 	void printTokens(std::ostream& os);
+	int calcExpression();
 
 	// Exceptions:
 	class InvalidTokenException : std::exception {
@@ -50,7 +58,6 @@ public:
 
 private:
 	std::deque<std::string> _tokens;
-	std::stack<int> _stack;
 	// Default Constructor
 	RPN();
 };
