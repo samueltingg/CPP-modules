@@ -12,7 +12,7 @@
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange() : _database()
 {
 	std::cout << GREY << "BitcoinExchange:: Constructor Called" << RESET << std::endl;
 }
@@ -35,7 +35,7 @@ void loadDatabaseFromCsv(std::string fileName, std::map<std::string, double>& da
 	}
 }
 
-BitcoinExchange::BitcoinExchange(std::string fileName) 
+BitcoinExchange::BitcoinExchange(std::string fileName) :_database()
 {
 	std::cout << GREY << "BitcoinExchange:: String Constructor Called" << RESET << std::endl;
 	loadDatabaseFromCsv(fileName, _database);
