@@ -58,7 +58,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 
 BitcoinExchange::~BitcoinExchange()
 {
-	std::cout << GREY << "Bureaucrat:: Destructor Called" << RESET << std::endl;
+	std::cout << GREY << "BitcoinExchange:: Destructor Called" << RESET << std::endl;
 }
 
 
