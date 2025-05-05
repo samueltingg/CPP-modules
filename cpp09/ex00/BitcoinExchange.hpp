@@ -24,6 +24,7 @@
 #include <fstream>
 #include <exception>
 #include <cstdlib>
+#include <cmath>
 
 std::ifstream openInputFile(const std::string& fileName);
 

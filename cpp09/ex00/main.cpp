@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <climits>
+#include <limits>
 #include <cstdio>
 #include <cctype>
 
