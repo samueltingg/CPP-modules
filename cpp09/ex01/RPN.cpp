@@ -34,11 +34,12 @@ void splitBySpaces(std::string str, std::deque<std::string>& tokens)
 	tokens.push_back(str.substr(start));
 }
 
-void printDeque(std::deque<std::string>& deque)
+void RPN::printTokens(std::ostream& os)
 {
+	os << "\n==== Tokens ====\n";
 	std::deque<std::string>::size_type i;
-	for (i = 0; i < deque.size(); ++i) {
-		std::cout << "[" << deque[i] << "]" << '\n';
+	for (i = 0; i < _tokens.size(); ++i) {
+		os << "[" << _tokens[i] << "]" << '\n';
 	}
 }
 
@@ -47,7 +48,6 @@ RPN::RPN(std::string expression) : _tokens(), _stack()
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
 	
 	splitBySpaces(expression, _tokens);
-	printDeque(_tokens);	
 }
 
 RPN::RPN(const RPN& other) : _tokens(other._tokens), _stack(other._stack)
@@ -76,8 +76,4 @@ const char* RPN::ErrorOpeningFileException::what() const throw() {
 	return "Error opening file.";
 }
 
-// std::ostream& operator<<(std::ostream& os, RPN& rpn)
-// {
-//
-// 	return os;
-// }
+

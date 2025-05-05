@@ -39,7 +39,7 @@ public:
 	~RPN();
 
 	// Member Functions:
-	double getConvertedValue(const std::string& date, double value);
+	void printTokens(std::ostream& os);
 
 	// Exceptions:
 	class ErrorOpeningFileException : std::exception {
@@ -55,7 +55,6 @@ private:
 	RPN();
 };
 
-std::ostream& operator<<(std::ostream& os, RPN& rpn);
 
 #endif
 
