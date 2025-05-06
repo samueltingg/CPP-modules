@@ -40,7 +40,7 @@ void constructorErrorTest()
 		std::cout << bc << '\n' << "testt\n";
 	}
 	catch (BitcoinExchange::ErrorOpeningFileException& e) {
-		std::cout << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 }
 
@@ -172,7 +172,7 @@ int main(int argc, char **argv)
 
 	}
 	catch (BitcoinExchange::ErrorOpeningFileException& e){
-		std::cout << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 		return (1);
 	}
 
@@ -194,7 +194,7 @@ int main(int argc, char **argv)
 		}
 	}
 	catch (BitcoinExchange::ErrorOpeningFileException& e){
-		std::cout << e.what() << '\n';
+		std::cerr << e.what() << '\n';
 	}
 
 
