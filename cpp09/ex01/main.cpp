@@ -32,7 +32,7 @@ void ocfTest(const std::string& arg)
 		rpn2.printTokens(std::cout);
 	} 
 	catch (RPN::InvalidTokenException& e) {
-		std::cout << "Error: " << e.what() << '\n';
+		std::cerr << "Error: " << e.what() << '\n';
 	}
 	
 }
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
 			std::cout << "\nResult: " << rpn.calcExpression() << '\n';
 		} 
 		catch (std::exception& e) {
-			std::cout << "\nError: " << e.what() << '\n';
+			std::cerr << "\nError: " << e.what() << '\n';
 		}
 
 	} 
 	catch (RPN::InvalidTokenException& e) {
-		std::cout << "Error: " << e.what() << '\n';
+		std::cerr << "Error: " << e.what() << '\n';
 	}
 }
