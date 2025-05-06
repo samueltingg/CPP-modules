@@ -49,8 +49,13 @@ int main(int argc, char **argv)
 	try {
 		RPN rpn(argv[1]);
 		rpn.printTokens(std::cout);
-
-		std::cout << "Result: " << rpn.calcExpression() << '\n';
+		
+		try {
+			std::cout << "\nResult: " << rpn.calcExpression() << '\n';
+		} 
+		catch (std::exception& e) {
+			std::cout << "\nError: " << e.what() << '\n';
+		}
 
 	} 
 	catch (RPN::InvalidTokenException& e) {

@@ -50,11 +50,28 @@ public:
 	int calcExpression();
 
 	// Exceptions:
-	class InvalidTokenException : std::exception {
+	class InvalidTokenException : public std::exception {
 	public: 
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw();
 	};
+	class NotEnoughOperandsException : public std::exception {
+	public: 
+		// 'throw()' specifies that func won't throw any exceptions 
+        const char* what() const throw();
+	};
+	class NotEnoughOperatorException : public std::exception {
+	public: 
+		// 'throw()' specifies that func won't throw any exceptions 
+        const char* what() const throw();
+	};
+	class NoOperandsException : public std::exception {
+	public: 
+		// 'throw()' specifies that func won't throw any exceptions 
+        const char* what() const throw();
+	};
+
+
 
 private:
 	std::deque<std::string> _tokens;

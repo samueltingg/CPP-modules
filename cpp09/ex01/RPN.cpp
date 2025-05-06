@@ -117,6 +117,7 @@ void printStack(const std::stack<int>& stack)
 		std::cout << copy.top() << '\n';
 		copy.pop();
 	}
+	std::cout << '\n';
 }
 
 int RPN::calcExpression()
@@ -135,6 +136,8 @@ int RPN::calcExpression()
 			// printStack(stack);
 		}
 		else {
+			if (stack.size() < 2) // eg. "3 4 + +"
+				throw RPN::NotEnoughOperandsException();
 			rhs = stack.top();
 			stack.pop();
 			lhs = stack.top();
@@ -150,17 +153,30 @@ int RPN::calcExpression()
 				stack.push(lhs / rhs);
 			// std::cout << "\n=== Operator ===\n";
 			// printStack(stack);
-
 		}		
 
 	}
-	return stack.top(); // should have only one number left at the end
 
+	if (stack.size() > 1) // eg. "3 4"
+		throw RPN::NotEnoughOperatorException();
+	return stack.top(); // should have only one number left at the end
 }
 
 
 const char* RPN::InvalidTokenException::what() const throw() { 
 	return "Invalid Token.";
+}
+
+const char* RPN::NotEnoughOperandsException::what() const throw() { 
+	return "Not enough operands.";
+}
+
+const char* RPN::NotEnoughOperatorException::what() const throw() { 
+	return "Not enough operator.";
+}
+
+const char* RPN::NoOperandsException::what() const throw() { 
+	return "No operands.";
 }
 
 
