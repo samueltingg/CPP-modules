@@ -180,9 +180,9 @@ const char* RPN::NotEnoughOperatorException::what() const throw() {
 }
 
 const char* RPN::DivideByZeroException::what() const throw() { 
-	return "No operands.";
+	return "Division by 0.";
 }
 
 const char* RPN::InvalidOperatorException::what() const throw() { 
-	return "No operands.";
+	return "Invalid operator.";
 }
