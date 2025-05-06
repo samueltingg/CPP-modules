@@ -44,10 +44,16 @@ void RPN::printTokens(std::ostream& os)
 	}
 }
 
-bool isExpressionValid(const std::string& expression, std::deque<std::string>& tokens)
+bool isTokensValid(const std::string& expression, const std::deque<std::string>& tokens)
 {
 	if (expression.find_first_not_of("1234567890+-*/ ") != std::string::npos)
 		return false;
+	std::deque<std::string>::const_iterator it = tokens.begin();
+
+	for (; it != tokens.end(); ++it) {
+		if (it->length() != 1)
+			return false;
+	}
 	return true;	
 }
 
@@ -55,10 +61,10 @@ RPN::RPN(std::string expression) : _tokens()
 {
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
 	
-	if (!isExpressionValid(expression))
+	splitBySpaces(expression, _tokens);
+	if (!isTokensValid(expression, _tokens))
 		throw RPN::InvalidTokenException();
 
-	splitBySpaces(expression, _tokens);
 }
 
 RPN::RPN(const RPN& other) : _tokens(other._tokens)
@@ -97,31 +103,31 @@ operatorType getOperatorType(const std::string& str)
 		return NOT_OP;
 }
 
-int stringToInt(const std::string& str)
-{
-	int num;
-	
-	// use atoi as confirm 1 digit
+// int stringToInt(const std::string& str)
+// {
+// 	int num;
+//
+// 	// use atoi as confirm 1 digit
+//
+// }
 
-}
-
-int RPN::calcExpression()
-{
-	std::stack<int> stack;
-	std::deque<std::string>::const_iterator it = _tokens.begin();
-	operatorType opType;
-
-	for (; it != _tokens.end(); ++it) {
-		if (opType != NOT_OP) {
-			
-		}
-		else {
-			
-		}		
-
-	}
-
-}
+// int RPN::calcExpression()
+// {
+// 	std::stack<int> stack;
+// 	std::deque<std::string>::const_iterator it = _tokens.begin();
+// 	operatorType opType;
+//
+// 	for (; it != _tokens.end(); ++it) {
+// 		if (opType != NOT_OP) {
+//
+// 		}
+// 		else {
+//
+// 		}		
+//
+// 	}
+//
+// }
 
 
 const char* RPN::InvalidTokenException::what() const throw() { 
