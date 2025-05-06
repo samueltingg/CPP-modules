@@ -26,12 +26,12 @@
 #include <cstdlib>
 #include <cmath>
 
-enum operatorType {
+enum tokenType {
 	PLUS,
 	MINUS,
 	TIMES,
 	DIVIDE,
-	NOT_OP
+	NUM
 };
 
 class RPN {

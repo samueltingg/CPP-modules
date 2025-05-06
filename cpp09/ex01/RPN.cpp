@@ -89,7 +89,7 @@ RPN::~RPN()
 
 
 
-operatorType getOperatorType(const std::string& str) 
+tokenType getTokenType(const std::string& str) 
 {
 	if (str == "+") 
 		return PLUS;
@@ -100,34 +100,63 @@ operatorType getOperatorType(const std::string& str)
 	else if (str == "/") 
 		return DIVIDE;
 	else
-		return NOT_OP;
+		return NUM;
 }
 
-// int stringToInt(const std::string& str)
-// {
-// 	int num;
-//
-// 	// use atoi as confirm 1 digit
-//
-// }
+int strToInt(const std::string& str)
+{
+	// use atoi as confirm 1 digit
+	return atoi(str.c_str());
+}
 
-// int RPN::calcExpression()
-// {
-// 	std::stack<int> stack;
-// 	std::deque<std::string>::const_iterator it = _tokens.begin();
-// 	operatorType opType;
-//
-// 	for (; it != _tokens.end(); ++it) {
-// 		if (opType != NOT_OP) {
-//
-// 		}
-// 		else {
-//
-// 		}		
-//
-// 	}
-//
-// }
+void printStack(const std::stack<int>& stack)
+{
+	std::stack<int> copy(stack);
+
+	while (!copy.empty()) {
+		std::cout << copy.top() << '\n';
+		copy.pop();
+	}
+}
+
+int RPN::calcExpression()
+{
+	std::stack<int> stack;
+	std::deque<std::string>::const_iterator it = _tokens.begin();
+	tokenType opType;
+	int rhs;
+	int lhs;
+
+	for (; it != _tokens.end(); ++it) {
+		opType = getTokenType(*it);
+		if (opType == NUM) {
+			stack.push(strToInt(*it));
+			// std::cout << "\n=== Not Operator ===\n";
+			// printStack(stack);
+		}
+		else {
+			rhs = stack.top();
+			stack.pop();
+			lhs = stack.top();
+			stack.pop();
+
+			if (opType == PLUS)
+				stack.push(lhs + rhs);
+			else if (opType == MINUS)
+				stack.push(lhs - rhs);
+			else if (opType == TIMES)
+				stack.push(lhs * rhs);
+			else if (opType == DIVIDE)
+				stack.push(lhs / rhs);
+			// std::cout << "\n=== Operator ===\n";
+			// printStack(stack);
+
+		}		
+
+	}
+	return stack.top(); // should have only one number left at the end
+
+}
 
 
 const char* RPN::InvalidTokenException::what() const throw() { 

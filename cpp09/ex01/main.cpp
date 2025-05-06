@@ -44,8 +44,16 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	ocfTest(argv[1]);
-
+	// ocfTest(argv[1]);
 	
+	try {
+		RPN rpn(argv[1]);
+		rpn.printTokens(std::cout);
 
+		std::cout << "Result: " << rpn.calcExpression() << '\n';
+
+	} 
+	catch (RPN::InvalidTokenException& e) {
+		std::cout << "Error: " << e.what() << '\n';
+	}
 }
