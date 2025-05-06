@@ -65,12 +65,16 @@ public:
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw();
 	};
-	class NoOperandsException : public std::exception {
+	class DivideByZeroException : public std::exception {
 	public: 
 		// 'throw()' specifies that func won't throw any exceptions 
         const char* what() const throw();
 	};
-
+	class InvalidOperatorException : public std::exception {
+	public: 
+		// 'throw()' specifies that func won't throw any exceptions 
+        const char* what() const throw();
+	};
 
 
 private:

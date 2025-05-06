@@ -12,6 +12,7 @@
 
 #include "RPN.hpp"
 
+// Constructor
 RPN::RPN() : _tokens()
 {
 	std::cout << GREY << "RPN:: Constructor Called" << RESET << std::endl;
@@ -57,6 +58,7 @@ bool isTokensValid(const std::string& expression, const std::deque<std::string>&
 	return true;	
 }
 
+// String Contructor
 RPN::RPN(std::string expression) : _tokens()
 {
 	std::cout << GREY << "RPN:: String Constructor Called" << RESET << std::endl;
@@ -67,11 +69,13 @@ RPN::RPN(std::string expression) : _tokens()
 
 }
 
+// Copy Constructor
 RPN::RPN(const RPN& other) : _tokens(other._tokens)
 {
 	std::cout << GREY << "RPN:: Copy Constructor Called" << RESET << std::endl;
 }
 
+// Copy Assignment Operator
 RPN& RPN::operator=(const RPN& other)
 {
 	std::cout << GREY << "RPN:: Copy Assignment Operator Called" << RESET << std::endl;
@@ -82,11 +86,11 @@ RPN& RPN::operator=(const RPN& other)
 	return *this;
 }
 
+// Destructor
 RPN::~RPN()
 {
 	std::cout << GREY << "RPN:: Destructor Called" << RESET << std::endl;
 }
-
 
 
 tokenType getTokenType(const std::string& str) 
@@ -124,43 +128,43 @@ int RPN::calcExpression()
 {
 	std::stack<int> stack;
 	std::deque<std::string>::const_iterator it = _tokens.begin();
-	tokenType opType;
-	int rhs;
-	int lhs;
+	tokenType tokenType;
 
 	for (; it != _tokens.end(); ++it) {
-		opType = getTokenType(*it);
-		if (opType == NUM) {
+		tokenType = getTokenType(*it);
+		if (tokenType == NUM) {
 			stack.push(strToInt(*it));
-			// std::cout << "\n=== Not Operator ===\n";
-			// printStack(stack);
 		}
 		else {
 			if (stack.size() < 2) // eg. "3 4 + +"
 				throw RPN::NotEnoughOperandsException();
-			rhs = stack.top();
+			int rhs = stack.top();
 			stack.pop();
-			lhs = stack.top();
+			int lhs = stack.top();
 			stack.pop();
 
-			if (opType == PLUS)
-				stack.push(lhs + rhs);
-			else if (opType == MINUS)
-				stack.push(lhs - rhs);
-			else if (opType == TIMES)
-				stack.push(lhs * rhs);
-			else if (opType == DIVIDE)
-				stack.push(lhs / rhs);
-			// std::cout << "\n=== Operator ===\n";
-			// printStack(stack);
+			switch (tokenType) {
+				case PLUS:   stack.push(lhs + rhs); break;
+				case MINUS:  stack.push(lhs - rhs); break;
+				case TIMES:  stack.push(lhs * rhs); break;
+				case DIVIDE:
+					if (rhs == 0) 
+						throw RPN::DivideByZeroException();
+					stack.push(lhs / rhs); break;
+				default:
+					throw RPN::InvalidOperatorException();		
+			}
 		}		
-
 	}
 
-	if (stack.size() > 1) // eg. "3 4"
+	if (stack.size() != 1) // eg. "3 4"
 		throw RPN::NotEnoughOperatorException();
 	return stack.top(); // should have only one number left at the end
 }
+// std::cout << "\n=== Not Operator ===\n";
+// printStack(stack);
+// std::cout << "\n=== Operator ===\n";
+// printStack(stack);
 
 
 const char* RPN::InvalidTokenException::what() const throw() { 
@@ -175,8 +179,10 @@ const char* RPN::NotEnoughOperatorException::what() const throw() {
 	return "Not enough operator.";
 }
 
-const char* RPN::NoOperandsException::what() const throw() { 
+const char* RPN::DivideByZeroException::what() const throw() { 
 	return "No operands.";
 }
 
-
+const char* RPN::InvalidOperatorException::what() const throw() { 
+	return "No operands.";
+}
