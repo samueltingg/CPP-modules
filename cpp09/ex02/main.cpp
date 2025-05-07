@@ -39,9 +39,12 @@ int main(int argc, char **argv)
 	try {
 		PmergeMe merge(argv);
 		merge.printVector();
+		merge.sortSequence();
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
 	}
+
+	
 }
 

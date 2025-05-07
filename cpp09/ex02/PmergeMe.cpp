@@ -66,12 +66,29 @@ PmergeMe::~PmergeMe()
 	std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
+/*void printPairedVector(std::vector< std::pair<int, int> >& vec)*/
+/*{*/
+/*	std::vector< std::pair<int, int> >::const_iterator it = vec.begin();*/
+/*	for (; it != vec.end(); ++it) {*/
+/*		std::cout << "("<< it->first << ", " << it->second << ")" << '\n';*/
+/*	}*/
+/**/
+/*}*/
 
 void PmergeMe::sortSequence()
 {
-
-}
+	std::vector< std::pair<int, int> > pairedSeq;
 	
+	size_t size = _sequence.size();
+	for (size_t i = 0; i < size; ++i) {
+		if (i % 2 != 0)
+			continue;
+		pairedSeq.push_back(std::make_pair(_sequence[i], _sequence[i+1]));
+	}
+
+	/*printPairedVector(pairedSeq);*/
+}
+
 void PmergeMe::printVector()
 {
 	std::vector<int>::const_iterator it = _sequence.begin();

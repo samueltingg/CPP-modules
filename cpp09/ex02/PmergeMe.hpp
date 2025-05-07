@@ -25,6 +25,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <limits.h> 
+#include <utility>
 
 class PmergeMe {
 public:
@@ -40,7 +41,6 @@ public:
 
 	// Member Functions:
 	void sortSequence();
-	
 	void printVector();
 
 	// Exceptions:
@@ -62,7 +62,6 @@ private:
 	// Default Constructor
 	PmergeMe();
 };
-
 
 #endif
 
