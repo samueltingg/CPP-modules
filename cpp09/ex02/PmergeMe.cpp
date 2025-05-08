@@ -77,6 +77,16 @@ void printPairedVector(std::vector< std::pair<int, int> >& vec)
 
 }
 
+void printVector(std::vector<int>& vec)
+{
+	std::vector<int>::const_iterator it = vec.begin();
+
+	for (; it != vec.end(); ++it) {
+		std::cout << *it << '\n';
+	}
+
+}
+
 std::vector< std::pair<int, int> > createPairedSequence(std::vector<int>& sequence)
 {
 	std::vector< std::pair<int, int> > pairedSeq;
@@ -153,7 +163,15 @@ void mergeSort(std::vector< std::pair<int, int> >& pairedSeq, int left, int righ
 	merge(pairedSeq, left, mid, right);
 }
 
-void PmergeMe::sortSequence()
+void transferLargerNumToFinalVector(std::vector< std::pair<int, int> >& pairedSeq, std::vector<int>& final)
+{
+	std::vector< std::pair<int, int> >::const_iterator it = pairedSeq.begin();
+	for (; it != pairedSeq.end(); ++it) {
+		final.push_back(it->first);
+	}
+}
+
+std::vector<int> PmergeMe::sortSequence()
 {
 	std::vector< std::pair<int, int> > pairedSeq = createPairedSequence(_sequence);
 	
@@ -162,15 +180,21 @@ void PmergeMe::sortSequence()
 	mergeSort(pairedSeq, 0, pairedSeq.size() - 1);
 	std::cout << "\n===After Merge Sort ===\n";
 	printPairedVector(pairedSeq);
+	
+	std::vector<int> final;
+	transferLargerNumToFinalVector(pairedSeq, final);
+	printVector(final);
+	return final;
 }
 
-void PmergeMe::printVector()
+void PmergeMe::printOriSequence()
 {
 	std::vector<int>::const_iterator it = _sequence.begin();
 
 	for (; it != _sequence.end(); ++it) {
-		std::cout << *it << '\n';
+		std::cout << *it << " ";
 	}
+	std::cout << '\n';
 
 }
 

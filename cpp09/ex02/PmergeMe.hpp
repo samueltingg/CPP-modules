@@ -16,7 +16,10 @@
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
 #define CYAN "\033[36m"
+#define GREEN "\033[0;32m"
+#define RED "\033[0;31m"
 #define GREY "\033[90m"
+
 
 #include <vector>
 #include <string>
@@ -40,8 +43,8 @@ public:
 	~PmergeMe();
 
 	// Member Functions:
-	void sortSequence();
-	void printVector();
+	std::vector<int> sortSequence();
+	void printOriSequence();
 
 	// Exceptions:
 	class InvalidArgumentException : public std::exception {

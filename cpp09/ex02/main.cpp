@@ -38,8 +38,11 @@ int main(int argc, char **argv)
 	
 	try {
 		PmergeMe merge(argv);
-		merge.printVector();
+		printSection("Original Sequence");
+		std::cout << GREEN << "Before:   "<< RESET;
+		merge.printOriSequence();
 		merge.sortSequence();
+		printSection("Sorted Sequence");
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
