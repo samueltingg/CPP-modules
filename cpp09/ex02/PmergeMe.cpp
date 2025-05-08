@@ -66,14 +66,14 @@ PmergeMe::~PmergeMe()
 	std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
-/*void printPairedVector(std::vector< std::pair<int, int> >& vec)*/
-/*{*/
-/*	std::vector< std::pair<int, int> >::const_iterator it = vec.begin();*/
-/*	for (; it != vec.end(); ++it) {*/
-/*		std::cout << "("<< it->first << ", " << it->second << ")" << '\n';*/
-/*	}*/
-/**/
-/*}*/
+void printPairedVector(std::vector< std::pair<int, int> >& vec)
+{
+	std::vector< std::pair<int, int> >::const_iterator it = vec.begin();
+	for (; it != vec.end(); ++it) {
+		std::cout << "("<< it->first << ", " << it->second << ")" << '\n';
+	}
+
+}
 
 void PmergeMe::sortSequence()
 {
@@ -83,10 +83,13 @@ void PmergeMe::sortSequence()
 	for (size_t i = 0; i < size; ++i) {
 		if (i % 2 != 0)
 			continue;
-		pairedSeq.push_back(std::make_pair(_sequence[i], _sequence[i+1]));
+		if (i == size - 1)
+			pairedSeq.push_back(std::make_pair(_sequence[i], -1));
+		else 
+			pairedSeq.push_back(std::make_pair(_sequence[i], _sequence[i+1]));
 	}
 
-	/*printPairedVector(pairedSeq);*/
+	printPairedVector(pairedSeq);
 }
 
 void PmergeMe::printVector()
