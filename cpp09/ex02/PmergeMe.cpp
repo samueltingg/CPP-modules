@@ -106,9 +106,51 @@ void sortPairs(std::vector< std::pair<int, int> >& pairedSeq)
 	}
 }
 
-void mergeSortPairedSequence(std::vector< std::pair<int, int> >& pairedSeq)
+// updates vector with sorted sequence, for a range of numbers: left->right
+void merge(std::vector< std::pair<int, int> >& pairedSeq, int left, int mid, int right)
 {
+	int leftSize = mid - left + 1;   // size of left half
+    int rightSize = right - mid;      // size of right half
 
+    // Temporary arrays
+	std::vector< std::pair<int, int> > L(leftSize);
+	std::vector< std::pair<int, int> > R(rightSize);
+
+    // Copy data to temporary arrays
+    for (int i = 0; i < leftSize; i++)
+        L[i] = pairedSeq[left + i];
+    for (int j = 0; j < rightSize; j++)
+        R[j] = pairedSeq[mid + 1 + j];
+
+    // Merge the two pairedSeq back into pairedSeq[left..right]
+    int i = 0, j = 0, k = left;
+
+    while (i < leftSize && j < rightSize) {
+		if (L[i].first <= R[j].first)
+			pairedSeq[k++] = L[i++];
+		else
+			pairedSeq[k++] = R[j++];
+    }
+
+    // Copy any remaining elements
+    while (i < leftSize)
+        pairedSeq[k++] = L[i++];
+
+    while (j < rightSize)
+        pairedSeq[k++] = R[j++];
+}
+
+// sorts Paired Sequence
+void mergeSort(std::vector< std::pair<int, int> >& pairedSeq, int left, int right)
+{
+	// Base Condition: if one num left
+	if (left >= right) // why > ?
+		return ;
+	
+	int mid = (left + right) / 2;
+	mergeSort(pairedSeq, left, mid);
+	mergeSort(pairedSeq, mid + 1, right);
+	merge(pairedSeq, left, mid, right);
 }
 
 void PmergeMe::sortSequence()
@@ -116,7 +158,10 @@ void PmergeMe::sortSequence()
 	std::vector< std::pair<int, int> > pairedSeq = createPairedSequence(_sequence);
 	
 	sortPairs(pairedSeq);
-
+	printPairedVector(pairedSeq);
+	mergeSort(pairedSeq, 0, pairedSeq.size() - 1);
+	std::cout << "\n===After Merge Sort ===\n";
+	printPairedVector(pairedSeq);
 }
 
 void PmergeMe::printVector()
