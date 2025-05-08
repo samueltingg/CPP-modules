@@ -66,6 +66,8 @@ PmergeMe::~PmergeMe()
 	std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
+// =====================================================================================
+
 void printPairedVector(std::vector< std::pair<int, int> >& vec)
 {
 	std::vector< std::pair<int, int> >::const_iterator it = vec.begin();
@@ -75,21 +77,46 @@ void printPairedVector(std::vector< std::pair<int, int> >& vec)
 
 }
 
-void PmergeMe::sortSequence()
+std::vector< std::pair<int, int> > createPairedSequence(std::vector<int>& sequence)
 {
 	std::vector< std::pair<int, int> > pairedSeq;
 	
-	size_t size = _sequence.size();
+	size_t size = sequence.size();
 	for (size_t i = 0; i < size; ++i) {
 		if (i % 2 != 0)
 			continue;
-		if (i == size - 1)
-			pairedSeq.push_back(std::make_pair(_sequence[i], -1));
+		if (i == size - 1) // for ODD seq, extra num paired with '-1'
+			pairedSeq.push_back(std::make_pair(sequence[i], -1));
 		else 
-			pairedSeq.push_back(std::make_pair(_sequence[i], _sequence[i+1]));
+			pairedSeq.push_back(std::make_pair(sequence[i], sequence[i+1]));
 	}
+	return pairedSeq;
+}
 
-	printPairedVector(pairedSeq);
+void sortPairs(std::vector< std::pair<int, int> >& pairedSeq)
+{
+	std::vector< std::pair<int, int> >::iterator it = pairedSeq.begin();
+
+	for (; it != pairedSeq.end(); ++it) {
+		if (it->first > it->second)
+			continue;
+		int temp = it->first;
+		it->first = it->second;
+		it->second = temp;
+	}
+}
+
+void mergeSortPairedSequence(std::vector< std::pair<int, int> >& pairedSeq)
+{
+
+}
+
+void PmergeMe::sortSequence()
+{
+	std::vector< std::pair<int, int> > pairedSeq = createPairedSequence(_sequence);
+	
+	sortPairs(pairedSeq);
+
 }
 
 void PmergeMe::printVector()
