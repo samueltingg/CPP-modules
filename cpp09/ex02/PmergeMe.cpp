@@ -182,8 +182,13 @@ std::vector<int> PmergeMe::sortSequence()
 	printPairedVector(pairedSeq);
 	
 	std::vector<int> final;
+	final.push_back(pairedSeq[0].second);
 	transferLargerNumToFinalVector(pairedSeq, final);
+	pairedSeq.erase(pairedSeq.begin());
+		
 	printVector(final);
+	printPairedVector(pairedSeq);
+
 	return final;
 }
 
