@@ -96,8 +96,8 @@ PairedSeq createPairedSequence(std::vector<int>& sequence)
 	for (size_t i = 0; i < size; ++i) {
 		if (i % 2 != 0)
 			continue;
-		if (i == size - 1) // for ODD seq, extra num paired with '-1'
-			pairedSeq.push_back(std::make_pair(sequence[i], -1));
+		else if (i == size - 1) // for ODD seq, extra num is not included
+			continue;
 		else 
 			pairedSeq.push_back(std::make_pair(sequence[i], sequence[i+1]));
 	}
@@ -203,6 +203,9 @@ void insertSortLosersToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final
 
 std::vector<int> PmergeMe::sortSequence()
 {
+	int extraNum = -1; 
+	if (_sequence.size() % 2 != 0)
+		extraNum = _sequence.back();
 	PairedSeq pairedSeq = createPairedSequence(_sequence);
 	std::vector<int> final;
 	
@@ -224,6 +227,9 @@ std::vector<int> PmergeMe::sortSequence()
 	printPairedVector(pairedSeq);
 	
 	insertSortLosersToFinalVector(pairedSeq, final);
+
+	int index = searchInsertIndex(final, 0, final.size() - 1, extraNum);
+	final.insert(final.begin() + index, extraNum);
 
 	return final;
 }
