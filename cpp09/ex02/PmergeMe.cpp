@@ -82,8 +82,9 @@ void printVector(std::vector<int>& vec)
 	std::vector<int>::const_iterator it = vec.begin();
 
 	for (; it != vec.end(); ++it) {
-		std::cout << *it << '\n';
+		std::cout << *it << " ";
 	}
+	std::cout << '\n';
 
 }
 
@@ -151,19 +152,19 @@ void merge(PairedSeq& pairedSeq, int left, int mid, int right)
 }
 
 // sorts Paired Sequence
-void mergeSort(PairedSeq& pairedSeq, int left, int right)
+void mergeSortByWinners(PairedSeq& pairedSeq, int left, int right)
 {
 	// Base Condition: if one num left
 	if (left >= right) // why > ?
 		return ;
 	
 	int mid = (left + right) / 2;
-	mergeSort(pairedSeq, left, mid);
-	mergeSort(pairedSeq, mid + 1, right);
+	mergeSortByWinners(pairedSeq, left, mid);
+	mergeSortByWinners(pairedSeq, mid + 1, right);
 	merge(pairedSeq, left, mid, right);
 }
 
-void transferLargerNumToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final)
+void transferWinnersToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final)
 {
 	PairedSeq::const_iterator it = pairedSeq.begin();
 	for (; it != pairedSeq.end(); ++it) {
@@ -191,7 +192,7 @@ int searchInsertIndex(const std::vector<int>& final, int left, int right, int nu
 }
 
 
-void insertSmallerElements(PairedSeq& pairedSeq, std::vector<int>& final)
+void insertSortLosersToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final)
 {
 	PairedSeq::const_iterator it = pairedSeq.begin();
 	for (; it != pairedSeq.end(); ++it) {
@@ -209,13 +210,13 @@ std::vector<int> PmergeMe::sortSequence()
 	
 	sortPairs(pairedSeq);
 	printPairedVector(pairedSeq);
-	mergeSort(pairedSeq, 0, pairedSeq.size() - 1);
+	mergeSortByWinners(pairedSeq, 0, pairedSeq.size() - 1);
 	std::cout << "\n===After Merge Sort ===\n";
 	printPairedVector(pairedSeq);
 
 	if (pairedSeq[0].second != -1)
 		final.push_back(pairedSeq[0].second); // insert first pair's smaller num pair
-	transferLargerNumToFinalVector(pairedSeq, final);
+	transferWinnersToFinalVector(pairedSeq, final);
 	pairedSeq.erase(pairedSeq.begin());
 		
 	std::cout << "\n ===Final Vector with larger nums===\n";
@@ -224,10 +225,8 @@ std::vector<int> PmergeMe::sortSequence()
 	std::cout << "\n ===Paired vector after erasing first pair===\n";
 	printPairedVector(pairedSeq);
 	
-	insertSmallerElements(pairedSeq, final);
+	insertSortLosersToFinalVector(pairedSeq, final);
 
-	std::cout << "\n===After Insertion===\n";
-	printVector(final);
 	return final;
 }
 

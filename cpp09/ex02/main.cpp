@@ -39,9 +39,11 @@ int main(int argc, char **argv)
 	try {
 		PmergeMe merge(argv);
 		printSection("Original Sequence");
-		std::cout << GREEN << "Before:   "<< RESET;
+		std::cout << GREEN << "\nBefore: "<< RESET;
 		merge.printOriSequence();
-		merge.sortSequence();
+		std::vector<int> sorted = merge.sortSequence();
+		std::cout << RED << "\nAfter: "<< RESET;
+		printVector(sorted);
 		printSection("Sorted Sequence");
 	}
 	catch (std::exception& e) {
