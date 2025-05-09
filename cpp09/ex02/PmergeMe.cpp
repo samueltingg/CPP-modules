@@ -171,40 +171,40 @@ void transferLargerNumToFinalVector(PairedSeq& pairedSeq, std::vector<int>& fina
 	}
 }
 
-int binarySearch(const std::vector<int>& final, int left, int right, int num)
+// Binary Search
+int searchInsertIndex(const std::vector<int>& final, int left, int right, int num)
 {
     // base condition: if number not found
-	if (left == right)
+	if (left == right) {
+		std::cout << "left == right\n";
 		return left;
+	}
 
     int mid = (left + right) / 2;
-	std::cout << "\n----------\n";
-	std::cout << "left index: " << left << '\n';	
-	std::cout << "mid index: " << mid << '\n';	
-	std::cout << "right index: " << right << '\n';	
 
-	// std::cout << "mid value: " << final[mid] << '\n';	
 	if (num == final[mid]) {
 		std::cout << "num == final[mid]\n";
 		return mid;
 	}
 	else if (num < final[mid]) {
-		if (right - left + 1 == 3)
-			return left;
 		std::cout << "num < final[mid]\n";
-		return binarySearch(final, left, mid, num);
+		return searchInsertIndex(final, left, mid, num);
 	}
 	else {
-		if (right - left + 1 == 3)
-			return right;
-		// if (right == 2) {
-		// 	std::cout << "error\n";
-		// 	return (-1);
-		// }
-
 		std::cout << "num > final[mid]\n";
-		return binarySearch(final, mid + 1, right, num);
+		return searchInsertIndex(final, mid + 1, right, num);
 	}
+}
+
+
+void insertSmallerElements(PairedSeq& pairedSeq, std::vector<int>& final)
+{
+	PairedSeq::const_iterator it = pairedSeq.begin();
+	for (; it != pairedSeq.end(); ++it) {
+		int index = searchInsertIndex(final, 0, final.size() - 1, pairedSeq[1].second);
+	}
+
+
 }
 
 std::vector<int> PmergeMe::sortSequence()
@@ -230,10 +230,12 @@ std::vector<int> PmergeMe::sortSequence()
 	printPairedVector(pairedSeq);
 	
 	// insertSmallerElements
-	// std::cout << "finalsize -1: " << final.size() - 1 << '\n';
-	int index = binarySearch(final, 0, final.size() - 1, pairedSeq[1].second);
+	std::cout << "num to insert: " << pairedSeq[1].second << '\n';
+	int index = searchInsertIndex(final, 0, final.size() - 1, pairedSeq[1].second);
 	std::cout << "index: " << index << '\n';
 
+	final.insert(final.begin() + index, pairedSeq[1].second);
+	printVector(final);
 	return final;
 }
 
