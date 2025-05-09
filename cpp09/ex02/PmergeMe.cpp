@@ -181,10 +181,8 @@ int searchInsertIndex(const std::vector<int>& final, int left, int right, int nu
 
     int mid = (left + right) / 2;
 
-	if (num == final[mid]) {
-		std::cout << "num == final[mid]" << '\n';
+	if (num == final[mid]) // don't need if no duplicates
 		return mid;
-	}
 	else if (num < final[mid])
 		return searchInsertIndex(final, left, mid, num);
 	else
