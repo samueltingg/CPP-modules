@@ -68,9 +68,9 @@ PmergeMe::~PmergeMe()
 
 // =====================================================================================
 
-void printPairedVector(std::vector< std::pair<int, int> >& vec)
+void printPairedVector(PairedSeq& vec)
 {
-	std::vector< std::pair<int, int> >::const_iterator it = vec.begin();
+	PairedSeq::const_iterator it = vec.begin();
 	for (; it != vec.end(); ++it) {
 		std::cout << "("<< it->first << ", " << it->second << ")" << '\n';
 	}
@@ -87,9 +87,9 @@ void printVector(std::vector<int>& vec)
 
 }
 
-std::vector< std::pair<int, int> > createPairedSequence(std::vector<int>& sequence)
+PairedSeq createPairedSequence(std::vector<int>& sequence)
 {
-	std::vector< std::pair<int, int> > pairedSeq;
+	PairedSeq pairedSeq;
 	
 	size_t size = sequence.size();
 	for (size_t i = 0; i < size; ++i) {
@@ -103,9 +103,9 @@ std::vector< std::pair<int, int> > createPairedSequence(std::vector<int>& sequen
 	return pairedSeq;
 }
 
-void sortPairs(std::vector< std::pair<int, int> >& pairedSeq)
+void sortPairs(PairedSeq& pairedSeq)
 {
-	std::vector< std::pair<int, int> >::iterator it = pairedSeq.begin();
+	PairedSeq::iterator it = pairedSeq.begin();
 
 	for (; it != pairedSeq.end(); ++it) {
 		if (it->first > it->second)
@@ -117,14 +117,14 @@ void sortPairs(std::vector< std::pair<int, int> >& pairedSeq)
 }
 
 // updates vector with sorted sequence, for a range of numbers: left->right
-void merge(std::vector< std::pair<int, int> >& pairedSeq, int left, int mid, int right)
+void merge(PairedSeq& pairedSeq, int left, int mid, int right)
 {
 	int leftSize = mid - left + 1;   // size of left half
     int rightSize = right - mid;      // size of right half
 
     // Temporary arrays
-	std::vector< std::pair<int, int> > L(leftSize);
-	std::vector< std::pair<int, int> > R(rightSize);
+	PairedSeq L(leftSize);
+	PairedSeq R(rightSize);
 
     // Copy data to temporary arrays
     for (int i = 0; i < leftSize; i++)
@@ -151,7 +151,7 @@ void merge(std::vector< std::pair<int, int> >& pairedSeq, int left, int mid, int
 }
 
 // sorts Paired Sequence
-void mergeSort(std::vector< std::pair<int, int> >& pairedSeq, int left, int right)
+void mergeSort(PairedSeq& pairedSeq, int left, int right)
 {
 	// Base Condition: if one num left
 	if (left >= right) // why > ?
@@ -163,31 +163,76 @@ void mergeSort(std::vector< std::pair<int, int> >& pairedSeq, int left, int righ
 	merge(pairedSeq, left, mid, right);
 }
 
-void transferLargerNumToFinalVector(std::vector< std::pair<int, int> >& pairedSeq, std::vector<int>& final)
+void transferLargerNumToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final)
 {
-	std::vector< std::pair<int, int> >::const_iterator it = pairedSeq.begin();
+	PairedSeq::const_iterator it = pairedSeq.begin();
 	for (; it != pairedSeq.end(); ++it) {
 		final.push_back(it->first);
 	}
 }
 
+int binarySearch(const std::vector<int>& final, int left, int right, int num)
+{
+    // base condition: if number not found
+	if (left == right)
+		return left;
+
+    int mid = (left + right) / 2;
+	std::cout << "\n----------\n";
+	std::cout << "left index: " << left << '\n';	
+	std::cout << "mid index: " << mid << '\n';	
+	std::cout << "right index: " << right << '\n';	
+
+	// std::cout << "mid value: " << final[mid] << '\n';	
+	if (num == final[mid]) {
+		std::cout << "num == final[mid]\n";
+		return mid;
+	}
+	else if (num < final[mid]) {
+		if (right - left + 1 == 3)
+			return left;
+		std::cout << "num < final[mid]\n";
+		return binarySearch(final, left, mid, num);
+	}
+	else {
+		if (right - left + 1 == 3)
+			return right;
+		// if (right == 2) {
+		// 	std::cout << "error\n";
+		// 	return (-1);
+		// }
+
+		std::cout << "num > final[mid]\n";
+		return binarySearch(final, mid + 1, right, num);
+	}
+}
+
 std::vector<int> PmergeMe::sortSequence()
 {
-	std::vector< std::pair<int, int> > pairedSeq = createPairedSequence(_sequence);
+	PairedSeq pairedSeq = createPairedSequence(_sequence);
+	std::vector<int> final;
 	
 	sortPairs(pairedSeq);
 	printPairedVector(pairedSeq);
 	mergeSort(pairedSeq, 0, pairedSeq.size() - 1);
 	std::cout << "\n===After Merge Sort ===\n";
 	printPairedVector(pairedSeq);
-	
-	std::vector<int> final;
-	final.push_back(pairedSeq[0].second);
+
+	if (pairedSeq[0].second != -1)
+		final.push_back(pairedSeq[0].second); // insert first pair's smaller num pair
 	transferLargerNumToFinalVector(pairedSeq, final);
 	pairedSeq.erase(pairedSeq.begin());
 		
+	std::cout << "\n ===Final Vector with larger nums===\n";
 	printVector(final);
+
+	std::cout << "\n ===Paired vector after erasing first pair===\n";
 	printPairedVector(pairedSeq);
+	
+	// insertSmallerElements
+	// std::cout << "finalsize -1: " << final.size() - 1 << '\n';
+	int index = binarySearch(final, 0, final.size() - 1, pairedSeq[1].second);
+	std::cout << "index: " << index << '\n';
 
 	return final;
 }

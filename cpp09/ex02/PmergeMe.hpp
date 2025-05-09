@@ -30,6 +30,8 @@
 #include <limits.h> 
 #include <utility>
 
+typedef std::vector< std::pair<int, int> > PairedSeq;
+
 class PmergeMe {
 public:
 	// Overloaded Constructor
