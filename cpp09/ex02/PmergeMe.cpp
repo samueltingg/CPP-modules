@@ -175,25 +175,19 @@ void transferLargerNumToFinalVector(PairedSeq& pairedSeq, std::vector<int>& fina
 int searchInsertIndex(const std::vector<int>& final, int left, int right, int num)
 {
     // base condition: if number not found
-	if (left == right) {
-		std::cout << "left == right\n";
+	if (left == right)
 		return left;
-	}
 
     int mid = (left + right) / 2;
 
 	if (num == final[mid]) {
-		std::cout << "num == final[mid]\n";
+		std::cout << "num == final[mid]" << '\n';
 		return mid;
 	}
-	else if (num < final[mid]) {
-		std::cout << "num < final[mid]\n";
+	else if (num < final[mid])
 		return searchInsertIndex(final, left, mid, num);
-	}
-	else {
-		std::cout << "num > final[mid]\n";
+	else
 		return searchInsertIndex(final, mid + 1, right, num);
-	}
 }
 
 
@@ -201,10 +195,11 @@ void insertSmallerElements(PairedSeq& pairedSeq, std::vector<int>& final)
 {
 	PairedSeq::const_iterator it = pairedSeq.begin();
 	for (; it != pairedSeq.end(); ++it) {
-		int index = searchInsertIndex(final, 0, final.size() - 1, pairedSeq[1].second);
+		int index = searchInsertIndex(final, 0, final.size() - 1, it->second);
+		if (it->second == -1)
+			continue;
+		final.insert(final.begin() + index, it->second);
 	}
-
-
 }
 
 std::vector<int> PmergeMe::sortSequence()
@@ -229,12 +224,9 @@ std::vector<int> PmergeMe::sortSequence()
 	std::cout << "\n ===Paired vector after erasing first pair===\n";
 	printPairedVector(pairedSeq);
 	
-	// insertSmallerElements
-	std::cout << "num to insert: " << pairedSeq[1].second << '\n';
-	int index = searchInsertIndex(final, 0, final.size() - 1, pairedSeq[1].second);
-	std::cout << "index: " << index << '\n';
+	insertSmallerElements(pairedSeq, final);
 
-	final.insert(final.begin() + index, pairedSeq[1].second);
+	std::cout << "\n===After Insertion===\n";
 	printVector(final);
 	return final;
 }
