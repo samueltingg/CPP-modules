@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:24:46 by sting             #+#    #+#             */
-/*   Updated: 2025/05/14 17:56:35 by sting            ###   ########.fr       */
+/*   Updated: 2025/05/14 18:25:41 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,8 +230,9 @@ std::vector<int> PmergeMe::sortSequence()
 	//
 	// int index = searchInsertIndex(final, 0, final.size() - 1, extraNum);
 	// final.insert(final.begin() + index, extraNum);
-
-	mergeInsertionSort(_sequence, 1);
+	
+	final = _sequence;
+	mergeInsertionSort(final, 1);
 	return final;
 }
 

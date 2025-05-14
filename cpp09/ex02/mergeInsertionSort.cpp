@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 16:10:38 by sting             #+#    #+#             */
-/*   Updated: 2025/05/14 18:06:39 by sting            ###   ########.fr       */
+/*   Updated: 2025/05/14 18:23:55 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void swapWithinPair(Iterator start, int pairLevel)
 	Iterator end = start + pairLevel;
 
 	for (; start != end; start++) {
-		Iterator next = start + pairLevel;
-		std::iter_swap(start, next);
+		std::iter_swap(start, start + pairLevel);
 	}
 }
 
@@ -26,6 +25,10 @@ void swapWithinPair(Iterator start, int pairLevel)
 // end: 'end of container' OR '1st num in leftover section'
 void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 {
+	static int recursionLevel = 1;
+	std::cout << "==== Recursion Level: " << recursionLevel << " ====\n";
+	recursionLevel++;
+
 	int elementCount = sequence.size() / pairLevel;
 
 	// Base Case
@@ -41,10 +44,17 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 	// Sort Pairs
 	int jump = pairLevel * 2;	
 
-	// for (; start != end; start += jump) {
-	// 	// swap a pair
-	//
-	// }
+	for (; start != end; start += jump) {
+		// swap a pair
+		
+		Iterator startBiggest = start + pairLevel - 1;
+		Iterator nextBiggest = start + (pairLevel * 2) - 1;
+
+		if (*startBiggest > *nextBiggest)
+			swapWithinPair(start, pairLevel);
+
+		printVector(sequence);
+	}
 	
 
 
