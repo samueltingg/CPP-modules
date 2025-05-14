@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:23:27 by sting             #+#    #+#             */
-/*   Updated: 2025/05/06 11:31:59 by sting            ###   ########.fr       */
+/*   Updated: 2025/05/14 17:54:23 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 
 typedef std::vector< std::pair<int, int> > PairedSeq;
 void printVector(std::vector<int>& vec);
+
+typedef std::vector<int>::iterator Iterator;
+void mergeInsertionSort(std::vector<int>& sequence, int pairLevel);
 
 class PmergeMe {
 public:

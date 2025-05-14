@@ -6,7 +6,7 @@
 /*   By: sting <sting@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:24:46 by sting             #+#    #+#             */
-/*   Updated: 2025/05/06 11:32:30 by sting            ###   ########.fr       */
+/*   Updated: 2025/05/14 17:56:35 by sting            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,34 +203,35 @@ void insertSortLosersToFinalVector(PairedSeq& pairedSeq, std::vector<int>& final
 
 std::vector<int> PmergeMe::sortSequence()
 {
-	int extraNum = -1; 
-	if (_sequence.size() % 2 != 0)
-		extraNum = _sequence.back();
-	PairedSeq pairedSeq = createPairedSequence(_sequence);
+	// int extraNum = -1; 
+	// if (_sequence.size() % 2 != 0)
+	// 	extraNum = _sequence.back();
+	// PairedSeq pairedSeq = createPairedSequence(_sequence);
 	std::vector<int> final;
 	
-	sortPairs(pairedSeq);
-	printPairedVector(pairedSeq);
-	mergeSortByWinners(pairedSeq, 0, pairedSeq.size() - 1);
-	std::cout << "\n===After Merge Sort ===\n";
-	printPairedVector(pairedSeq);
+	// sortPairs(pairedSeq);
+	// printPairedVector(pairedSeq);
+	// mergeSortByWinners(pairedSeq, 0, pairedSeq.size() - 1);
+	// std::cout << "\n===After Merge Sort ===\n";
+	// printPairedVector(pairedSeq);
+	//
+	// if (pairedSeq[0].second != -1)
+	// 	final.push_back(pairedSeq[0].second); // insert first pair's smaller num pair
+	// transferWinnersToFinalVector(pairedSeq, final);
+	// pairedSeq.erase(pairedSeq.begin());
+	//
+	// std::cout << "\n ===Final Vector with larger nums===\n";
+	// printVector(final);
+	//
+	// std::cout << "\n ===Paired vector after erasing first pair===\n";
+	// printPairedVector(pairedSeq);
+	//
+	// insertSortLosersToFinalVector(pairedSeq, final);
+	//
+	// int index = searchInsertIndex(final, 0, final.size() - 1, extraNum);
+	// final.insert(final.begin() + index, extraNum);
 
-	if (pairedSeq[0].second != -1)
-		final.push_back(pairedSeq[0].second); // insert first pair's smaller num pair
-	transferWinnersToFinalVector(pairedSeq, final);
-	pairedSeq.erase(pairedSeq.begin());
-		
-	std::cout << "\n ===Final Vector with larger nums===\n";
-	printVector(final);
-
-	std::cout << "\n ===Paired vector after erasing first pair===\n";
-	printPairedVector(pairedSeq);
-	
-	insertSortLosersToFinalVector(pairedSeq, final);
-
-	int index = searchInsertIndex(final, 0, final.size() - 1, extraNum);
-	final.insert(final.begin() + index, extraNum);
-
+	mergeInsertionSort(_sequence, 1);
 	return final;
 }
 
