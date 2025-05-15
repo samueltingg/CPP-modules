@@ -21,6 +21,19 @@ void swapWithinPair(Iterator start, int pairLevel)
 	}
 }
 
+
+void printIteratorVector(std::vector<Iterator>& vec)
+{
+	std::vector<Iterator>::const_iterator it = vec.begin();
+
+	for (; it != vec.end(); ++it) {
+		std::cout << *(*it) << " ";
+	}
+	std::cout << '\n';
+
+}
+
+
 // pairLevel = element size
 // end: 'end of container' OR '1st num in leftover section'
 void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
@@ -55,9 +68,34 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 
 		printVector(sequence);
 	}
-	
 
-
-	
 	mergeInsertionSort(sequence, pairLevel * 2);
+
+	std::cout << "==== Recursion Level ====\n";
+	recursionLevel++;
+
+	std::vector<Iterator> main;
+	std::vector<Iterator> pend;
+
+	// Transfer b1 & a1 to main
+	main.push_back(sequence.begin() + pairLevel - 1);
+	main.push_back(sequence.begin() + (pairLevel * 2) - 1);
+	
+
+	// transfer rest of a & b alternatively
+	// i: element index
+	for (int i = 3; i <= elementCount; i += 2) {
+		pend.push_back(sequence.begin() + pairLevel * i - 1); // insert b
+		main.push_back(sequence.begin() + pairLevel * (i + 1) - 1); // insert a
+		std::cout << "a: " << *(sequence.begin() + pairLevel * (i + 1) - 1) << '\n'; // STOPPED HERE
+	}
+
+
+	std::cout << "\n==== Ori Sequence ====\n";
+	printVector(sequence);
+	std::cout << "\n==== pend ====\n";
+	printIteratorVector(pend);
+	std::cout << "\n==== main ====\n";
+	printIteratorVector(main);
+
 }
