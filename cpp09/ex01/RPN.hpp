@@ -18,7 +18,7 @@
 #define CYAN "\033[36m"
 #define GREY "\033[90m"
 
-#include <list>
+#include <deque>
 #include <stack>
 #include <string>
 #include <iostream>
@@ -78,7 +78,7 @@ public:
 
 
 private:
-	std::list<std::string> _tokens;
+	std::deque<std::string> _tokens;
 	// Default Constructor
 	RPN();
 };

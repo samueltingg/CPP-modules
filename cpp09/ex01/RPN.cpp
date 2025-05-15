@@ -18,7 +18,7 @@ RPN::RPN() : _tokens()
 	std::cout << GREY << "RPN:: Constructor Called" << RESET << std::endl;
 }
 
-void splitBySpaces(std::string str, std::list<std::string>& tokens)
+void splitBySpaces(std::string str, std::deque<std::string>& tokens)
 {
 	std::string::size_type end;
 	std::string::size_type start = 0;
@@ -38,18 +38,18 @@ void splitBySpaces(std::string str, std::list<std::string>& tokens)
 void RPN::printTokens(std::ostream& os)
 {
 	os << "\n==== Tokens ====\n";
-	std::list<std::string>::const_iterator it = _tokens.begin();
+	std::deque<std::string>::const_iterator it = _tokens.begin();
 
 	for (; it != _tokens.end(); ++it) {
 		os << "[" << *it << "]" << '\n';
 	}
 }
 
-bool isTokensValid(const std::string& expression, const std::list<std::string>& tokens)
+bool isTokensValid(const std::string& expression, const std::deque<std::string>& tokens)
 {
 	if (expression.find_first_not_of("1234567890+-*/ ") != std::string::npos)
 		return false;
-	std::list<std::string>::const_iterator it = tokens.begin();
+	std::deque<std::string>::const_iterator it = tokens.begin();
 
 	for (; it != tokens.end(); ++it) {
 		if (it->length() != 1)
@@ -127,7 +127,7 @@ void printStack(const std::stack<int>& stack)
 int RPN::calcExpression()
 {
 	std::stack<int> stack;
-	std::list<std::string>::const_iterator it = _tokens.begin();
+	std::deque<std::string>::const_iterator it = _tokens.begin();
 	tokenType tokenType;
 
 	for (; it != _tokens.end(); ++it) {
