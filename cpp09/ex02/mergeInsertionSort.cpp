@@ -71,25 +71,35 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 
 	mergeInsertionSort(sequence, pairLevel * 2);
 
-	std::cout << "==== Recursion Level ====\n";
+	std::cout << GREY << "\n==== Recursion Level ====\n" << RESET;
 	recursionLevel++;
+	std::cout << "Element count: " << elementCount << '\n';
+	std::cout << "Pair Level: " << pairLevel << "\n\n";
 
 	std::vector<Iterator> main;
 	std::vector<Iterator> pend;
 
 	// Transfer b1 & a1 to main
 	main.push_back(sequence.begin() + pairLevel - 1);
+	std::cout << "b1: " << *(sequence.begin() + pairLevel - 1) << '\n';
 	main.push_back(sequence.begin() + (pairLevel * 2) - 1);
-	
+	std::cout << "a1: " << *(sequence.begin() + pairLevel * 2 - 1) << '\n';
+
 
 	// transfer rest of a & b alternatively
 	// i: element index
-	for (int i = 3; i <= elementCount; i += 2) {
-		pend.push_back(sequence.begin() + pairLevel * i - 1); // insert b
-		main.push_back(sequence.begin() + pairLevel * (i + 1) - 1); // insert a
-		std::cout << "a: " << *(sequence.begin() + pairLevel * (i + 1) - 1) << '\n'; // STOPPED HERE
+	for (int i = 3; i <= elementCount; i++) {
+		if (i % 2 == 1) {
+			pend.push_back(sequence.begin() + pairLevel * i - 1); // insert b
+			std::cout << "b: " << *(sequence.begin() + pairLevel * i - 1) << '\n';
+		}
+		else {
+			main.push_back(sequence.begin() + pairLevel * i - 1); // insert a
+			std::cout << "a: " << *(sequence.begin() + pairLevel * i - 1) << '\n';
+		}
 	}
 
+	
 
 	std::cout << "\n==== Ori Sequence ====\n";
 	printVector(sequence);
