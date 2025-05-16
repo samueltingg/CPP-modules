@@ -34,15 +34,22 @@ void printIteratorVector(std::vector<Iterator>& vec)
 }
 
 
+int generateJacobNum(int n)
+{
+    double result = (pow(2, n + 1) + pow(-1, n)) / 3;
+	return static_cast<int>(round(result));
+}
+
+
 // pairLevel = element size
 // end: 'end of container' OR '1st num in leftover section'
-void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
+void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 {
 	static int recursionLevel = 1;
 	std::cout << "==== Recursion Level: " << recursionLevel << " ====\n";
 	recursionLevel++;
 
-	int elementCount = sequence.size() / pairLevel;
+	int elementCount = container.size() / pairLevel;
 
 	// Base Case
 	if (elementCount <= 1)
@@ -50,8 +57,8 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 
 	bool isOdd = elementCount % 2 != 0;
 
-	Iterator start = sequence.begin();
-	Iterator last = sequence.begin() + (pairLevel * elementCount);
+	Iterator start = container.begin();
+	Iterator last = container.begin() + (pairLevel * elementCount);
 	Iterator end = isOdd ? (last - pairLevel) : last;
 
 	// Sort Pairs
@@ -66,10 +73,10 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 		if (*startBiggest > *nextBiggest)
 			swapWithinPair(start, pairLevel);
 
-		printVector(sequence);
+		printVector(container);
 	}
 
-	mergeInsertionSort(sequence, pairLevel * 2);
+	mergeInsertionSort(container, pairLevel * 2);
 
 	std::cout << GREY << "\n==== Recursion Level ====\n" << RESET;
 	recursionLevel++;
@@ -80,29 +87,38 @@ void mergeInsertionSort(std::vector<int>& sequence, int pairLevel)
 	std::vector<Iterator> pend;
 
 	// Transfer b1 & a1 to main
-	main.push_back(sequence.begin() + pairLevel - 1);
-	std::cout << "b1: " << *(sequence.begin() + pairLevel - 1) << '\n';
-	main.push_back(sequence.begin() + (pairLevel * 2) - 1);
-	std::cout << "a1: " << *(sequence.begin() + pairLevel * 2 - 1) << '\n';
+	main.push_back(container.begin() + pairLevel - 1);
+	std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
+	main.push_back(container.begin() + (pairLevel * 2) - 1);
+	std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
 
 
 	// transfer rest of a & b alternatively
 	// i: element index
 	for (int i = 3; i <= elementCount; i++) {
 		if (i % 2 == 1) {
-			pend.push_back(sequence.begin() + pairLevel * i - 1); // insert b
-			std::cout << "b: " << *(sequence.begin() + pairLevel * i - 1) << '\n';
+			pend.push_back(container.begin() + pairLevel * i - 1); // insert b
+			std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 		else {
-			main.push_back(sequence.begin() + pairLevel * i - 1); // insert a
-			std::cout << "a: " << *(sequence.begin() + pairLevel * i - 1) << '\n';
+			main.push_back(container.begin() + pairLevel * i - 1); // insert a
+			std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 	}
 
+	// TODO: Insert pend to main
+	
+	
+	
+	// TODO: make a copy of values represented by iterators in 'main'
 	
 
-	std::cout << "\n==== Ori Sequence ====\n";
-	printVector(sequence);
+	// TODO: update 'ori container' with 'copy'
+
+	
+
+	std::cout << "\n==== Ori container ====\n";
+	printVector(container);
 	std::cout << "\n==== pend ====\n";
 	printIteratorVector(pend);
 	std::cout << "\n==== main ====\n";

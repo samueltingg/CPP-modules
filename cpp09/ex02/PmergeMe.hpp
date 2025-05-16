@@ -34,7 +34,7 @@ typedef std::vector< std::pair<int, int> > PairedSeq;
 void printVector(std::vector<int>& vec);
 
 typedef std::vector<int>::iterator Iterator;
-void mergeInsertionSort(std::vector<int>& sequence, int pairLevel);
+void mergeInsertionSort(std::vector<int>& container, int pairLevel);
 
 class PmergeMe {
 public:
