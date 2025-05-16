@@ -29,6 +29,7 @@
 #include <cmath>
 #include <limits.h> 
 #include <utility>
+#include <algorithm>
 
 typedef std::vector< std::pair<int, int> > PairedSeq;
 void printVector(std::vector<int>& vec);
