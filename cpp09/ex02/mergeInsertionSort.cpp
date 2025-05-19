@@ -108,15 +108,16 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 // end: 'end of container' OR '1st num in leftover section'
 void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 {
-	static int recursionLevel = 1;
-	std::cout << "==== Recursion Level: " << recursionLevel << " ====\n";
-	recursionLevel++;
+	static int recursionLevel = 0;
 
 	int elementCount = container.size() / pairLevel;
-
 	// Base Case
-	if (elementCount <= 1)
+	if (elementCount <= 1) {
+		std::cout << RED << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 		return ;
+	}
+
+	std::cout << CYAN << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 
 	bool isOdd = elementCount % 2 != 0;
 
@@ -141,8 +142,7 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 	mergeInsertionSort(container, pairLevel * 2);
 
-	std::cout << CYAN << "\n========= Recursion Level =========\n" << RESET;
-	recursionLevel++;
+	std::cout << CYAN << "\n========= Recursion Level: " << --recursionLevel << " =========\n" << RESET;
 	std::cout << "Element count: " << elementCount << '\n';
 	std::cout << "Pair Level: " << pairLevel << "\n\n";
 
