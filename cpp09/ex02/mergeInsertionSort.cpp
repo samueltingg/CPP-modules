@@ -21,6 +21,27 @@ void swapWithinPair(Iterator start, int pairLevel)
 	}
 }
 
+void sortPairs(std::vector<int>& container, int pairLevel, int elementCount, bool isOdd)
+{ 
+	Iterator start = container.begin();
+	Iterator last = container.begin() + (pairLevel * elementCount);
+	Iterator end = isOdd ? (last - pairLevel) : last;
+
+	// Sort Pairs
+	int jump = pairLevel * 2;	
+
+	for (; start != end; start += jump) {
+		// swap a pair
+		
+		Iterator startBiggest = start + pairLevel - 1;
+		Iterator nextBiggest = start + (pairLevel * 2) - 1;
+
+		if (*startBiggest > *nextBiggest)
+			swapWithinPair(start, pairLevel);
+
+		printVector(container);
+	}
+}
 
 void printIteratorVector(std::vector<Iterator>& vec)
 {
@@ -64,7 +85,6 @@ bool comp(const T& a, const T& b)
 // std::upper_bound: returns an iterator point to 1st position this is greater than 'value'
 void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 {
-	// TODO: Insert pend to main
 	for (int n = 2; true; ++n) {
 		int curJacob = generateJacobNum(n);
 		int prevJacob = generateJacobNum(n - 1);
@@ -102,6 +122,17 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 		}
 		insertedNumCount += batchSize;
 	}
+	// TODO: Insert remaining elements that cannot fit into batchSize
+	
+	for (size_t i = (pend.size() - 1); i >= 0; --i) {
+		std::vector<Iterator>::iterator pendIt = pend.begin() + i;
+
+		std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *pendIt, comp<Iterator>);
+		main.insert(idx, *pendIt);
+		pendIt = pend.erase(pendIt);
+		--pendIt;
+	}
+
 }
 
 // pairLevel = element size
@@ -121,24 +152,25 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 	bool isOdd = elementCount % 2 != 0;
 
-	Iterator start = container.begin();
-	Iterator last = container.begin() + (pairLevel * elementCount);
-	Iterator end = isOdd ? (last - pairLevel) : last;
-
 	// Sort Pairs
-	int jump = pairLevel * 2;	
+	// Iterator start = container.begin();
+	// Iterator last = container.begin() + (pairLevel * elementCount);
+	// Iterator end = isOdd ? (last - pairLevel) : last;
 
-	for (; start != end; start += jump) {
-		// swap a pair
-		
-		Iterator startBiggest = start + pairLevel - 1;
-		Iterator nextBiggest = start + (pairLevel * 2) - 1;
-
-		if (*startBiggest > *nextBiggest)
-			swapWithinPair(start, pairLevel);
-
-		printVector(container);
-	}
+	// int jump = pairLevel * 2;	
+	//
+	// for (; start != end; start += jump) {
+	// 	// swap a pair
+	//
+	// 	Iterator startBiggest = start + pairLevel - 1;
+	// 	Iterator nextBiggest = start + (pairLevel * 2) - 1;
+	//
+	// 	if (*startBiggest > *nextBiggest)
+	// 		swapWithinPair(start, pairLevel);
+	//
+	// 	printVector(container);
+	// }
+	sortPairs(container, pairLevel, elementCount, isOdd);
 
 	mergeInsertionSort(container, pairLevel * 2);
 
@@ -176,8 +208,6 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	
 
 
-	// TODO: Insert remaining elements that cannot fit into batchSize
-	
 	
 	// TODO: make a copy of values represented by iterators in 'main'
 	
