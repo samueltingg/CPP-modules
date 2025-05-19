@@ -55,17 +55,52 @@ int searchInsertIndex(const std::vector<Iterator>& vec, int left, int right, int
 		return searchInsertIndex(vec, mid + 1, right, num);
 }
 
+template <typename T>
+bool comp(const T& a, const T& b)
+{
+	return *a < *b;
+}
 
 // std::upper_bound: returns an iterator point to 1st position this is greater than 'value'
 void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 {
-	std::vector<Iterator>::const_iterator pendIt = pend.begin();
-	// TODO: find bound index(a) for each pend element(b)
-	// std::vector<Iterator>::const_iterator boundIt =  
-	
-	for (; pendIt != pend.end(); ++pendIt) {
-		std::vector<Iterator>::const_iterator idx = std::upper_bound(pend.begin(), pend.end(), **pendIt);
-		main.insert(idx, *pendIt);
+	// TODO: Insert pend to main
+	for (int n = 2; true; ++n) {
+		int curJacob = generateJacobNum(n);
+		int prevJacob = generateJacobNum(n - 1);
+		size_t batchSize = curJacob - prevJacob; // J(n) - J(n-1)
+
+		if (pend.size() < batchSize)
+			break;
+
+		
+		int insertedNumCount = 0;
+
+		std::cout << "\nInit 'boundIt'  & 'pendIt': \n";
+		std::vector<Iterator>::iterator boundIt = main.begin() + curJacob + insertedNumCount;
+		std::vector<Iterator>::iterator pendIt = pend.begin() + batchSize - 1;
+		if (boundIt != main.end())
+			std::cout << "boundIt: " << **boundIt << '\n';
+		else 
+			std::cout << "boundIt: 'end()'\n";
+		if (boundIt != pend.end())
+			std::cout << "pendIt: " << **pendIt << '\n';
+		
+		// Insert batch
+		for (size_t i = 0; i < batchSize; ++i) {
+			std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), boundIt, *pendIt, comp<Iterator>);
+			main.insert(idx, *pendIt);
+			pendIt = pend.erase(pendIt);
+			--pendIt;
+			if (pendIt == pend.end())
+				std::cout << "pendIt == end\n";
+			std::cout << "CHECK\n";
+
+			// update boundIt using 'offset'
+			int offset = (idx == boundIt) ? true : false;
+			boundIt = main.begin() + curJacob  + insertedNumCount - offset;
+		}
+		insertedNumCount += batchSize;
 	}
 }
 
@@ -106,7 +141,7 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 	mergeInsertionSort(container, pairLevel * 2);
 
-	std::cout << GREY << "\n==== Recursion Level ====\n" << RESET;
+	std::cout << CYAN << "\n========= Recursion Level =========\n" << RESET;
 	recursionLevel++;
 	std::cout << "Element count: " << elementCount << '\n';
 	std::cout << "Pair Level: " << pairLevel << "\n\n";
@@ -135,21 +170,11 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	}
 	
 
-	std::cout << "JACOB NUM: \n";
-	for (int i = 0; i < 10; ++i) {
-		std::cout << generateJacobNum(i) << '\n';
-	}
+	std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
+	insertPendToMain(pend, main);
+	std::cout << "After Inserting: \n";
+	
 
-	// TODO: Insert pend to main
-	for (int i = 0; i < pend.size(); ++i) {
-		int curJacob = generateJacobNum(i + 2);
-		int prevJacob = generateJacobNum(i + 1);
-		int batchSize = curJacob - prevJacob;
-
-		for (int j = 0; j < batchSize; ++j) {
-			
-		}
-	}
 
 	// TODO: Insert remaining elements that cannot fit into batchSize
 	
@@ -157,7 +182,7 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	// TODO: make a copy of values represented by iterators in 'main'
 	
 
-	// TODO: update 'ori container' with 'copy'
+	// TODO: update 'ori container' with 'copy' (copy until 'copy.size()' only)
 
 	
 
@@ -167,5 +192,8 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	printIteratorVector(pend);
 	std::cout << "\n==== main ====\n";
 	printIteratorVector(main);
+	std::cout << "\n==== Ori container(updated) ====\n";
+	printVector(container);
+
 
 }
