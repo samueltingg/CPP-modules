@@ -57,9 +57,9 @@ void transferElementsToMainAndPend(std::vector<int>& container, std::vector<Iter
 {
 	// Transfer b1 & a1 to main
 	main.push_back(container.begin() + pairLevel - 1);
-	std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
+	// std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
 	main.push_back(container.begin() + (pairLevel * 2) - 1);
-	std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
+	// std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
 
 
 	// transfer rest of a & b alternatively
@@ -67,11 +67,11 @@ void transferElementsToMainAndPend(std::vector<int>& container, std::vector<Iter
 	for (int i = 3; i <= elementCount; i++) {
 		if (i % 2 == 1) {
 			pend.push_back(container.begin() + pairLevel * i - 1); // insert b
-			std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
+			// std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 		else {
 			main.push_back(container.begin() + pairLevel * i - 1); // insert a
-			std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
+			// std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 	}
 
@@ -103,15 +103,15 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 		
 		int insertedNumCount = 0;
 
-		std::cout << "\nInit 'boundIt'  & 'pendIt': \n";
+		// std::cout << "\nInit 'boundIt'  & 'pendIt': \n";
 		std::vector<Iterator>::iterator boundIt = main.begin() + curJacob + insertedNumCount;
 		std::vector<Iterator>::iterator pendIt = pend.begin() + batchSize - 1;
-		if (boundIt != main.end())
-			std::cout << "boundIt: " << **boundIt << '\n';
-		else 
-			std::cout << "boundIt: 'end()'\n";
-		if (boundIt != pend.end())
-			std::cout << "pendIt: " << **pendIt << '\n';
+		// if (boundIt != main.end())
+		// 	std::cout << "boundIt: " << **boundIt << '\n';
+		// else 
+		// 	std::cout << "boundIt: 'end()'\n";
+		// if (boundIt != pend.end())
+			// std::cout << "pendIt: " << **pendIt << '\n';
 		
 		// Insert batch
 		for (size_t i = 0; i < batchSize; ++i) {
@@ -119,9 +119,8 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 			main.insert(idx, *pendIt);
 			pendIt = pend.erase(pendIt);
 			--pendIt;
-			if (pendIt == pend.end())
-				std::cout << "pendIt == end\n";
-			std::cout << "CHECK\n";
+			// if (pendIt == pend.end())
+			// 	std::cout << "pendIt == end\n";
 
 			// update boundIt using 'offset'
 			int offset = (idx == boundIt) ? true : false;
@@ -130,7 +129,6 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 		insertedNumCount += batchSize;
 	}
 	// Insert remaining elements that cannot fit into batchSize
-	std::cout << "pend.size(): " << pend.size() << '\n';
 	for (ssize_t i = (pend.size() - 1); i >= 0; --i) {
 		std::vector<Iterator>::iterator curr_pend = pend.begin() + i;
 		std::vector<Iterator>::iterator curr_bound = main.begin() + (main.size() - pend.size() + i + isOdd);
@@ -171,23 +169,42 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 
 	std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
-	insertPendToMain(pend, main, isOdd);
-	std::cout << "After Inserting: \n";
-	
-	
-	// TODO: make a copy of values represented by iterators in 'main'
-	
-
-	// TODO: update 'ori container' with 'copy' (copy until 'copy.size()' only)
-
-	
-
+	std::cout << BOLD << "Before Insertion: \n" << RESET;
 	std::cout << "\n==== Ori container ====\n";
 	printVector(container);
 	std::cout << "\n==== pend ====\n";
 	printIteratorVector(pend);
 	std::cout << "\n==== main ====\n";
 	printIteratorVector(main);
+
+
+	insertPendToMain(pend, main, isOdd);
+	std::cout << BOLD << "\nAfter Insertion: \n" << RESET;
+	std::cout << "\n==== main(updated) ====\n";
+	printIteratorVector(main);
+	
+	
+	// TODO: make a copy of values represented by iterators in 'main'
+	
+	std::vector<int> copy;
+	
+	std::vector<Iterator>::iterator mainIt = main.begin();
+	for (; mainIt != main.end(); ++mainIt) {
+		Iterator it = *mainIt - pairLevel + 1;
+
+		for (int i = 0; i < pairLevel; ++i) {
+			copy.push_back(*it++);
+		}
+	}
+
+	// TODO: update 'ori container' with 'copy' (copy until 'copy.size()' only)
+	  // use 'copy method'
+	
+	std::copy(copy.begin(), copy.end(), container.begin());
+	
+
+	std::cout << GREY << "==== copy ====\n" << RESET << '\n';
+	printVector(copy);
 	std::cout << "\n==== Ori container(updated) ====\n";
 	printVector(container);
 
