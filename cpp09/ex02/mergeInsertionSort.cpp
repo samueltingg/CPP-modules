@@ -90,7 +90,7 @@ bool comp(const T& a, const T& b)
 }
 
 // std::upper_bound: returns an iterator point to 1st position this is greater than 'value'
-void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
+void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, bool isOdd)
 {
 	for (int n = 2; true; ++n) {
 		int curJacob = generateJacobNum(n);
@@ -129,14 +129,13 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 		}
 		insertedNumCount += batchSize;
 	}
-	// TODO: Insert remaining elements that cannot fit into batchSize
-	
-
+	// Insert remaining elements that cannot fit into batchSize
 	std::cout << "pend.size(): " << pend.size() << '\n';
 	for (ssize_t i = (pend.size() - 1); i >= 0; --i) {
 		std::vector<Iterator>::iterator curr_pend = pend.begin() + i;
+		std::vector<Iterator>::iterator curr_bound = main.begin() + (main.size() - pend.size() + i + isOdd);
 
-		std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *curr_pend, comp<Iterator>);
+		std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), curr_bound, *curr_pend, comp<Iterator>);
 		main.insert(idx, *curr_pend);
 	}
 
@@ -172,7 +171,7 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 
 	std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
-	insertPendToMain(pend, main);
+	insertPendToMain(pend, main, isOdd);
 	std::cout << "After Inserting: \n";
 	
 	
