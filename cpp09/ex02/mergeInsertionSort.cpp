@@ -52,26 +52,35 @@ void printIteratorVector(std::vector<Iterator>& vec)
 
 }
 
+
+void transferElementsToMainAndPend(std::vector<int>& container, std::vector<Iterator>& main, std::vector<Iterator>& pend, int pairLevel, int elementCount)
+{
+	// Transfer b1 & a1 to main
+	main.push_back(container.begin() + pairLevel - 1);
+	std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
+	main.push_back(container.begin() + (pairLevel * 2) - 1);
+	std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
+
+
+	// transfer rest of a & b alternatively
+	// i: element index
+	for (int i = 3; i <= elementCount; i++) {
+		if (i % 2 == 1) {
+			pend.push_back(container.begin() + pairLevel * i - 1); // insert b
+			std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
+		}
+		else {
+			main.push_back(container.begin() + pairLevel * i - 1); // insert a
+			std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
+		}
+	}
+
+}
+
 // skips 0 -> 1, 1, 3, 5....
 long generateJacobNum(long n)
 {
 	return static_cast<long>(round((pow(2, n + 1) + pow(-1, n)) / 3));
-}
-
-int searchInsertIndex(const std::vector<Iterator>& vec, int left, int right, int num)
-{
-    // base condition: if number not found
-	if (left == right)
-		return left;
-
-    int mid = (left + right) / 2;
-
-	if (num == *vec[mid]) // don't need if no duplicates
-		return mid;
-	else if (num < *vec[mid])
-		return searchInsertIndex(vec, left, mid, num);
-	else
-		return searchInsertIndex(vec, mid + 1, right, num);
 }
 
 template <typename T>
@@ -138,20 +147,18 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 {
 	static int recursionLevel = 0;
-
 	int elementCount = container.size() / pairLevel;
+
 	// Base Case
 	if (elementCount <= 1) {
 		std::cout << RED << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 		return ;
 	}
-
 	std::cout << CYAN << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 
 	bool isOdd = elementCount % 2 != 0;
 
 	sortPairs(container, pairLevel, elementCount, isOdd);
-
 	mergeInsertionSort(container, pairLevel * 2);
 
 	std::cout << CYAN << "\n========= Recursion Level: " << --recursionLevel << " =========\n" << RESET;
@@ -161,33 +168,13 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	std::vector<Iterator> main;
 	std::vector<Iterator> pend;
 
-	// Transfer b1 & a1 to main
-	main.push_back(container.begin() + pairLevel - 1);
-	std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
-	main.push_back(container.begin() + (pairLevel * 2) - 1);
-	std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
+	transferElementsToMainAndPend(container, main, pend, pairLevel, elementCount);
 
-
-	// transfer rest of a & b alternatively
-	// i: element index
-	for (int i = 3; i <= elementCount; i++) {
-		if (i % 2 == 1) {
-			pend.push_back(container.begin() + pairLevel * i - 1); // insert b
-			std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
-		}
-		else {
-			main.push_back(container.begin() + pairLevel * i - 1); // insert a
-			std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
-		}
-	}
-	
 
 	std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
 	insertPendToMain(pend, main);
 	std::cout << "After Inserting: \n";
 	
-
-
 	
 	// TODO: make a copy of values represented by iterators in 'main'
 	
