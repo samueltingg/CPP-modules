@@ -116,6 +116,7 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 		// Insert batch
 		for (size_t i = 0; i < batchSize; ++i) {
 			std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), boundIt, *pendIt, comp<Iterator>);
+			// std::vector<Iterator>::iterator inserted = main.insert(idx, *pendIt);
 			main.insert(idx, *pendIt);
 			pendIt = pend.erase(pendIt);
 			--pendIt;
@@ -124,6 +125,7 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 
 			// update boundIt using 'offset'
 			int offset = (idx == boundIt) ? true : false;
+			// int offset = (inserted - main.begin() == curJacob + insertedNumCount);
 			boundIt = main.begin() + curJacob  + insertedNumCount - offset;
 		}
 		insertedNumCount += batchSize;
