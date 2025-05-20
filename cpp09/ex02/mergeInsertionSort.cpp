@@ -15,8 +15,7 @@
 void swapWithinPair(Iterator start, int pairLevel)
 {
 	Iterator end = start + pairLevel;
-
-	for (; start != end; start++) {
+for (; start != end; start++) {
 		std::iter_swap(start, start + pairLevel);
 	}
 }
@@ -27,7 +26,6 @@ void sortPairs(std::vector<int>& container, int pairLevel, int elementCount, boo
 	Iterator last = container.begin() + (pairLevel * elementCount);
 	Iterator end = isOdd ? (last - pairLevel) : last;
 
-	// Sort Pairs
 	int jump = pairLevel * 2;	
 
 	for (; start != end; start += jump) {
@@ -124,14 +122,14 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 	}
 	// TODO: Insert remaining elements that cannot fit into batchSize
 	
-	for (size_t i = (pend.size() - 1); i >= 0; --i) {
-		std::vector<Iterator>::iterator pendIt = pend.begin() + i;
-
-		std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *pendIt, comp<Iterator>);
-		main.insert(idx, *pendIt);
-		pendIt = pend.erase(pendIt);
-		--pendIt;
-	}
+	// for (size_t i = (pend.size() - 1); i >= 0; --i) {
+	// 	std::vector<Iterator>::iterator pendIt = pend.begin() + i;
+	//
+	// 	std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *pendIt, comp<Iterator>);
+	// 	main.insert(idx, *pendIt);
+	// 	pendIt = pend.erase(pendIt);
+	// 	--pendIt;
+	// }
 
 }
 
@@ -152,24 +150,6 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 
 	bool isOdd = elementCount % 2 != 0;
 
-	// Sort Pairs
-	// Iterator start = container.begin();
-	// Iterator last = container.begin() + (pairLevel * elementCount);
-	// Iterator end = isOdd ? (last - pairLevel) : last;
-
-	// int jump = pairLevel * 2;	
-	//
-	// for (; start != end; start += jump) {
-	// 	// swap a pair
-	//
-	// 	Iterator startBiggest = start + pairLevel - 1;
-	// 	Iterator nextBiggest = start + (pairLevel * 2) - 1;
-	//
-	// 	if (*startBiggest > *nextBiggest)
-	// 		swapWithinPair(start, pairLevel);
-	//
-	// 	printVector(container);
-	// }
 	sortPairs(container, pairLevel, elementCount, isOdd);
 
 	mergeInsertionSort(container, pairLevel * 2);
