@@ -184,10 +184,8 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	printIteratorVector(main);
 	
 	
-	// TODO: make a copy of values represented by iterators in 'main'
-	
+	// make a copy of values represented by iterators in 'main'
 	std::vector<int> copy;
-	
 	std::vector<Iterator>::iterator mainIt = main.begin();
 	for (; mainIt != main.end(); ++mainIt) {
 		Iterator it = *mainIt - pairLevel + 1;
@@ -197,14 +195,9 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 		}
 	}
 
-	// TODO: update 'ori container' with 'copy' (copy until 'copy.size()' only)
-	  // use 'copy method'
-	
+	// update 'ori container' with 'copy' (copy until 'copy.size()' only)
 	std::copy(copy.begin(), copy.end(), container.begin());
 	
-
-	std::cout << GREY << "==== copy ====\n" << RESET << '\n';
-	printVector(copy);
 	std::cout << "\n==== Ori container(updated) ====\n";
 	printVector(container);
 
