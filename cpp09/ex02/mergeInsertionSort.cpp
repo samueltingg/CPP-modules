@@ -131,14 +131,14 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main)
 	}
 	// TODO: Insert remaining elements that cannot fit into batchSize
 	
-	// for (size_t i = (pend.size() - 1); i >= 0; --i) {
-	// 	std::vector<Iterator>::iterator pendIt = pend.begin() + i;
-	//
-	// 	std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *pendIt, comp<Iterator>);
-	// 	main.insert(idx, *pendIt);
-	// 	pendIt = pend.erase(pendIt);
-	// 	--pendIt;
-	// }
+
+	std::cout << "pend.size(): " << pend.size() << '\n';
+	for (ssize_t i = (pend.size() - 1); i >= 0; --i) {
+		std::vector<Iterator>::iterator curr_pend = pend.begin() + i;
+
+		std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), main.end(), *curr_pend, comp<Iterator>);
+		main.insert(idx, *curr_pend);
+	}
 
 }
 
