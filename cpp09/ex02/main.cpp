@@ -27,27 +27,6 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	
-	// try {
-	// 	PmergeMe merge(argv);
-	// 	// printSection("Original Sequence");
-	// 	// std::cout << GREEN << "\nBefore: "<< RESET;
-	// 	// merge.printOriSequence();
-	// 	std::vector<int> sorted = merge.sortSequence();
-	//
-	// 	if (isSorted(sorted))
-	//   		std::cout << "Sorted\n";
-	// 	else 
-	// 		std::cout << "Not Sorted\n";
-	//
-	// 	// std::cout << RED << "\nAfter: "<< RESET;
-	// 	// printVector(sorted);
-	// 	// printSection("Sorted Sequence");
-	// }
-	// catch (std::exception& e) {
-	// 	std::cerr << "Error: " << e.what() << '\n';
-	// }
-
-	
 	std::vector<int> vector;
 	try {
 		argvToContainer(argv, vector);
