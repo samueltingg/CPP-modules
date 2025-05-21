@@ -15,8 +15,8 @@ NAME = PmergeMe
 SRCS = \
 		main.cpp \
 		PmergeMe.cpp \
-		mergeInsertionSort.cpp
-#SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
+		utils.cpp
+# SRCS = $(addprefix $(SRCDIR), $(SRCS_FIL))
 
 # Object files
 OBJDIR = objs/

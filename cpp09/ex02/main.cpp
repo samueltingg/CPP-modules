@@ -20,23 +20,6 @@ void printSection(const std::string &title) {
 		<< std::endl;
 }
 
-// void ocfTest(const std::string& arg)
-// {
-// 	printSection("Testing PmergeMe Constructors");
-//
-//
-// }
-
-
-bool isSorted(const std::vector<int>& vec) {
-    if (vec.empty()) return true; // empty vector is trivially sorted
-    for (std::size_t i = 1; i < vec.size(); ++i) {
-        if (vec[i-1] > vec[i])
-            return false;
-    }
-    return true;
-}
-
 int main(int argc, char **argv)
 {
 	if (argc < 2) {
@@ -44,26 +27,46 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	
-	try {
-		PmergeMe merge(argv);
-		// printSection("Original Sequence");
-		// std::cout << GREEN << "\nBefore: "<< RESET;
-		// merge.printOriSequence();
-		std::vector<int> sorted = merge.sortSequence();
-
-		if (isSorted(sorted))
-	  		std::cout << "Sorted\n";
-		else 
-			std::cout << "Not Sorted\n";
-
-		// std::cout << RED << "\nAfter: "<< RESET;
-		// printVector(sorted);
-		// printSection("Sorted Sequence");
-	}
-	catch (std::exception& e) {
-		std::cerr << "Error: " << e.what() << '\n';
-	}
+	// try {
+	// 	PmergeMe merge(argv);
+	// 	// printSection("Original Sequence");
+	// 	// std::cout << GREEN << "\nBefore: "<< RESET;
+	// 	// merge.printOriSequence();
+	// 	std::vector<int> sorted = merge.sortSequence();
+	//
+	// 	if (isSorted(sorted))
+	//   		std::cout << "Sorted\n";
+	// 	else 
+	// 		std::cout << "Not Sorted\n";
+	//
+	// 	// std::cout << RED << "\nAfter: "<< RESET;
+	// 	// printVector(sorted);
+	// 	// printSection("Sorted Sequence");
+	// }
+	// catch (std::exception& e) {
+	// 	std::cerr << "Error: " << e.what() << '\n';
+	// }
 
 	
+	std::vector<int> vector;
+	argvToContainer(argv, vector);
+	std::deque<int> deque;
+	argvToContainer(argv, deque);
+
+	PmergeMe pm;
+
+	pm.sortSequence(vector);
+	if (isSorted(vector))
+		std::cout << "Sorted\n";
+	else 
+		std::cout << "Not Sorted\n";
+
+	pm.sortSequence(deque);
+	if (isSorted(deque))
+		std::cout << "Sorted\n";
+	else 
+		std::cout << "Not Sorted\n";
+
+
 }
 
