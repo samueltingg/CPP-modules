@@ -16,7 +16,7 @@
 // Constructor
 PmergeMe::PmergeMe() : _sequence()
 {
-	std::cout << GREY << "PmergeMe:: Constructor Called" << RESET << std::endl;
+	// std::cout << GREY << "PmergeMe:: Constructor Called" << RESET << std::endl;
 }
 
 
@@ -35,7 +35,7 @@ int strToInt(const std::string& str)
 // String Contructor
 PmergeMe::PmergeMe(char **sequence) : _sequence()
 {
-	std::cout << GREY << "PmergeMe:: String Constructor Called" << RESET << std::endl;
+	// std::cout << GREY << "PmergeMe:: String Constructor Called" << RESET << std::endl;
 	
 	for (int i = 1; sequence[i]; ++i) {
 		int num = strToInt(sequence[i]);	
@@ -63,7 +63,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 // Destructor
 PmergeMe::~PmergeMe()
 {
-	std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
+	// std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
 // =====================================================================================

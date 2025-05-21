@@ -28,6 +28,14 @@ void printSection(const std::string &title) {
 // }
 
 
+bool isSorted(const std::vector<int>& vec) {
+    if (vec.empty()) return true; // empty vector is trivially sorted
+    for (std::size_t i = 1; i < vec.size(); ++i) {
+        if (vec[i-1] > vec[i])
+            return false;
+    }
+    return true;
+}
 
 int main(int argc, char **argv)
 {
@@ -38,13 +46,19 @@ int main(int argc, char **argv)
 	
 	try {
 		PmergeMe merge(argv);
-		printSection("Original Sequence");
-		std::cout << GREEN << "\nBefore: "<< RESET;
-		merge.printOriSequence();
+		// printSection("Original Sequence");
+		// std::cout << GREEN << "\nBefore: "<< RESET;
+		// merge.printOriSequence();
 		std::vector<int> sorted = merge.sortSequence();
-		std::cout << RED << "\nAfter: "<< RESET;
-		printVector(sorted);
-		printSection("Sorted Sequence");
+
+		if (isSorted(sorted))
+	  		std::cout << "Sorted\n";
+		else 
+			std::cout << "Not Sorted\n";
+
+		// std::cout << RED << "\nAfter: "<< RESET;
+		// printVector(sorted);
+		// printSection("Sorted Sequence");
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';

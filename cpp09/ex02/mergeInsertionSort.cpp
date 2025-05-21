@@ -37,7 +37,7 @@ void sortPairs(std::vector<int>& container, int pairLevel, int elementCount, boo
 		if (*startBiggest > *nextBiggest)
 			swapWithinPair(start, pairLevel);
 
-		printVector(container);
+		// printVector(container);
 	}
 }
 
@@ -140,24 +140,24 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 // end: 'end of container' OR '1st num in leftover section'
 void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 {
-	static int recursionLevel = 0;
+	// static int recursionLevel = 0;
 	int elementCount = container.size() / pairLevel;
 
 	// Base Case
 	if (elementCount <= 1) {
-		std::cout << RED << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
+		// std::cout << RED << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 		return ;
 	}
-	std::cout << CYAN << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
+	// std::cout << CYAN << "\n========= Recursion Level: " << ++recursionLevel << " =========\n" << RESET;
 
 	bool isOdd = elementCount % 2 != 0;
 
 	sortPairs(container, pairLevel, elementCount, isOdd);
 	mergeInsertionSort(container, pairLevel * 2);
 
-	std::cout << CYAN << "\n========= Recursion Level: " << --recursionLevel << " =========\n" << RESET;
-	std::cout << "Element count: " << elementCount << '\n';
-	std::cout << "Pair Level: " << pairLevel << "\n\n";
+	// std::cout << CYAN << "\n========= Recursion Level: " << --recursionLevel << " =========\n" << RESET;
+	// std::cout << "Element count: " << elementCount << '\n';
+	// std::cout << "Pair Level: " << pairLevel << "\n\n";
 
 	std::vector<Iterator> main;
 	std::vector<Iterator> pend;
@@ -165,20 +165,20 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	transferElementsToMainAndPend(container, main, pend, pairLevel, elementCount);
 
 
-	std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
-	std::cout << BOLD << "Before Insertion: \n" << RESET;
-	std::cout << "\n==== Ori container ====\n";
-	printVector(container);
-	std::cout << "\n==== pend ====\n";
-	printIteratorVector(pend);
-	std::cout << "\n==== main ====\n";
-	printIteratorVector(main);
+	// std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
+	// std::cout << BOLD << "Before Insertion: \n" << RESET;
+	// std::cout << "\n==== Ori container ====\n";
+	// printVector(container);
+	// std::cout << "\n==== pend ====\n";
+	// printIteratorVector(pend);
+	// std::cout << "\n==== main ====\n";
+	// printIteratorVector(main);
 
 
 	insertPendToMain(pend, main, isOdd);
-	std::cout << BOLD << "\nAfter Insertion: \n" << RESET;
-	std::cout << "\n==== main(updated) ====\n";
-	printIteratorVector(main);
+	// std::cout << BOLD << "\nAfter Insertion: \n" << RESET;
+	// std::cout << "\n==== main(updated) ====\n";
+	// printIteratorVector(main);
 	
 	
 	// make a copy of values represented by iterators in 'main'
@@ -195,8 +195,8 @@ void mergeInsertionSort(std::vector<int>& container, int pairLevel)
 	// update 'ori container' with 'copy' (copy until 'copy.size()' only)
 	std::copy(copy.begin(), copy.end(), container.begin());
 	
-	std::cout << "\n==== Ori container(updated) ====\n";
-	printVector(container);
+	// std::cout << "\n==== Ori container(updated) ====\n";
+	// printVector(container);
 
 
 }
