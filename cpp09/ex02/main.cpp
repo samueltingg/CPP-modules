@@ -11,13 +11,19 @@
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <limits>
-#include <cstdio>
-#include <cctype>
 
 void printSection(const std::string &title) {
 	std::cout << CYAN << BOLD << "\n=== " << title << " ===" << RESET
 		<< std::endl;
+}
+
+// Gets the current time in milliseconds
+size_t	get_current_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000000 + (time.tv_usec));
 }
 
 int main(int argc, char **argv)
@@ -46,18 +52,42 @@ int main(int argc, char **argv)
 	}
 
 	PmergeMe pm;
-
+	
+	// vector
+	std::cout << GREEN << "Before:  " << RESET; 
+	printContainer(vector);
+	size_t start = get_current_time();
 	pm.sortSequence(vector);
+	size_t end = get_current_time();
+	std::cout << RED << "After:  " << RESET; 
+	printContainer(vector);
+	std::cout << "Time to process a range of " << vector.size() 
+			  << " elements with std::vector : " 
+			  << std::fixed << std::setprecision(5)
+			  << (end - start) / 1000000 << " us\n";
 	if (isSorted(vector))
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
-
+	
+	// deque
+	std::cout << GREEN << "Before:  " << RESET; 
+	printContainer(deque);
+	start = get_current_time();
 	pm.sortSequence(deque);
+	end = get_current_time();
+	std::cout << RED << "After:  " << RESET; 
+	printContainer(deque);
+	std::cout << "Time to process a range of " << deque.size() 
+			  << " elements with std::deque : "
+			  << std::fixed << std::setprecision(5)
+			  << (end - start) / 1000000 << " us\n";
+
 	if (isSorted(deque))
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
+
 
 
 }

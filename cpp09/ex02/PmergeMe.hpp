@@ -25,12 +25,17 @@
 #include <deque>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <exception>
 #include <cstdlib>
 #include <cmath>
 #include <limits.h> 
 #include <utility>
 #include <algorithm>
+#include <sys/time.h>
+#include <cstdio>
+#include <cctype>
+#include <unistd.h>
 
 typedef std::vector< std::pair<int, int> > PairedSeq;
 
