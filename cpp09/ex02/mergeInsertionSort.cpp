@@ -92,6 +92,7 @@ bool comp(const T& a, const T& b)
 // std::upper_bound: returns an iterator point to 1st position this is greater than 'value'
 void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, bool isOdd)
 {
+	int insertedNumCount = 0;
 	for (int n = 2; true; ++n) {
 		int curJacob = generateJacobNum(n);
 		int prevJacob = generateJacobNum(n - 1);
@@ -99,10 +100,6 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 
 		if (pend.size() < batchSize)
 			break;
-
-		
-		int insertedNumCount = 0;
-
 		// std::cout << "\nInit 'boundIt'  & 'pendIt': \n";
 		std::vector<Iterator>::iterator boundIt = main.begin() + curJacob + insertedNumCount;
 		std::vector<Iterator>::iterator pendIt = pend.begin() + batchSize - 1;
@@ -111,12 +108,11 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 		// else 
 		// 	std::cout << "boundIt: 'end()'\n";
 		// if (boundIt != pend.end())
-			// std::cout << "pendIt: " << **pendIt << '\n';
+		// 	std::cout << "pendIt: " << **pendIt << '\n';
 		
 		// Insert batch
 		for (size_t i = 0; i < batchSize; ++i) {
 			std::vector<Iterator>::iterator idx = std::upper_bound(main.begin(), boundIt, *pendIt, comp<Iterator>);
-			// std::vector<Iterator>::iterator inserted = main.insert(idx, *pendIt);
 			main.insert(idx, *pendIt);
 			pendIt = pend.erase(pendIt);
 			--pendIt;
@@ -125,7 +121,6 @@ void insertPendToMain(std::vector<Iterator>& pend, std::vector<Iterator>& main, 
 
 			// update boundIt using 'offset'
 			int offset = (idx == boundIt) ? true : false;
-			// int offset = (inserted - main.begin() == curJacob + insertedNumCount);
 			boundIt = main.begin() + curJacob  + insertedNumCount - offset;
 		}
 		insertedNumCount += batchSize;
