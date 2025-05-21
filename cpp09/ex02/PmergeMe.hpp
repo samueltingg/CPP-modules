@@ -56,18 +56,6 @@ public:
 
 	// void printOriSequence();
 
-	// Exceptions:
-	class InvalidArgumentException : public std::exception {
-	public: 
-		// 'throw()' specifies that func won't throw any exceptions 
-        const char* what() const throw();
-	};
-
-	class NumberOutOfRangeException : public std::exception {
-	public: 
-		// 'throw()' specifies that func won't throw any exceptions 
-        const char* what() const throw();
-	};
 
 };
 
@@ -300,6 +288,19 @@ template <typename ContainerType> void PmergeMe::sortSequence(ContainerType& con
 {
 	mergeInsertionSort<ContainerType>(container, 1);
 }
+
+// Exceptions:
+class InvalidArgumentException : public std::exception {
+public: 
+	// 'throw()' specifies that func won't throw any exceptions 
+	const char* what() const throw();
+};
+
+class NumberOutOfRangeException : public std::exception {
+public: 
+	// 'throw()' specifies that func won't throw any exceptions 
+	const char* what() const throw();
+};
 
 #endif
 

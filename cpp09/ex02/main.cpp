@@ -49,9 +49,22 @@ int main(int argc, char **argv)
 
 	
 	std::vector<int> vector;
-	argvToContainer(argv, vector);
+	try {
+		argvToContainer(argv, vector);
+	}
+	catch (std::exception& e) {
+		std::cerr << "Error: " << e.what() << '\n';
+		return (1);
+	}
+
 	std::deque<int> deque;
-	argvToContainer(argv, deque);
+	try {
+		argvToContainer(argv, deque);
+	}
+	catch (std::exception& e) {
+		std::cerr << "Error: " << e.what() << '\n';
+		return (1);
+	}
 
 	PmergeMe pm;
 

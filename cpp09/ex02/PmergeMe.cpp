@@ -42,11 +42,11 @@ PmergeMe::~PmergeMe()
 	// std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
-// const char* PmergeMe::InvalidArgumentException::what() const throw() { 
-// 	return "Invalid Argument.";
-// }
-//
-// const char* PmergeMe::NumberOutOfRangeException::what() const throw() { 
-// 	return "Number is out of range.";
-// }
+const char* InvalidArgumentException::what() const throw() { 
+	return "Invalid Argument.";
+}
+
+const char* NumberOutOfRangeException::what() const throw() { 
+	return "Number is out of range.";
+}
 

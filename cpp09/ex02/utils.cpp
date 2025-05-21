@@ -17,10 +17,10 @@ int strToInt(const std::string& str)
 	char *endPtr;
 	long num = strtol(str.c_str(), &endPtr, 10);
 
-	// if (endPtr[0] != '\0')
-	// 	throw PmergeMe::InvalidArgumentException();
-	// if (num < 0 || num > INT_MAX || num == LONG_MAX)
-	// 	throw PmergeMe::NumberOutOfRangeException();
+	if (endPtr[0] != '\0')
+		throw InvalidArgumentException();
+	if (num < 0 || num > INT_MAX || num == LONG_MAX)
+		throw NumberOutOfRangeException();
 	return num;
 }
 
