@@ -17,7 +17,7 @@ void printSection(const std::string &title) {
 		<< std::endl;
 }
 
-double	getCurrentTime(void)
+long	getCurrentTime(void)
 {
 	struct timeval	time;
 
@@ -55,11 +55,11 @@ int main(int argc, char **argv)
 	// vector
 	std::cout << GREEN << "Before:  " << RESET; 
 	printContainer(vector);
-	size_t start = getCurrentTime();
+	long start = getCurrentTime();
 	pm.sortSequence(vector);
-	size_t end = getCurrentTime();
+	long end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
-	double duration1 = end - start;
+	long duration1 = end - start;
 	printContainer(vector);
 	std::cout << "Time to process a range of " << vector.size() 
 			  << " elements with std::vector : " 
