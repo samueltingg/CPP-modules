@@ -17,13 +17,12 @@ void printSection(const std::string &title) {
 		<< std::endl;
 }
 
-// Gets the current time in milliseconds
-size_t	get_current_time(void)
+double	getCurrentTime(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000000 + (time.tv_usec));
+	return (time.tv_sec * 1000000 + time.tv_usec); // convert time into microseconds
 }
 
 int main(int argc, char **argv)
@@ -56,15 +55,16 @@ int main(int argc, char **argv)
 	// vector
 	std::cout << GREEN << "Before:  " << RESET; 
 	printContainer(vector);
-	size_t start = get_current_time();
+	size_t start = getCurrentTime();
 	pm.sortSequence(vector);
-	size_t end = get_current_time();
+	size_t end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
+	double duration1 = end - start;
 	printContainer(vector);
 	std::cout << "Time to process a range of " << vector.size() 
 			  << " elements with std::vector : " 
 			  << std::fixed << std::setprecision(5)
-			  << (end - start) / 1000000 << " us\n";
+			  << duration1 << " us\n";
 	if (isSorted(vector))
 		std::cout << "Sorted\n";
 	else 
@@ -73,22 +73,22 @@ int main(int argc, char **argv)
 	// deque
 	std::cout << GREEN << "Before:  " << RESET; 
 	printContainer(deque);
-	start = get_current_time();
+	start = getCurrentTime();
 	pm.sortSequence(deque);
-	end = get_current_time();
+	end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
 	printContainer(deque);
+
+	double duration2 = end - start;
 	std::cout << "Time to process a range of " << deque.size() 
 			  << " elements with std::deque : "
 			  << std::fixed << std::setprecision(5)
-			  << (end - start) / 1000000 << " us\n";
+			  << duration2 << " us\n";
 
 	if (isSorted(deque))
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
-
-
 
 }
 
