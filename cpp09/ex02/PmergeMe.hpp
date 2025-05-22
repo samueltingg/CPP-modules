@@ -53,13 +53,10 @@ public:
 	// Destructor
 	~PmergeMe();
 
-	static int comparisonsCount; //NOTE:variables need to be before templates/ functions?
-	// Member Functions:
-	// std::vector<int> sortSequence();
 	template <typename ContainerType>
 	void sortSequence(ContainerType& container);
 
-
+	static int comparisonsCount; 	
 };
 
 
