@@ -28,7 +28,7 @@ all: $(OBJDIR) $(NAME)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR) $(addprefix $(OBJDIR), $(dir $(SRCS_FIL)))
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) PmergeMe.hpp
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) && echo "$(GREEN)$(NAME) was created$(RESET)"
 
 
