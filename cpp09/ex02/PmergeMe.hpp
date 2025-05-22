@@ -55,12 +55,11 @@ public:
 	// Destructor
 	~PmergeMe();
 
+	static int comparisonsCount; //NOTE:variables need to be before templates/ functions?
 	// Member Functions:
 	// std::vector<int> sortSequence();
 	template <typename ContainerType>
 	void sortSequence(ContainerType& container);
-
-	// void printOriSequence();
 
 
 };
@@ -118,6 +117,13 @@ for (; start != end; start++) {
 	}
 }
 
+template <typename ItType>
+bool comp(const ItType& a, const ItType& b)
+{
+	// PmergeMe::comparisonsCount++;
+	return *a < *b;
+}
+
 template <typename ContainerType>
 void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool isOdd)
 { 
@@ -134,7 +140,8 @@ void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool i
 		Iterator startBiggest = start + pairLevel - 1;
 		Iterator nextBiggest = start + (pairLevel * 2) - 1;
 
-		if (*startBiggest > *nextBiggest)
+		// if (*startBiggest > *nextBiggest)
+		if (comp(nextBiggest, startBiggest))
 			swapWithinPair(start, pairLevel);
 
 		// printContainer(container);
@@ -166,13 +173,6 @@ void transferElementsToMainAndPend(ContainerType& container,
 			// std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 	}
-}
-
-
-template <typename ContainerType>
-bool comp(const ContainerType& a, const ContainerType& b)
-{
-	return *a < *b;
 }
 
 
