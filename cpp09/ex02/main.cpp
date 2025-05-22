@@ -47,10 +47,10 @@ int main(int argc, char **argv)
 		return (0);
 	}
 
-	std::deque<int> deque;
+	std::list<int> list;
 	try {
-		argvToContainer(argv, deque);
-		checkDuplicates(deque);
+		argvToContainer(argv, list);
+		checkDuplicates(list);
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
@@ -79,27 +79,27 @@ int main(int argc, char **argv)
 	std::cout << "Expected No. of comparisons: " << F(vector.size()) << '\n';
 	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
 
-	// deque
+	//list 
 	PmergeMe::comparisonsCount = 0;
 	std::cout << GREEN << "Before:  " << RESET; 
-	printContainer(deque);
+	printContainer(list);
 	start = getCurrentTime();
-	pm.sortSequence(deque);
+	pm.sortSequence(list);
 	end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
-	printContainer(deque);
+	printContainer(list);
 
 	double duration2 = end - start;
-	std::cout << "Time to process a range of " << deque.size() 
-			  << " elements with std::deque : "
+	std::cout << "Time to process a range of " << list.size() 
+			  << " elements with std::list : "
 			  << std::fixed << std::setprecision(5)
 			  << duration2 << " us\n";
 
-	if (isSorted(deque))
+	if (isSorted(list))
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
-	std::cout << "Expected No. of comparisons: " << F(deque.size()) << '\n';
+	std::cout << "Expected No. of comparisons: " << F(list.size()) << '\n';
 	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
 	
 	// TEST comparison Count
@@ -107,6 +107,13 @@ int main(int argc, char **argv)
 	// std::cout << "Sorted: ";
 	// printContainer(vector);
 	// std::cout << "Comparisons: " << PmergeMe::comparisonsCount << '\n';
+
+	// TEST sort
+	// pm.sortSequence(list);
+	// if (isSorted(list))
+	// 	std::cout << "Sorted\n";
+	// else 
+	// 	std::cout << "Not Sorted\n";
 
 
 }

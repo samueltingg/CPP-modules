@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <deque>
+#include <list>
 #include <iterator>
 #include <string>
 #include <iostream>
@@ -78,6 +79,14 @@ public:
 	// 'throw()' specifies that func won't throw any exceptions 
 	const char* what() const throw();
 };
+
+template<typename InputIt>
+InputIt next(InputIt it, typename std::iterator_traits<InputIt>::difference_type n = 1)
+{
+    std::advance(it, n);
+    return it;
+}
+
 template <typename ContainerType>
 void argvToContainer(char **argv, ContainerType& container)
 {
@@ -109,19 +118,34 @@ template <typename ContainerType>
 bool isSorted(const ContainerType& container) {
     if (container.empty() || container.size() == 1) 
 		return true; 
-    for (std::size_t i = 1; i < container.size(); ++i) {
-        if (container[i-1] > container[i])
+
+    typename ContainerType::const_iterator it = container.begin();
+    typename ContainerType::const_iterator next = it;
+    ++next;
+
+    while (next != container.end()) {
+        if (*it > *next)
             return false;
+        ++it;
+        ++next;
     }
     return true;
 }
 
 template <typename ContainerType>
-void printContainer(ContainerType& vec)
+void printContainer(ContainerType& container)
 {
-	typename ContainerType::const_iterator it = vec.begin();
+	typename ContainerType::const_iterator it = container.begin();
 
-	for (; it != vec.end(); ++it) {
+	if (container.size() > 6) {
+		for (int i = 0; it != container.end() && i < 6; ++it, ++i) {
+			std::cout << *it << " ";
+		}
+		std::cout << "[...]\n";
+		return;
+	}
+
+	for (; it != container.end(); ++it) {
 		std::cout << *it << " ";
 	}
 	std::cout << '\n';
@@ -142,9 +166,9 @@ void printIteratorVector(std::vector<ItType>& vec)
 template <typename ItType>
 void swapWithinPair(ItType start, int pairLevel)
 {
-	ItType end = start + pairLevel;
+	ItType end = next(start, pairLevel);
 for (; start != end; start++) {
-		std::iter_swap(start, start + pairLevel);
+		std::iter_swap(start, next(start, pairLevel));
 	}
 }
 
@@ -160,16 +184,16 @@ void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool i
 { 
 	typedef typename ContainerType::iterator Iterator;
 	Iterator start = container.begin();
-	Iterator last = container.begin() + (pairLevel * elementCount);
-	Iterator end = isOdd ? (last - pairLevel) : last;
+	Iterator last = next(container.begin(), pairLevel * elementCount);
+	Iterator end = isOdd ? next(last, -pairLevel) : last;
 
 	int jump = pairLevel * 2;	
 
-	for (; start != end; start += jump) {
+	for (; start != end; std::advance(start, jump)) {
 		// swap a pair
 		
-		Iterator startBiggest = start + pairLevel - 1;
-		Iterator nextBiggest = start + (pairLevel * 2) - 1;
+		Iterator startBiggest = next(start, pairLevel - 1);
+		Iterator nextBiggest = next(start, (pairLevel * 2) - 1);
 
 		// if (*startBiggest > *nextBiggest)
 		if (comp(nextBiggest, startBiggest))
@@ -186,9 +210,9 @@ void transferElementsToMainAndPend(ContainerType& container,
 								   int pairLevel, int elementCount)
 {
 	// Transfer b1 & a1 to main
-	main.push_back(container.begin() + pairLevel - 1);
+	main.push_back(next(container.begin(), pairLevel - 1));
 	// std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
-	main.push_back(container.begin() + (pairLevel * 2) - 1);
+	main.push_back(next(container.begin(), (pairLevel * 2) - 1));
 	// std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
 
 
@@ -196,11 +220,11 @@ void transferElementsToMainAndPend(ContainerType& container,
 	// i: element index
 	for (int i = 3; i <= elementCount; i++) {
 		if (i % 2 == 1) {
-			pend.push_back(container.begin() + pairLevel * i - 1); // insert b
+			pend.push_back(next(container.begin(), pairLevel * i - 1)); // insert b
 			// std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 		else {
-			main.push_back(container.begin() + pairLevel * i - 1); // insert a
+			main.push_back(next(container.begin(), pairLevel * i - 1)); // insert a
 			// std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 	}
@@ -305,8 +329,7 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 	ContainerType copy;
 	typename std::vector<Iterator>::iterator mainIt = main.begin();
 	for (; mainIt != main.end(); ++mainIt) {
-		Iterator it = *mainIt - pairLevel + 1;
-
+		Iterator it = next(*mainIt, -pairLevel + 1);
 		for (int i = 0; i < pairLevel; ++i) {
 			copy.push_back(*it++);
 		}
