@@ -81,7 +81,7 @@ public:
 };
 
 template<typename InputIt>
-InputIt next(InputIt it, typename std::iterator_traits<InputIt>::difference_type n = 1)
+InputIt myNext(InputIt it, typename std::iterator_traits<InputIt>::difference_type n = 1)
 {
     std::advance(it, n);
     return it;
@@ -166,9 +166,9 @@ void printIteratorVector(std::vector<ItType>& vec)
 template <typename ItType>
 void swapWithinPair(ItType start, int pairLevel)
 {
-	ItType end = next(start, pairLevel);
+	ItType end = myNext(start, pairLevel);
 for (; start != end; start++) {
-		std::iter_swap(start, next(start, pairLevel));
+		std::iter_swap(start, myNext(start, pairLevel));
 	}
 }
 
@@ -184,16 +184,16 @@ void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool i
 { 
 	typedef typename ContainerType::iterator Iterator;
 	Iterator start = container.begin();
-	Iterator last = next(container.begin(), pairLevel * elementCount);
-	Iterator end = isOdd ? next(last, -pairLevel) : last;
+	Iterator last = myNext(container.begin(), pairLevel * elementCount);
+	Iterator end = isOdd ? myNext(last, -pairLevel) : last;
 
 	int jump = pairLevel * 2;	
 
 	for (; start != end; std::advance(start, jump)) {
 		// swap a pair
 		
-		Iterator startBiggest = next(start, pairLevel - 1);
-		Iterator nextBiggest = next(start, (pairLevel * 2) - 1);
+		Iterator startBiggest = myNext(start, pairLevel - 1);
+		Iterator nextBiggest = myNext(start, (pairLevel * 2) - 1);
 
 		// if (*startBiggest > *nextBiggest)
 		if (comp(nextBiggest, startBiggest))
@@ -210,9 +210,9 @@ void transferElementsToMainAndPend(ContainerType& container,
 								   int pairLevel, int elementCount)
 {
 	// Transfer b1 & a1 to main
-	main.push_back(next(container.begin(), pairLevel - 1));
+	main.push_back(myNext(container.begin(), pairLevel - 1));
 	// std::cout << "b1: " << *(container.begin() + pairLevel - 1) << '\n';
-	main.push_back(next(container.begin(), (pairLevel * 2) - 1));
+	main.push_back(myNext(container.begin(), (pairLevel * 2) - 1));
 	// std::cout << "a1: " << *(container.begin() + pairLevel * 2 - 1) << '\n';
 
 
@@ -220,11 +220,11 @@ void transferElementsToMainAndPend(ContainerType& container,
 	// i: element index
 	for (int i = 3; i <= elementCount; i++) {
 		if (i % 2 == 1) {
-			pend.push_back(next(container.begin(), pairLevel * i - 1)); // insert b
+			pend.push_back(myNext(container.begin(), pairLevel * i - 1)); // insert b
 			// std::cout << "b: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 		else {
-			main.push_back(next(container.begin(), pairLevel * i - 1)); // insert a
+			main.push_back(myNext(container.begin(), pairLevel * i - 1)); // insert a
 			// std::cout << "a: " << *(container.begin() + pairLevel * i - 1) << '\n';
 		}
 	}
@@ -329,7 +329,7 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 	ContainerType copy;
 	typename std::vector<Iterator>::iterator mainIt = main.begin();
 	for (; mainIt != main.end(); ++mainIt) {
-		Iterator it = next(*mainIt, -pairLevel + 1);
+		Iterator it = myNext(*mainIt, -pairLevel + 1);
 		for (int i = 0; i < pairLevel; ++i) {
 			copy.push_back(*it++);
 		}
