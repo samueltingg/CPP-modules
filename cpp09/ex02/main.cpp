@@ -54,13 +54,13 @@ int main(int argc, char **argv)
 	
 	// vector
 	std::cout << GREEN << "Before:  " << RESET; 
-	printContainer(vector);
+	// printContainer(vector);
 	long start = getCurrentTime();
 	pm.sortSequence(vector);
 	long end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
 	long duration1 = end - start;
-	printContainer(vector);
+	// printContainer(vector);
 	std::cout << "Time to process a range of " << vector.size() 
 			  << " elements with std::vector : " 
 			  << std::fixed << std::setprecision(5)
@@ -69,15 +69,18 @@ int main(int argc, char **argv)
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
-	
+	std::cout << "Expected No. of comparisons: " << F(vector.size()) << '\n';
+	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
+
 	// deque
+	PmergeMe::comparisonsCount = 0;
 	std::cout << GREEN << "Before:  " << RESET; 
-	printContainer(deque);
+	// printContainer(deque);
 	start = getCurrentTime();
 	pm.sortSequence(deque);
 	end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
-	printContainer(deque);
+	// printContainer(deque);
 
 	double duration2 = end - start;
 	std::cout << "Time to process a range of " << deque.size() 
@@ -89,6 +92,7 @@ int main(int argc, char **argv)
 		std::cout << "Sorted\n";
 	else 
 		std::cout << "Not Sorted\n";
-
+	std::cout << "Expected No. of comparisons: " << F(deque.size()) << '\n';
+	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
 }
 

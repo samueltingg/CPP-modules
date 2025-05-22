@@ -12,6 +12,7 @@
 
 #include "PmergeMe.hpp"
 
+int PmergeMe::comparisonsCount = 0;
 
 // Constructor
 PmergeMe::PmergeMe() 

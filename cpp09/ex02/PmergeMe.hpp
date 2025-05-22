@@ -13,14 +13,6 @@
 #ifndef PMERGE_ME_HPP
 #define PMERGE_ME_HPP
 
-#define RESET "\033[0m"
-#define BOLD "\033[1m"
-#define CYAN "\033[36m"
-#define GREEN "\033[0;32m"
-#define RED "\033[0;31m"
-#define GREY "\033[90m"
-
-
 #include <vector>
 #include <deque>
 #include <iterator>
@@ -38,11 +30,17 @@
 #include <cctype>
 #include <unistd.h>
 
-typedef std::vector< std::pair<int, int> > PairedSeq;
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+#define CYAN "\033[36m"
+#define GREEN "\033[0;32m"
+#define RED "\033[0;31m"
+#define GREY "\033[90m"
 
 // Utils
 int strToInt(const std::string& str);
 long generateJacobNum(long n);
+int F(int n);
 
 class PmergeMe {
 public:
@@ -120,7 +118,7 @@ for (; start != end; start++) {
 template <typename ItType>
 bool comp(const ItType& a, const ItType& b)
 {
-	// PmergeMe::comparisonsCount++;
+	PmergeMe::comparisonsCount++;
 	return *a < *b;
 }
 

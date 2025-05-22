@@ -30,4 +30,12 @@ long generateJacobNum(long n)
 	return static_cast<long>(round((pow(2, n + 1) + pow(-1, n)) / 3));
 }
 
-
+int F(int n)
+{
+    int sum = 0;
+    for (int k = 1; k <= n; ++k) {
+        double value = (3.0 / 4.0) * k;
+        sum += static_cast<int>(ceil(log2(value)));
+    }
+    return sum;
+}
