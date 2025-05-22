@@ -14,7 +14,6 @@
 #define PMERGE_ME_HPP
 
 #include <vector>
-#include <deque>
 #include <list>
 #include <iterator>
 #include <string>
