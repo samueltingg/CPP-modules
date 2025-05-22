@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 	pm.sortSequence(vector);
 	long end = getCurrentTime();
 	std::cout << RED << "After:  " << RESET; 
-	long duration1 = end - start;
+	double duration1 = end - start;
 	printContainer(vector);
 	std::cout << "Time to process a range of " << vector.size() 
 			  << " elements with std::vector : " 
