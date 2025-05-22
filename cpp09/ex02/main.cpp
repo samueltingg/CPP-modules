@@ -42,6 +42,11 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
+	if (isSorted(vector)) {
+		std::cerr << "Sequence is already sorted.\n";
+		return (0);
+	}
+
 	std::deque<int> deque;
 	try {
 		argvToContainer(argv, deque);
@@ -96,7 +101,6 @@ int main(int argc, char **argv)
 	// 	std::cout << "Not Sorted\n";
 	// std::cout << "Expected No. of comparisons: " << F(deque.size()) << '\n';
 	// std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
-
 
 	pm.sortSequence(vector);
 	std::cout << "Sorted: ";
