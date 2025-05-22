@@ -60,6 +60,24 @@ public:
 };
 
 
+// Exceptions:
+class InvalidArgumentException : public std::exception {
+public: 
+	// 'throw()' specifies that func won't throw any exceptions 
+	const char* what() const throw();
+};
+
+class NumberOutOfRangeException : public std::exception {
+public: 
+	// 'throw()' specifies that func won't throw any exceptions 
+	const char* what() const throw();
+};
+
+class HasDuplicatesException : public std::exception {
+public: 
+	// 'throw()' specifies that func won't throw any exceptions 
+	const char* what() const throw();
+};
 template <typename ContainerType>
 void argvToContainer(char **argv, ContainerType& container)
 {
@@ -68,6 +86,24 @@ void argvToContainer(char **argv, ContainerType& container)
 		container.push_back(num);
 	}
 }
+
+template <typename ContainerType>
+bool checkDuplicates(const ContainerType& container)
+{
+    typename ContainerType::const_iterator it1, it2;
+    for (it1 = container.begin(); it1 != container.end(); ++it1)
+    {
+        it2 = it1;
+        ++it2;
+        for (; it2 != container.end(); ++it2)
+        {
+            if (*it1 == *it2)
+                throw HasDuplicatesException();
+        }
+    }
+    return false;
+}
+
 
 template <typename ContainerType>
 bool isSorted(const ContainerType& container) {
@@ -290,18 +326,6 @@ template <typename ContainerType> void PmergeMe::sortSequence(ContainerType& con
 	mergeInsertionSort<ContainerType>(container, 1);
 }
 
-// Exceptions:
-class InvalidArgumentException : public std::exception {
-public: 
-	// 'throw()' specifies that func won't throw any exceptions 
-	const char* what() const throw();
-};
-
-class NumberOutOfRangeException : public std::exception {
-public: 
-	// 'throw()' specifies that func won't throw any exceptions 
-	const char* what() const throw();
-};
 
 #endif
 

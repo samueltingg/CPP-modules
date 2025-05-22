@@ -51,3 +51,8 @@ const char* NumberOutOfRangeException::what() const throw() {
 	return "Number is out of range.";
 }
 
+const char* HasDuplicatesException::what() const throw() { 
+	return "Sequence has duplicates";
+}
+
+

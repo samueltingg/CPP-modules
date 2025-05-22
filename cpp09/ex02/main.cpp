@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 	std::vector<int> vector;
 	try {
 		argvToContainer(argv, vector);
+		checkDuplicates(vector);
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
@@ -44,6 +45,7 @@ int main(int argc, char **argv)
 	std::deque<int> deque;
 	try {
 		argvToContainer(argv, deque);
+		checkDuplicates(deque);
 	}
 	catch (std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
