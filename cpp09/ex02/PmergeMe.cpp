@@ -12,7 +12,7 @@
 
 #include "PmergeMe.hpp"
 
-int PmergeMe::comparisonsCount = 0;
+int PmergeMe::_comparisonsCount = 0;
 
 // Constructor
 PmergeMe::PmergeMe() 
@@ -43,15 +43,26 @@ PmergeMe::~PmergeMe()
 	// std::cout << GREY << "PmergeMe:: Destructor Called" << RESET << std::endl;
 }
 
-const char* InvalidArgumentException::what() const throw() { 
+// skips 0 -> 1, 1, 3, 5....
+long PmergeMe::_generateJacobNum(long n)
+{
+	return static_cast<long>(round((pow(2, n + 1) + pow(-1, n)) / 3));
+}
+
+int PmergeMe::getComparisonsCount() const
+{
+	return _comparisonsCount;
+}
+
+const char* PmergeMe::InvalidArgumentException::what() const throw() { 
 	return "Invalid Argument.";
 }
 
-const char* NumberOutOfRangeException::what() const throw() { 
+const char* PmergeMe::NumberOutOfRangeException::what() const throw() { 
 	return "Number is out of range.";
 }
 
-const char* HasDuplicatesException::what() const throw() { 
+const char* PmergeMe::HasDuplicatesException::what() const throw() { 
 	return "Sequence has duplicates";
 }
 

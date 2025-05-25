@@ -39,52 +39,80 @@
 
 // Utils
 int strToInt(const std::string& str);
-long generateJacobNum(long n);
 int F(int n);
 
 class PmergeMe {
 public:
-	// Default Constructor
-	PmergeMe();
-	// Copy Constructor
-	PmergeMe(const PmergeMe& other);
-	// Copy Assignment Operator
-	PmergeMe& operator=(const PmergeMe& other);
-	// Destructor
-	~PmergeMe();
+    PmergeMe();
+    PmergeMe(const PmergeMe& other);
+    PmergeMe& operator=(const PmergeMe& other);
+    ~PmergeMe();
 
-	template <typename ContainerType>
-	void sortSequence(ContainerType& container);
+	int getComparisonsCount() const;
 
-	static int comparisonsCount; 	
+    template <typename ContainerType>
+    void sortSequence(ContainerType& container);
+
+    // Exceptions 
+    class InvalidArgumentException : public std::exception {
+        const char* what() const throw();
+    };
+
+    class NumberOutOfRangeException : public std::exception {
+        const char* what() const throw();
+    };
+
+    class HasDuplicatesException : public std::exception {
+        const char* what() const throw();
+    };
+
+private:
+	static int _comparisonsCount;
+
+    static long _generateJacobNum(long n);
+
+    template <typename ContainerType>
+    static void _mergeInsertionSort(ContainerType& container, int pairLevel);
+
+    template <typename ContainerType>
+    static void _sortPairs(ContainerType& container, int pairLevel, int elementCount, bool isOdd);
+
+    template <typename ContainerType>
+    static void _transferElementsToMainAndPend(ContainerType& container, 
+                                              std::vector<typename ContainerType::iterator>& main, 
+                                              std::vector<typename ContainerType::iterator>& pend, 
+                                              int pairLevel, int elementCount);
+
+    template <typename ItType>
+    static void _insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool isOdd);
+
+    template <typename ItType>
+    static void _swapWithinPair(ItType start, int pairLevel);
+
+    template <typename ItType>
+    static bool _comp(const ItType& a, const ItType& b);
+
+    template <typename ItType>
+    static void _printIteratorVector(const std::vector<ItType>& vec);
 };
 
 
 // Exceptions:
-class InvalidArgumentException : public std::exception {
-public: 
-	// 'throw()' specifies that func won't throw any exceptions 
-	const char* what() const throw();
-};
-
-class NumberOutOfRangeException : public std::exception {
-public: 
-	// 'throw()' specifies that func won't throw any exceptions 
-	const char* what() const throw();
-};
-
-class HasDuplicatesException : public std::exception {
-public: 
-	// 'throw()' specifies that func won't throw any exceptions 
-	const char* what() const throw();
-};
-
-template<typename InputIt>
-InputIt myNext(InputIt it, typename std::iterator_traits<InputIt>::difference_type n = 1)
-{
-    std::advance(it, n);
-    return it;
-}
+/*class InvalidArgumentException : public std::exception {*/
+/*public: */
+/*	const char* what() const throw();*/
+/*};*/
+/**/
+/*class NumberOutOfRangeException : public std::exception {*/
+/*public: */
+/*	const char* what() const throw();*/
+/*};*/
+/**/
+/*class HasDuplicatesException : public std::exception {*/
+/*public: */
+/*	const char* what() const throw();*/
+/*};*/
+/**/
 
 template <typename ContainerType>
 void argvToContainer(char **argv, ContainerType& container)
@@ -93,6 +121,13 @@ void argvToContainer(char **argv, ContainerType& container)
 		int num = strToInt(argv[i]);	
 		container.push_back(num);
 	}
+}
+
+template<typename InputIt>
+InputIt myNext(InputIt it, typename std::iterator_traits<InputIt>::difference_type n)
+{
+	std::advance(it, n);
+	return it;
 }
 
 template <typename ContainerType>
@@ -106,7 +141,7 @@ bool checkDuplicates(const ContainerType& container)
         for (; it2 != container.end(); ++it2)
         {
             if (*it1 == *it2)
-                throw HasDuplicatesException();
+                throw PmergeMe::HasDuplicatesException();
         }
     }
     return false;
@@ -132,7 +167,7 @@ bool isSorted(const ContainerType& container) {
 }
 
 template <typename ContainerType>
-void printContainer(ContainerType& container)
+void printContainer(const ContainerType& container)
 {
 	typename ContainerType::const_iterator it = container.begin();
 
@@ -151,7 +186,7 @@ void printContainer(ContainerType& container)
 }
 
 template <typename ItType>
-void printIteratorVector(std::vector<ItType>& vec)
+void PmergeMe::_printIteratorVector(const std::vector<ItType>& vec)
 {
 	typename std::vector<ItType>::const_iterator it = vec.begin();
 
@@ -159,27 +194,26 @@ void printIteratorVector(std::vector<ItType>& vec)
 		std::cout << *(*it) << " ";
 	}
 	std::cout << '\n';
-
 }
 
 template <typename ItType>
-void swapWithinPair(ItType start, int pairLevel)
+void PmergeMe::_swapWithinPair(ItType start, int pairLevel)
 {
 	ItType end = myNext(start, pairLevel);
-for (; start != end; start++) {
+	for (; start != end; start++) {
 		std::iter_swap(start, myNext(start, pairLevel));
 	}
 }
 
 template <typename ItType>
-bool comp(const ItType& a, const ItType& b)
+bool PmergeMe::_comp(const ItType& a, const ItType& b)
 {
-	PmergeMe::comparisonsCount++;
+	PmergeMe::_comparisonsCount++;
 	return *a < *b;
 }
 
 template <typename ContainerType>
-void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool isOdd)
+void PmergeMe::_sortPairs(ContainerType& container, int pairLevel, int elementCount, bool isOdd)
 { 
 	typedef typename ContainerType::iterator Iterator;
 	Iterator start = container.begin();
@@ -187,23 +221,21 @@ void sortPairs(ContainerType& container, int pairLevel, int elementCount, bool i
 	Iterator end = isOdd ? myNext(last, -pairLevel) : last;
 
 	int jump = pairLevel * 2;	
-
 	for (; start != end; std::advance(start, jump)) {
 		// swap a pair
 		
 		Iterator startBiggest = myNext(start, pairLevel - 1);
 		Iterator nextBiggest = myNext(start, (pairLevel * 2) - 1);
 
-		// if (*startBiggest > *nextBiggest)
-		if (comp(nextBiggest, startBiggest))
-			swapWithinPair(start, pairLevel);
+		if (_comp(nextBiggest, startBiggest))
+			_swapWithinPair(start, pairLevel);
 
 		// printContainer(container);
 	}
 }
 
 template <typename ContainerType>
-void transferElementsToMainAndPend(ContainerType& container, 
+void PmergeMe::_transferElementsToMainAndPend(ContainerType& container, 
 								   std::vector<typename ContainerType::iterator>& main, 
 								   std::vector<typename ContainerType::iterator>& pend, 
 								   int pairLevel, int elementCount)
@@ -232,12 +264,12 @@ void transferElementsToMainAndPend(ContainerType& container,
 
 // std::upper_bound: returns an iterator point to 1st position this is greater than 'value'
 template <typename ItType>
-void insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool isOdd)
+void PmergeMe::_insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool isOdd)
 {
 	int insertedNumCount = 0;
 	for (int n = 2; true; ++n) {
-		int curJacob = generateJacobNum(n);
-		int prevJacob = generateJacobNum(n - 1);
+		int curJacob = _generateJacobNum(n);
+		int prevJacob = _generateJacobNum(n - 1);
 		size_t batchSize = curJacob - prevJacob; // J(n) - J(n-1)
 
 		if (pend.size() < batchSize)
@@ -254,7 +286,7 @@ void insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool
 		
 		// Insert batch
 		for (size_t i = 0; i < batchSize; ++i) {
-			typename std::vector<ItType>::iterator idx = std::upper_bound(main.begin(), boundIt, *pendIt, comp<ItType>);
+			typename std::vector<ItType>::iterator idx = std::upper_bound(main.begin(), boundIt, *pendIt, _comp<ItType>);
 			main.insert(idx, *pendIt);
 			pendIt = pend.erase(pendIt);
 			--pendIt;
@@ -272,7 +304,7 @@ void insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool
 		typename std::vector<ItType>::iterator curr_pend = pend.begin() + i;
 		typename std::vector<ItType>::iterator curr_bound = main.begin() + (main.size() - pend.size() + i + isOdd);
 
-		typename std::vector<ItType>::iterator idx = std::upper_bound(main.begin(), curr_bound, *curr_pend, comp<ItType>);
+		typename std::vector<ItType>::iterator idx = std::upper_bound(main.begin(), curr_bound, *curr_pend, _comp<ItType>);
 		main.insert(idx, *curr_pend);
 	}
 
@@ -281,7 +313,7 @@ void insertPendToMain(std::vector<ItType>& pend, std::vector<ItType>& main, bool
 // pairLevel = element size
 // end: 'end of container' OR '1st num in leftover section'
 template <typename ContainerType>
-void mergeInsertionSort(ContainerType& container, int pairLevel)
+void PmergeMe::_mergeInsertionSort(ContainerType& container, int pairLevel)
 {
 	typedef typename ContainerType::iterator Iterator;
 
@@ -297,8 +329,8 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 
 	bool isOdd = elementCount % 2 != 0;
 
-	sortPairs(container, pairLevel, elementCount, isOdd);
-	mergeInsertionSort(container, pairLevel * 2);
+	_sortPairs(container, pairLevel, elementCount, isOdd);
+	_mergeInsertionSort(container, pairLevel * 2);
 
 	// std::cout << CYAN << "\n========= Recursion Level: " << --recursionLevel << " =========\n" << RESET;
 	// std::cout << "Element count: " << elementCount << '\n';
@@ -307,7 +339,7 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 	std::vector<Iterator> main;
 	std::vector<Iterator> pend;
 
-	transferElementsToMainAndPend(container, main, pend, pairLevel, elementCount);
+	_transferElementsToMainAndPend(container, main, pend, pairLevel, elementCount);
 
 
 	// std::cout << GREY << "\n==== Insert pend to main ====\n" << RESET;
@@ -315,13 +347,13 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 	// std::cout << "\n==== Ori container ====\n";
 	// printContainer(container);
 	// std::cout << "\n==== pend ====\n";
-	// printIteratorVector(pend);
+	// _printIteratorVector(pend);
 	// std::cout << "\n==== main ====\n";
-	// printIteratorVector(main);
-	insertPendToMain(pend, main, isOdd);
+	// _printIteratorVector(main);
+	_insertPendToMain(pend, main, isOdd);
 	// std::cout << BOLD << "\nAfter Insertion: \n" << RESET;
 	// std::cout << "\n==== main(updated) ====\n";
-	// printIteratorVector(main);
+	// _printIteratorVector(main);
 	
 	
 	// make a copy of values represented by iterators in 'main'
@@ -339,13 +371,12 @@ void mergeInsertionSort(ContainerType& container, int pairLevel)
 	
 	// std::cout << "\n==== Ori container(updated) ====\n";
 	// printContainer(container);
-
-
 }
 
 template <typename ContainerType> void PmergeMe::sortSequence(ContainerType& container) 
 {
-	mergeInsertionSort<ContainerType>(container, 1);
+	PmergeMe::_comparisonsCount = 0;
+	_mergeInsertionSort<ContainerType>(container, 1);
 }
 
 

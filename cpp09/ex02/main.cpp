@@ -77,10 +77,9 @@ int main(int argc, char **argv)
 	else 
 		std::cout << "Not Sorted\n";
 	std::cout << "Expected No. of comparisons: " << F(vector.size()) << '\n';
-	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
+	std::cout << "No. of comparisons: " << pm.getComparisonsCount() << '\n';
 
 	//list 
-	PmergeMe::comparisonsCount = 0;
 	std::cout << GREEN << "Before:  " << RESET; 
 	printContainer(list);
 	start = getCurrentTime();
@@ -100,7 +99,7 @@ int main(int argc, char **argv)
 	else 
 		std::cout << "Not Sorted\n";
 	std::cout << "Expected No. of comparisons: " << F(list.size()) << '\n';
-	std::cout << "No. of comparisons: " << PmergeMe::comparisonsCount << '\n';
+	std::cout << "No. of comparisons: " << pm.getComparisonsCount() << '\n';
 	
 	// TEST comparison Count
 	// pm.sortSequence(vector);
